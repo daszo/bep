@@ -20,7 +20,15 @@
 }
 
 \date{\today}
-
+% Introcuctie 
+% Bachground 
+% - related research
+% - toepassings domijn data research
+% Methods
+% experimental setup - Data analysis
+% results
+% Discussion
+% Conclusions 
 \begin{document}
 
 
@@ -48,10 +56,11 @@ TODO: talk about pooling \cite{SparckJones1975ReportOT}, T5 \cite{JMLR:v21:20-07
 \section{Research Questions}
 %TODO: Adapt and write the research questions
 
-Can GR be applied to detect fraudulent language markers in the Enron Corpus?
+To what extend can GR be applied to detect fraudulent language markers in the Enron Corpus?
+(intent detection or emotion detection)
 
-1. RQ1: Does Generative Retrieval outperform BM25 and dense vector embeddings on general document retrieval within the Enron Corpus.
-2. RQ2: How effectively does GR retrieve fraudulent documents in the Enron Corpus.
+1. RQ1: How does Generative Retrieval outperform BM25 and dense vector embeddings on general document retrieval within the Enron Corpus. \\
+2. RQ2: How effectively does GR retrieve fraudulent documents in the Enron Corpus. \\
 
 \section{Data Study}
 The amount of emails present after dropping automatically generated folders is \NoFolderLength. This does include the inbox folders and sent / sent\_items / outbox. This is a similar amount to the cleaned dataset found in \citeauthor{klimt2004enron} although they found a value of 200.399 documents after cleaning. The selection of emails they used might have been different because their objective was classifying the folder an email belonged to and for that they only wanted human create folders. 
@@ -97,8 +106,9 @@ The Word Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_b
 
 \section{Methods}
 
-It is obvious that the main research question is a bit ambitious so the Research questions are subject to change, depending on how well the research is going. My research will have 2 fazes. The research will mainly focus on faze 1 but if time allows it faze two will be added. \subsection{Faze 1}
-Faze one will focus on the first Research question and will cover training a GR model on the Enron Corpus evaluating it against BM25 and dense vector embedding. 
+It is obvious that the main research question is a bit ambitious so the Research questions are subject to change, depending on how well the research is going. My research will have 2 phases. The research will mainly focus on phase 1 but if time allows it phase 2 will be added. 
+\subsection{Phase 1}
+Phase one will focus on the first Research question and will cover training a GR model on the Enron Corpus evaluating it against BM25 and dense vector embedding. 
 
 %TODO: Fill in subsubsections
 
@@ -130,8 +140,8 @@ To clean the dataset redundant information has been removed. This includes ident
 
 \subsubsection{Model training}
 
-\subsection{Faze 2}
-Faze two will be on RSQ2 and focus on reproducing research that uses linguistic markers to identify fraudulent data and using the model obtained in the previous faze to retrieve emails containing fraud.  
+\subsection{Phase 2}
+Phase two will be on RSQ2 and focus on reproducing research that uses linguistic markers to identify fraudulent data and using the model obtained in the previous faze to retrieve emails containing fraud.  
 
 
 %TODO: Fill in subsubsections
