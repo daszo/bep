@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\usepackage[backend=biber, style=numeric, sorting=nty]{biblatex}
+\addbibresource{../Data-study/references.bib}
+
+\newcommand{\titlecite}[1]{%
+  \emph{\parencite{#1} \citetitle{#1}}\\%
+}
+\title{Literary analysis}
+\author{Daniël van Oosteroom}
+\date{October 2025}
+
+\begin{document}
+
+
+\maketitle
+
+\section{Enron Corpus}
+
+
+\titlecite{noever2020enroncorpusemailbodies}
+Although this research is not well peer-reviewed it is full it interesting data mining techniques for document discovery. Techniques like sentiment analysis and decision trees. This is different from the use of GR models but can add to the document discovery.
+
+\bigskip
+
+\titlecite{blanco2020manifestation}
+This is a research by a masters student. It talks about linguistic markers of fraud. Although this is not a peer reviewed research it is interesting for inspiration on which type of language might be fraudulent.
+
+\bigskip
+
+\titlecite{klimt2004introducing}
+This paper is the original paper that described the Enron corpus. This paper already shows how the data set can be cleaned an analyzed. 
+
+\bigskip
+
+\titlecite{klimt2004enron}
+This paper is the bigger whole were the previous paper is part of. And talks about how to use the data for email classification. Although this is a different task then a GR model it is similar enough to take inspiration out of. It talks about which data is most useful for classification en concludes that unstructured data like the subject and the body has the biggest influence on the performance. Numerical data was not very interesting (thinks like word count, character count, number of recipients) and did not contribute to the performance. Lastly there was categorical text fields like to an from which were not very useful for classification. This was not useful for the classification. 
+
+
+\section{Technical papers}
+
+\titlecite{JMLR:v21:20-074}
+The T5 model stands for the Test-to-Text Transfer Transformer. This model is build with the idea that every tasks is just a Test-to-Text task and is fine-tuned on those tasks after the unsupervised learning step. This is also why it is used often with GR as this is also a Test-to-Text task.
+
+\bigskip
+
+\titlecite{NEURIPS2022_892840a6}
+This paper is about the first implementation of the Differenciable Search Index (DSI). This explores the possibility to use LLM's as Search Index because this would allow for end to end optimization.
+
+\bigskip
+
+\titlecite{10.1145/3580305.3599903}
+This paper explores the method of generating id's for DSI. It proposes a method where the ids for the documents are just semantic descriptions of the documents. These are called Elaborative Descriptions (ED). It also describes how it acquires these descriptions. 
+
+\bigskip
+
+
+\printbibliography
+
+\end{document}

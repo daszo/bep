@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\title{Data study Lol}
+\author{Daniël van Oosteroom}
+\date{October 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+The Enron Corpus is a large email data set that was released during the investigation of the Enron Corporation by the Federal Energy Regulatory Commission and is prepared by the CALO Project (A Cognitive Assistant that Learns and Organizes) \cite{enron_dataset}. It contains 158 users and 619,446 messages. In a cleaned version of the dataset, there is an average of 757 emails per user \cite{klimt2004enron}.
+
+
+The dataset was bought by MIT and was found to have some integrity problems \cite{enron_dataset}. Attachments were removed and some messages were removed as requested by affected employees. Invalid email addresses or missing addresses were converted to place holder email @enron.com addresses. This is the 2016 version of the Enron corpus and will be used in this research. 
+
+Can I use this dataset as I can not find a direct link to the origional dataset? \cite{ruhe_enron_2021}
+The specific version of the 2016 dataset that will be used is the Ruhe version by Arne Hendrik \cite{ruhe_enron_2021}. This dataset provides convenient access to the data via an SQL table. This table contains 4 tables: Employeelist, Messages, Recipientinfo and Referenceinfo.
+
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/enorn-message-per-user.png}
+    \caption{Messages per user in the Enron Corpus \cite{klimt2004enron}}
+    \label{fig:myimage1}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/correlation-of-folders-and-messages.png}
+    \caption{Correlation of folders and messages in the Corpu \cite{klimt2004enron}}
+    \label{fig:myimage2}
+\end{figure}
+
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+    mid & Message-ID. Refers to the rows in recipientinfo and referenceinfo \\
+    sender & Email address (updated) \\
+    date & Date \\
+    message\_id & Internal message-ID from the mailserver \\
+    subject & Email subject \\
+    body & Email body \\
+    folder & Exact folder of the e-mail including sub folders \\
+\hline
+\end{tabular}
+\caption{Messages table \cite{ruhe_enron_2021}}
+\label{tab:message-data}
+\end{table}
+
+We will mainly be using the messages~\ref{tab:message-data} .
+
+This table has 252759 rows. For my research the body is the most important so that will be 218074 messages. Some have a duplicate Email subject so using that as the Elaborate Description would not suffice. Also some subect are not very descriptive of the emails themselves so generating the labels is the best option.
+% TODO: insert some example subjects
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

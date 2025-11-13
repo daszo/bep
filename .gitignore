@@ -1,0 +1,17 @@
+*.fls
+*.bbl
+*.blg
+*.aux
+*.fdb*
+*.pdf
+*.gz
+*.log
+*.bcf*
+*.run*
+
+*.db
+maildir/
+mysql2sqlite/
+*.gz
+
+*.venv

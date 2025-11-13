@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\usepackage[backend=biber, style=numeric, sorting=nty]{biblatex}
+\addbibresource{../Data-study/references.bib}
+
+\newcommand{\titlecite}[1]{%
+  \emph{\parencite{#1} \citetitle{#1}}%
+}
+\title{Research proposal: Detecting fraud in language with Generative Retrieval models. An Enron Corpus study.}
+\author{Daniël van Oosteroom, \\
+  \small Supervisor: Yubao Tang
+}
+
+\date{\today}
+
+\begin{document}
+
+
+\maketitle
+
+\section{Literature Review}
+
+Fraud detection is a growing field. Fraud detection on textual unstructured data is novel and unsolved \cite{blanco2020manifestation, noever2020enroncorpusemailbodies}. Also no trustworthy and peer reviewed research has been published about this. It could be possible to detect fraud from text because perpetrators might leave behind linguistic markers or show emotions that are common with fraud.
+
+To be able to do research on this it is imperative that there is a large corpus which contains fraud. This is why the Enron corpus is such an addition to the field \cite{klimt2004introducing,klimt2004enron, enron_dataset}. Enron was energy company that specialized in oil and gas and filed for bankruptcy in 2001 \cite{BritannicaEnron, FBIEnronCase}. During the investigation this dataset was made public and a cleaned version is publicly available \cite{enron_dataset}. 
+
+Could it be possible to retrieve fraudulent documents. The field of information retrieval is old and has had many different systems to achieve this goal. One that has been dominant for a while is BM25 \cite{INR-019}. This uses in part the inverted term frequency index to search for documents. This is limited because of the semantic gap. This is where certain tokens in the document that are important for meaning do not show up in the query even though they are similar. Newer but computationally heavier methods include dense vector embedding models \cite{bengio2003neural} solve this problem by translating query and documents to a vector representation and matching documents to a query by taking the cosine distance between their respective vectors. 
+
+%TODO: move embedding models down to paragraph below
+
+Recently there has been a paradigm shift in NLP processing with the introduction of Transformers \cite{NIPS2017_3f5ee243}. This is a version of a recurrent neural network that encodes not only tokens but also their position. This done called attention. Where before language models were build by linguists, mapping words to synonyms or related words now a neural network can be trained on really large corpus and learn this behaviour unsupervised. Because of the size these are commonly refered to as Large Language Models (LLMs).
+
+This opens up the question. Could this be used for retrieving documents? This where the field of Generative Retrieval Models comes in (GR). The advantage that generative 
+%TODO: 1. extend literature review
+%TODO: 2. make it more academic like (no emotions and formal writing like French/Latin word and not Germanic)
+TODO: talk about pooling \cite{SparckJones1975ReportOT}, T5 \cite{JMLR:v21:20-074}, DSG \cite{NEURIPS2022_892840a6} and Elaborative Descriptions \cite{10.1145/3580305.3599903}
+
+\section{Research Questions}
+%TODO: Adapt and write the research questions
+
+Can GR be applied to detect fraudulent language markers in the Enron Corpus?
+
+1. RQ1: Does Generative Retrieval outperform BM25 and dense vector embeddings on general document retrieval within the Enron Corpus.
+2. RQ2: How effectively does GR retrieve fraudulent documents in the Enron Corpus.
+
+
+\section{Methods}
+
+It is obvious that the main research question is a bit ambitious so the Research questions are subject to change, depending on how well the research is going. My research will have 2 fazes. The research will mainly focus on faze 1 but if time allows it faze two will be added. \subsection{Faze 1}
+Faze one will focus on the first Research question and will cover training a GR model on the Enron Corpus evaluating it against BM25 and dense vector embedding. 
+
+%TODO: Fill in subsubsections
+
+\subsubsection{Data-preprocessing}
+  \begin{itemize}
+    \item Convert the email files to a database where all fields are mapped to a column
+    \item remove identical subject and body.
+    \item remove messages smaller then 10 words
+    \item remove empty messages
+    \item remove automatically generated folders \cite{klimt2004enron}
+  \end{itemize}
+\subsubsection{Data-Analysis}
+  \begin{itemize}
+    \item analyze body length by character and word length and make a distribution 
+    \item analyze subject body similarity (TODO: how?)
+    \item distribute folder size per user
+    \item analyze distribution of folder names.
+    \item use folder as weak topic/category
+    \item Cluster / topic modeling with LDA to reveal major themes
+    \item Plot a temporal distribution of the emails
+  \end{itemize}
+\subsubsection{Query Construction}
+
+  \begin{itemize}
+    \item generate elaborative descriptions using textrank.
+    \item (use document clustering and a language model to create queries?)
+  \end{itemize}
+
+\subsubsection{Model training}
+
+\subsection{Faze 2}
+Faze two will be on RSQ2 and focus on reproducing research that uses linguistic markers to identify fraudulent data and using the model obtained in the previous faze to retrieve emails containing fraud.  
+
+
+%TODO: Fill in subsubsections
+\subsubsection{sentiment Analysis}
+  \begin{itemize}
+    \item Sentiment analysis on emotions like fear, anger, trust, anticipation, fear, love, sadness and surprise and analyze their relation ship to the convicted people. \cite{noever2020enroncorpusemailbodies}
+  \end{itemize}
+
+\subsubsection{Reproducing research linguistic markers}
+Use the linguistic Markers datasets to analyze which emails and users contain the most \cite{blanco2020manifestation} % TODO: refer to the direct datasets
+
+
+\subsubsection{Query Construction}
+Create queries depending on the Linguistic markers dataset \cite{blanco2020manifestation} % TODO: refer to the direct datasets
+
+\section{Evaluation}
+
+
+\subsection{Faze 1}
+- Beam first search.
+- compare to BM25 or vector-embeddings and use one as ground truth 
+
+- Different system pooling and annotation
+
+\subsection{Faze 2}
+
+- Compare what was found to results found in \titlecite{blanco2020manifestation} and \titlecite{noever2020enroncorpusemailbodies}
+- see if the found documents which are of the users that have committed fraud. This can be checked to which people have been persecuted (find source for this here \cite{FBIEnronCase})
+
+
+
+\section{Plan}
+See the linked google sheet.
+
+\printbibliography
+
+\end{document}
