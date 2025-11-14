@@ -14,6 +14,13 @@
 \newcommand{\titlecite}[1]{%
   \emph{\parencite{#1} \citetitle{#1}}%
 }
+
+% \usepackage{siunitx}
+% \sisetup{
+%   output-decimal-marker = {,},
+%   group-separator = {.}
+% }
+
 \title{Research proposal: Detecting fraud in language with Generative Retrieval models. An Enron Corpus study.}
 \author{Daniël van Oosteroom, \\
   \small Supervisor: Yubao Tang
@@ -36,7 +43,17 @@
 
 \begin{multicols}{2}
 
-\section{Literature Review}
+\section{Introduction}
+
+To what extend can GR be applied to detect fraudulent language markers in the Enron Corpus?
+(intent detection or emotion detection)
+
+1. RQ1: How does Generative Retrieval outperform BM25 and dense vector embeddings on general document retrieval within the Enron Corpus. \\
+2. RQ2: How effectively does GR retrieve fraudulent documents in the Enron Corpus. \\
+\\
+- TODO: write introduction
+
+\section{Related Research}
 
 Fraud detection is a growing field. Fraud detection on textual unstructured data is novel and unsolved \cite{blanco2020manifestation, noever2020enroncorpusemailbodies}. Also no trustworthy and peer reviewed research has been published about this. It could be possible to detect fraud from text because perpetrators might leave behind linguistic markers or show emotions that are common with fraud.
 
@@ -52,18 +69,17 @@ This opens up the question. Could this be used for retrieving documents? This wh
 %TODO: 1. extend literature review
 %TODO: 2. make it more academic like (no emotions and formal writing like French/Latin word and not Germanic)
 TODO: talk about pooling \cite{SparckJones1975ReportOT}, T5 \cite{JMLR:v21:20-074}, DSG \cite{NEURIPS2022_892840a6} and Elaborative Descriptions \cite{10.1145/3580305.3599903}
+\\
+\\
+- TODO: Talk about the Enron data and what other research have found out about it while analyzing it.
 
-\section{Research Questions}
-%TODO: Adapt and write the research questions
+\section{Methods}
 
-To what extend can GR be applied to detect fraudulent language markers in the Enron Corpus?
-(intent detection or emotion detection)
+\subsection{Task Definition}
 
-1. RQ1: How does Generative Retrieval outperform BM25 and dense vector embeddings on general document retrieval within the Enron Corpus. \\
-2. RQ2: How effectively does GR retrieve fraudulent documents in the Enron Corpus. \\
 
-\section{Data Study}
-The amount of emails present after dropping automatically generated folders is \NoFolderLength. This does include the inbox folders and sent / sent\_items / outbox. This is a similar amount to the cleaned dataset found in \citeauthor{klimt2004enron} although they found a value of 200.399 documents after cleaning. The selection of emails they used might have been different because their objective was classifying the folder an email belonged to and for that they only wanted human create folders. 
+\subsection{Data and Corpus}
+The amount of emails present after dropping automatically generated folders is \NoFolderLength. This does include the inbox folders and sent / sent\_items / outbox. This is a similar amount to the cleaned dataset found in \citeauthor{klimt2004enron} although they found a value of 200,399 documents after cleaning. The selection of emails they used might have been different because their objective was classifying the folder an email belonged to and for that they only wanted human create folders. 
 
 After cleaning further the amount of emails left is \GeneralLength. 
 
@@ -92,90 +108,77 @@ After cleaning further the amount of emails left is \GeneralLength.
         \includegraphics[width=0.48\textwidth]{../../code/plots/word_counts_boxplot.png}
         \label{fig:wrd_box_plot}
     }%
-    \caption{KDE plot}
+    \caption{Box plot}
     \label{fig:main_box_plots}
 \end{figure*}
 
 The Word Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_box_plot} is almost twice as big as the word Median \wordMedian{} which indicates that the word size is not a normal distribution. This becomes clearer when comparing the Q3 \wordQthree{} to the Max value \wordMax{} increasing the mean.
-\\
-- subject body similarity \\ 
-- distribute folder size per user (is this similar to findings?) \\
-- distribution of folder names (bar plot automatically generated size and not automatically generated (maybe top 10)) \\ 
-- Topic modeling \\
-- Temporal distribution \\
 
-\section{Methods}
-
-It is obvious that the main research question is a bit ambitious so the Research questions are subject to change, depending on how well the research is going. My research will have 2 phases. The research will mainly focus on phase 1 but if time allows it phase 2 will be added. 
-\subsection{Phase 1}
-Phase one will focus on the first Research question and will cover training a GR model on the Enron Corpus evaluating it against BM25 and dense vector embedding. 
-
-%TODO: Fill in subsubsections
-
-\subsubsection{Data-preprocessing}
-To clean the dataset redundant information has been removed. This includes identical subject and body. Messages of smaller then 10 words are excluded, just like empty messages. Also there are a lot of folders that have been automatically generated and do not have human made emails or duplicate messages. The inbox will be kept because it might have interesting emails that are not necessarily unusable. An sqlite3 database has been made and is available for download here: [insert download link]
+- TODO:
   \begin{itemize}
-    \item Convert the email files to a database where all fields are mapped to a column
-    \item remove identical subject and body.
-    \item remove messages smaller then 10 words
-    \item remove empty messages
-    \item remove automatically generated folders \cite{klimt2004enron}
-  \end{itemize}
-\subsubsection{Data-Analysis}
-  \begin{itemize}
-    \item analyze body length by character and word length and make a distribution 
-    \item analyze subject body similarity (TODO: how?)
-    \item distribute folder size per user
+    \item analyze subject body similarity
+    \item distribute folder size per user (bar plot automatically generated size and not automatically generated (maybe top 10))  
+      \begin{itemize}
+        \item how do to manage the amount of different folders in displaying
+        \item add count distinct folder names
+        \item folder name topics
+      \end{itemize}
     \item analyze distribution of folder names.
     \item use folder as weak topic/category
     \item Cluster / topic modeling with LDA to reveal major themes
     \item Plot a temporal distribution of the emails
   \end{itemize}
-\subsubsection{Query Construction}
-
+\subsection{Model training}
+TODO: 
   \begin{itemize}
-    \item generate elaborative descriptions using textrank.
-    \item (use document clustering and a language model to create queries?)
+    \item Describe the models (GR, BM25, Dense vector-embeddings)
+    \item max pooling
+    \item metrics
+    \item Beam first search
   \end{itemize}
 
-\subsubsection{Model training}
+\subsection{Query Construction}
+TODO: \\
+  \begin{itemize}
+    \item generate elaborative descriptions
+    \item generate queries
+    \item do I need to generate separate test queries for evaluation?
+    \item decide on the use of the following techniques
+      \begin{itemize}
+        \item text rank\\
+          Text rank is great for ED because it is quick and cheap and keeps the core of the meaning intact. In making the ED, add in the subject. The sentences use for the ED are 1/3 of the sentences + subject that are in the email with a max of 3. Experiment if you dont get any duplicates
+        \item **Will not use doc2query/docTTTTTquery \\
+        \item put these into bibtex for reference
+      \end{itemize}
+    \item use document clustering for generating queries?
+  \end{itemize}
 
-\subsection{Phase 2}
-Phase two will be on RSQ2 and focus on reproducing research that uses linguistic markers to identify fraudulent data and using the model obtained in the previous faze to retrieve emails containing fraud.  
-
-
-%TODO: Fill in subsubsections
-\subsubsection{sentiment Analysis}
+\subsection{sentiment Analysis}
+TODO: 
   \begin{itemize}
     \item Sentiment analysis on emotions like fear, anger, trust, anticipation, fear, love, sadness and surprise and analyze their relation ship to the convicted people. \cite{noever2020enroncorpusemailbodies}
   \end{itemize}
 
-\subsubsection{Reproducing research linguistic markers}
+\subsection{Reproducing research linguistic markers}
+TOO: 
 Use the linguistic Markers datasets to analyze which emails and users contain the most \cite{blanco2020manifestation} % TODO: refer to the direct datasets
 
 
-\subsubsection{Query Construction}
+\subsection{Query Construction}
+TODO:
 Create queries depending on the Linguistic markers dataset \cite{blanco2020manifestation} % TODO: refer to the direct datasets
 
-\section{Evaluation}
-
-
-\subsection{Faze 1}
-- Beam first search.
-- compare to BM25 or vector-embeddings and use one as ground truth 
-
-- Different system pooling and annotation
-
-\subsection{Faze 2}
-
+\subsection{Fraud Evaluation}
+TODO:
 - Compare what was found to results found in \titlecite{blanco2020manifestation} and \titlecite{noever2020enroncorpusemailbodies}
 - see if the found documents which are of the users that have committed fraud. This can be checked to which people have been persecuted (find source for this here \cite{FBIEnronCase})
 
-
-
-\section{Plan}
-See the linked google sheet.
-
+\section{Results}
+-
+\section{Conclusion}
+-
+\section{Discussion}
+-
 \printbibliography
 
 \end{multicols}
