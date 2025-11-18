@@ -146,7 +146,7 @@ The Word Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_b
 
 - TODO:
   \begin{itemize}
-    \item analyze subject body similarity
+    \item analyze subject body similarity (how do I decide what model to use?)
     \item distribute folder size per user (bar plot automatically generated size and not automatically generated (maybe top 10))  
       \begin{itemize}
         \item how do to manage the amount of different folders in displaying
@@ -154,9 +154,9 @@ The Word Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_b
         \item folder name topics
       \end{itemize}
     \item analyze distribution of folder names.
-    \item Use folder structure as weak supervision for topic/category
     \item Cluster / topic modeling with LDA to reveal major themes
     \item Plot a temporal distribution of the emails
+    \item figure out how at what size emails will be truncated and truncate them. 
   \end{itemize}
 \subsection{Model training}
 TODO: 
@@ -170,6 +170,7 @@ TODO:
 \subsection{Query Construction}
 TODO: \\
   \begin{itemize}
+    \item make a 10k and 100k dataset that equally uses from all users and folders. By random data as well and size.
     \item generate elaborative descriptions
     \item generate queries (13k-100k for 100k) (half t5 query generation)
     \item do I need to generate separate test queries for evaluation? (extract 1000 to 5000 for the test)
