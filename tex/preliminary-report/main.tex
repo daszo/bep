@@ -45,6 +45,7 @@
 
 \section{Introduction}
 
+
 To what extend can GR be applied to detect fraudulent language markers in the Enron Corpus?
 (intent detection or emotion detection)
 
@@ -52,6 +53,10 @@ To what extend can GR be applied to detect fraudulent language markers in the En
 2. RQ2: How effectively does GR retrieve fraudulent documents in the Enron Corpus. \\
 \\
 - TODO: write introduction
+
+introduce task definition 
+task barkground and limitation that I want to adress. And key idea of your method
+and results
 
 \section{Related Research}
 
@@ -73,12 +78,32 @@ TODO: talk about pooling \cite{SparckJones1975ReportOT}, T5 \cite{JMLR:v21:20-07
 \\
 - TODO: Talk about the Enron data and what other research have found out about it while analyzing it.
 
+Task definition
+fraud detection 
+relevant research
+What will I do
+
+generative retrieval 
+what it is 
+relevant research
+what I will do 
+
+How they work on this
+key idea of the method.
+
+Do research on fraud detection.
+Introduce task and give overview
+Then what makes yours unique.
+
+
+details in the methods
+
 \section{Methods}
 
 \subsection{Task Definition}
 
 
-\subsection{Data and Corpus}
+\subsection{Dataset}
 The amount of emails present after dropping automatically generated folders is \NoFolderLength. This does include the inbox folders and sent / sent\_items / outbox. This is a similar amount to the cleaned dataset found in \citeauthor{klimt2004enron} although they found a value of 200,399 documents after cleaning. The selection of emails they used might have been different because their objective was classifying the folder an email belonged to and for that they only wanted human create folders. 
 
 After cleaning further the amount of emails left is \GeneralLength. 
@@ -112,6 +137,11 @@ After cleaning further the amount of emails left is \GeneralLength.
     \label{fig:main_box_plots}
 \end{figure*}
 
+% TODO: only use Q1 and Q3. Get too many too long documents out. Beginning is most interesting so truncating would be fine (happens automatically). Case study biggest email. \\
+% TODO: Do distribution of folder per 
+% TODO: 10 thoudand and 100. Slice of all the users. 
+% TODO: T-SNE
+
 The Word Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_box_plot} is almost twice as big as the word Median \wordMedian{} which indicates that the word size is not a normal distribution. This becomes clearer when comparing the Q3 \wordQthree{} to the Max value \wordMax{} increasing the mean.
 
 - TODO:
@@ -124,7 +154,7 @@ The Word Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_b
         \item folder name topics
       \end{itemize}
     \item analyze distribution of folder names.
-    \item use folder as weak topic/category
+    \item Use folder structure as weak supervision for topic/category
     \item Cluster / topic modeling with LDA to reveal major themes
     \item Plot a temporal distribution of the emails
   \end{itemize}
@@ -141,11 +171,11 @@ TODO:
 TODO: \\
   \begin{itemize}
     \item generate elaborative descriptions
-    \item generate queries
-    \item do I need to generate separate test queries for evaluation?
+    \item generate queries (13k-100k for 100k) (half t5 query generation)
+    \item do I need to generate separate test queries for evaluation? (extract 1000 to 5000 for the test)
     \item decide on the use of the following techniques
       \begin{itemize}
-        \item text rank\\
+        \item text rank\\ 
           Text rank is great for ED because it is quick and cheap and keeps the core of the meaning intact. In making the ED, add in the subject. The sentences use for the ED are 1/3 of the sentences + subject that are in the email with a max of 3. Experiment if you dont get any duplicates
         \item **Will not use doc2query/docTTTTTquery \\
         \item put these into bibtex for reference
