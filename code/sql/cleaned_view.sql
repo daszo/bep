@@ -4,7 +4,7 @@ CREATE VIEW v_CleanMessages AS
 SELECT * FROM (
     SELECT *
     FROM v_DroppedFolders
-    WHERE length_word > 10 
+    WHERE clean_length_word > 20
     
 GROUP BY subject, body
 );

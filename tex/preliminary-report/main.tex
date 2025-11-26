@@ -2,14 +2,16 @@
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{multicol}
+\usepackage{amsmath}
 \usepackage[margin=1in]{geometry}
 
 \usepackage[backend=biber, style=numeric, sorting=nty]{biblatex}
-\addbibresource{../Data-study/references.bib}
+\addbibresource{../references.bib}
 
 \input{../../code/tbls/character_stats.tex}
 \input{../../code/tbls/word_stats.tex}
 \input{../../code/tbls/general_stats.tex}
+\input{../../code/tbls/similarities_stats.tex}
 
 \newcommand{\titlecite}[1]{%
   \emph{\parencite{#1} \citetitle{#1}}%
@@ -41,7 +43,7 @@
 
 \maketitle
 
-\begin{multicols}{2}
+% \begin{multicols}{2}
 
 \section{Introduction}
 
@@ -60,7 +62,8 @@ and results
 
 \section{Related Research}
 
-Fraud detection is a growing field. Fraud detection on textual unstructured data is novel and unsolved \cite{blanco2020manifestation, noever2020enroncorpusemailbodies}. Also no trustworthy and peer reviewed research has been published about this. It could be possible to detect fraud from text because perpetrators might leave behind linguistic markers or show emotions that are common with fraud.
+(add pshycholinguistic references)
+To Fraud detection is a growing field. In particular, fraud detection on textual unstructured data is novel and unsolved \cite{blanco2020manifestation, noever2020enroncorpusemailbodies}. Moreover, no trustworthy, peer reviewed research has been published about this. It could be possible to detect fraud from text because perpetrators might leave behind linguistic markers or show emotions that are common with fraud.
 
 To be able to do research on this it is imperative that there is a large corpus which contains fraud. This is why the Enron corpus is such an addition to the field \cite{klimt2004introducing,klimt2004enron, enron_dataset}. Enron was energy company that specialized in oil and gas and filed for bankruptcy in 2001 \cite{BritannicaEnron, FBIEnronCase}. During the investigation this dataset was made public and a cleaned version is publicly available \cite{enron_dataset}. 
 
@@ -79,7 +82,7 @@ TODO: talk about pooling \cite{SparckJones1975ReportOT}, T5 \cite{JMLR:v21:20-07
 - TODO: Talk about the Enron data and what other research have found out about it while analyzing it.
 
 Task definition
-fraud detection 
+fraud detection (also do intention detection and sentiment analysis)
 relevant research
 What will I do
 
@@ -102,11 +105,23 @@ details in the methods
 
 \subsection{Task Definition}
 
+Let $\mathcal{D} = \{d_1, d_2, \dots d_N \}$ denote the corpus of N documents, and let $\mathcal{Q} = \{q_1, q_2, \dots q_M \}$ represent the set of M queries. Further, we define $\mathcal{Y} = \{y_1, y_2, \dots y_N \}$ as the set of unique identifiers corresponding to each document. \\
+Let $f_\theta$ be the GR model parameterized by $\theta$. The task of the model is to map query $q \in \mathcal{Q}$ or $d \in \mathcal{D}$ to output relevant documents identifier $y \in \mathcal{Y}$.
+
+To do this, a training set is construction $\mathcal{T}$, this is defined as the union of the document-id pair and query-id pair~\eqref{eq:training-set}.
+\begin{equation}
+  \mathcal{T} = \{(d,y_d) | d \in \mathcal{D} \} \cup \{(q, y_q) | q \in \mathcal{Q}\}
+  \label{eq:training-set}
+\end{equation}
+Where $y_d \in \mathcal{Y}$ is the unique identifier assigned to document d and $y_q \in \mathcal{Q}$ is the unique identifier assigned to document q.
 
 \subsection{Dataset}
-The amount of emails present after dropping automatically generated folders is \NoFolderLength. This does include the inbox folders and sent / sent\_items / outbox. This is a similar amount to the cleaned dataset found in \citeauthor{klimt2004enron} although they found a value of 200,399 documents after cleaning. The selection of emails they used might have been different because their objective was classifying the folder an email belonged to and for that they only wanted human create folders. 
+The datalanalys is done before truncating the emails.
+The number of emails present after dropping automatically generated folders is \NoFolderLength. This include the inbox folders and sent / sent\_items / outbox. This is a similar number to the cleaned dataset found in \citeauthor{klimt2004enron}. They found a value of 200,399 documents after cleaning. Their different number of selected emails may have been due to theirobjective to classify the folders that each email belonged to, for which reson they sought only folders created by humans. 
 
-After cleaning further the amount of emails left is \GeneralLength. 
+After cleaning further the number of remaining emails left is \GeneralLength. 
+
+To clean the bodies of the emails, it is imperative to remove the extra syntax that email providers like outlook enter automatically. Also messages smaller then 20 words are removed as they are to small to create queries and docids of.
 
 \begin{figure*}[ht!]
     \centering
@@ -137,16 +152,25 @@ After cleaning further the amount of emails left is \GeneralLength.
     \label{fig:main_box_plots}
 \end{figure*}
 
+\begin{figure*}[ht!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{../../code/plots/similarities_hist.png}
+  \caption{Distribution of similarities}
+  \label{fig:similarities}
+\end{figure*}
+
 % TODO: only use Q1 and Q3. Get too many too long documents out. Beginning is most interesting so truncating would be fine (happens automatically). Case study biggest email. \\
 % TODO: Do distribution of folder per 
 % TODO: 10 thoudand and 100. Slice of all the users. 
 % TODO: T-SNE
 
-The Word Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_box_plot} is almost twice as big as the word Median \wordMedian{} which indicates that the word size is not a normal distribution. This becomes clearer when comparing the Q3 \wordQthree{} to the Max value \wordMax{} increasing the mean.
+For the word count the Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_box_plot} is substantially larger than the Median \wordMedian{} which indicates that this is not a normal distribution. This becomes clearer when comparing the Q3 \wordQthree{} to the Max value \wordMax{}. The substantial gap explains the size of the mean. The same is applicable to the character count.  (TODO: add the skewness of the )
 
+To determine if the subjects of the emails have any similarity to their respective bodies a sentence transformer will be used to calculate the embedding and the cosine similarity will be computed. In the process of calculating the cosine similarity the dot product of the subject and body embeddings is taken and the distribution is plotted in figure \ref{fig:similarities}. Although the distribution is unimodal, it is not a perfect bell curve. This is also apparent when looking at the Skewness which is a negative skew of \similaritiesSkewness. It is clear that the subjects and the bodies are very similar. 
+\\\\
 - TODO:
   \begin{itemize}
-    \item analyze subject body similarity (how do I decide what model to use?)
+    \item analyze subject body similarity (how do I decide what model to use?). Similarity, Sentence transformer T5 \cite{ni-etal-2022-sentence}
     \item distribute folder size per user (bar plot automatically generated size and not automatically generated (maybe top 10))  
       \begin{itemize}
         \item how do to manage the amount of different folders in displaying
@@ -158,6 +182,9 @@ The Word Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_b
     \item Plot a temporal distribution of the emails
     \item figure out how at what size emails will be truncated and truncate them. 
   \end{itemize}
+
+
+
 \subsection{Model training}
 TODO: 
   \begin{itemize}
@@ -170,7 +197,7 @@ TODO:
 \subsection{Query Construction}
 TODO: \\
   \begin{itemize}
-    \item make a 10k and 100k dataset that equally uses from all users and folders. By random data as well and size.
+    \item make a 10k and 100k dataset that equally uses from all users and folders. By random data as well and size. 
     \item generate elaborative descriptions
     \item generate queries (13k-100k for 100k) (half t5 query generation)
     \item do I need to generate separate test queries for evaluation? (extract 1000 to 5000 for the test)
@@ -212,6 +239,6 @@ TODO:
 -
 \printbibliography
 
-\end{multicols}
+% \end{multicols}
 
 \end{document}

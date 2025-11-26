@@ -10,6 +10,7 @@
 *.run*
 
 *.db
+*.npz
 maildir/
 mysql2sqlite/
 *.gz
