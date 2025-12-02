@@ -12,7 +12,9 @@ def main():
 
     df = load_db(table)
 
-    df[["mid", "body_clean"]].to_csv("data/N10k_text_rank.tsv", sep="\t")
+    df[["mid", "body_clean"]].set_index("mid", inplace=True)
+
+    df.to_csv("data/N10k_text_rank.tsv", sep="\t")
 
 
 if __name__ == "__main__":
