@@ -3,6 +3,8 @@
 \usepackage{subfig}
 \usepackage{multicol}
 \usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{cleveref}
 \usepackage[margin=1in]{geometry}
 
 \usepackage[backend=biber, style=numeric, sorting=nty]{biblatex}
@@ -104,8 +106,9 @@ details in the methods
 \section{Methods}
 
 \subsection{Task Definition}
+\label{subsec:task-definition}
 
-Let $\mathcal{D} = \{d_1, d_2, \dots d_N \}$ denote the corpus of N documents, and let $\mathcal{Q} = \{q_1, q_2, \dots q_M \}$ represent the set of M queries. Further, we define $\mathcal{Y} = \{y_1, y_2, \dots y_N \}$ as the set of unique identifiers corresponding to each document. \\
+Let $\mathcal{D} = \{d_1, d_2, \dots d_N \}$ denote the corpus of N email documents, which consists of subject, sender, recipient and sender. Let $\mathcal{Q} = \{q_1, q_2, \dots q_M \}$ represent the set of M queries. Further, we define $\mathcal{Y} = \{y_1, y_2, \dots y_N \}$ as the set of unique document identifiers corresponding to each email document. \\
 Let $f_\theta$ be the GR model parameterized by $\theta$. The task of the model is to map query $q \in \mathcal{Q}$ or $d \in \mathcal{D}$ to output relevant documents identifier $y \in \mathcal{Y}$.
 
 To do this, a training set is construction $\mathcal{T}$, this is defined as the union of the document-id pair and query-id pair~\eqref{eq:training-set}.
@@ -115,9 +118,11 @@ To do this, a training set is construction $\mathcal{T}$, this is defined as the
 \end{equation}
 Where $y_d \in \mathcal{Y}$ is the unique identifier assigned to document d and $y_q \in \mathcal{Q}$ is the unique identifier assigned to document q.
 
+The GR retrieval model, $f_\theta$ follows an encoder-decoder architecture. The encoder encodes the query q or the email document d and generates the unique document identifier y.
+
 \subsection{Dataset}
 The datalanalys is done before truncating the emails.
-The number of emails present after dropping automatically generated folders is \NoFolderLength. This include the inbox folders and sent / sent\_items / outbox. This is a similar number to the cleaned dataset found in \citeauthor{klimt2004enron}. They found a value of 200,399 documents after cleaning. Their different number of selected emails may have been due to theirobjective to classify the folders that each email belonged to, for which reson they sought only folders created by humans. 
+The number of emails present after dropping automatically generated folders is \NoFolderLength. This include the inbox folders and sent / sent\_items / outbox. This is a similar number to the cleaned dataset found in \citeauthor{klimt2004enron}. They found a value of 200,399 documents after cleaning. Their different number of selected emails may have been due to theirobjective to classify the folders that each email belonged to, for which reason they sought only folders created by humans. 
 
 After cleaning further the number of remaining emails left is \GeneralLength. 
 
@@ -166,7 +171,9 @@ To clean the bodies of the emails, it is imperative to remove the extra syntax t
 
 For the word count the Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_box_plot} is substantially larger than the Median \wordMedian{} which indicates that this is not a normal distribution. This becomes clearer when comparing the Q3 \wordQthree{} to the Max value \wordMax{}. The substantial gap explains the size of the mean. The same is applicable to the character count.  (TODO: add the skewness of the )
 
-To determine if the subjects of the emails have any similarity to their respective bodies a sentence transformer will be used to calculate the embedding and the cosine similarity will be computed. In the process of calculating the cosine similarity the dot product of the subject and body embeddings is taken and the distribution is plotted in figure \ref{fig:similarities}. Although the distribution is unimodal, it is not a perfect bell curve. This is also apparent when looking at the Skewness which is a negative skew of \similaritiesSkewness. It is clear that the subjects and the bodies are very similar. 
+To determine if the subjects of the emails have any similarity to their respective bodies a sentence transformer will be used to calculate the embedding and the cosine similarity will be computed. In the process of calculating the cosine similarity the dot product of the subject and body embeddings is taken and the distribution is plotted in figure \ref{fig:similarities}. Although the distribution is unimodal, it is not a perfect bell curve. This is also apparent when looking at the Skewness which is a negative skew of \similaritiesSkewness. It is clear that the subjects and the bodies are very similar. \\
+
+The training of the model was conducted in two stages. In the first stage, a set containing 10,000 emails was curated to verify if the data was suitable for the current objective and that the experimental setup contained no errors. When it was confirmed that the experimental setup was successful, a 100,000-email dataset was curated for the final training. \textcite{NEURIPS2022_892840a6} uses different sizes in datasets to give better insight into the performance of a retrieval methods, because different systems perform better at different size datasets. Due to limited emails contained in this dataset the 320.000-email dataset mentioned in the original DSI paper was not created in this experiment. In all curated datasets the ratio of emails per user-folder was maintained.
 \\\\
 - TODO:
   \begin{itemize}
@@ -184,23 +191,14 @@ To determine if the subjects of the emails have any similarity to their respecti
   \end{itemize}
 
 
-
-\subsection{Model training}
-TODO: 
-  \begin{itemize}
-    \item Describe the models (GR, BM25, Dense vector-embeddings)
-    \item max pooling
-    \item metrics
-    \item Beam first search
-  \end{itemize}
-
 \subsection{Query Construction}
+
 TODO: \\
   \begin{itemize}
     \item make a 10k and 100k dataset that equally uses from all users and folders. By random data as well and size. 
     \item generate elaborative descriptions
     \item generate queries (13k-100k for 100k) (half t5 query generation)
-    \item do I need to generate separate test queries for evaluation? (extract 1000 to 5000 for the test)
+    \item do I need to generate separate test queries for evaluation? (extract 1000 to 5000 for the test) 
     \item decide on the use of the following techniques
       \begin{itemize}
         \item text rank\\ 
@@ -210,6 +208,38 @@ TODO: \\
       \end{itemize}
     \item use document clustering for generating queries?
   \end{itemize}
+
+\subsection{Model training}
+Question: do I comment on the improvements between the original DSI paper \cite{NEURIPS2022_892840a6} and your improvement \cite{10.1145/3580305.3599903} or can I just quote that?
+As specified in \cref{subsec:task-definition} $f_\theta$ is a GR model with the encoder decoder architecture. For this the T5 model was chosen because that is the standard used in previous works \cite{NEURIPS2022_892840a6}\cite{10.1145/3580305.3599903}. The training of the model is a joint mode of two parts i.e., indexing and the retrieval in an end to end way.\\
+\textbf{Indexing:} This step is for memorizing information about the email documents, \textcite{NEURIPS2022_892840a6} takes a document and maps it to an unique document identifier.
+
+\begin{equation}
+  \mathcal{L}_{Indexing}{(\theta)} = \displaystyle\sum_{d_i \in \mathcal{D}} log P(y | T5_{\theta}(d_i))
+  \label{eq:indexing-los}
+\end{equation}
+
+While \textcite{NEURIPS2022_892840a6} use only numerical ids \textcite{10.1145/3580305.3599903} use Elaborative Descriptions as the identifier. 
+
+\textbf{Retrieval:} Given a query $q \in \mathcal{Q}$, the DSI model outputs the relevant document identifier y. For this the T5 model, previously fine tuned for indexing, is trained on the query-id pair.
+
+\begin{equation}
+  \mathcal{L}_{Retrieval}{(\theta)} = \displaystyle\sum_{d_i \in \mathcal{D}} log P(y | T5_{\theta}(d_i))
+  \label{eq:retrieval-loss}
+\end{equation}
+
+
+TODO: 
+  \begin{itemize}
+    \item add more information about the combination trainging and the beam search method
+  \end{itemize}
+
+\subsection{Baseline Methods}
+
+BM25 vector embedding
+
+\subsection{Evaluation metrics}
+
 
 \subsection{sentiment Analysis}
 TODO: 
@@ -230,6 +260,11 @@ Create queries depending on the Linguistic markers dataset \cite{blanco2020manif
 TODO:
 - Compare what was found to results found in \titlecite{blanco2020manifestation} and \titlecite{noever2020enroncorpusemailbodies}
 - see if the found documents which are of the users that have committed fraud. This can be checked to which people have been persecuted (find source for this here \cite{FBIEnronCase})
+
+\section{Experimental setup}
+
+\subsection{Evaluation metrics}
+
 
 \section{Results}
 -
