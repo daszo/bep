@@ -56,3 +56,7 @@ def main():
     print("Finished query generation")
 
     write_to_db(df_queries, destination_table)
+
+
+if __name__ == "__main__":
+    main()
