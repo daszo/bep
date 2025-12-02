@@ -61,7 +61,7 @@ echo "Running script on Ubuntu..."
 ssh $REMOTE_USER@$REMOTE_IP "
     cd $REMOTE_PATH && \
     git pull && \
-    source .venv/bin/arcivate && \
+    source .venv/bin/activate && \
     python3 $FILE $ARGS"
 
 # 3. Sync Results DOWN (Ubuntu -> Arch)
