@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 
 
-def load_db(table: str, DB_PATH: str = "enron.db") -> pd.Dataframe:
+def load_db(table: str, DB_PATH: str = "enron.db") -> pd.DataFrame:
 
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -19,7 +19,7 @@ def load_db(table: str, DB_PATH: str = "enron.db") -> pd.Dataframe:
     return df
 
 
-def write_to_db(df, table, DB_PATH="enron.db"):
+def write_to_db(df: pd.DataFrame, table: str, DB_PATH: str = "enron.db"):
 
     conn = sqlite3.connect(DB_PATH)
 
