@@ -12,9 +12,14 @@ def main():
 
     df = load_db(table)
 
-    df[["mid", "body_clean"]].set_index("mid", inplace=True)
+    df.set_index("mid", inplace=True)
 
-    df.to_csv("data/N10k_text_rank.tsv", sep="\t")
+    # Clean the text: Replace newlines/tabs with spaces to prevent breaking the TSV structure
+    df["body_clean"] = (
+        df["body_clean"].astype(str).str.replace(r"[\n\r\t]", " ", regex=True)
+    )
+
+    df["body_clean"].to_csv("data/N10k_text_rank_msmarco.tsv", sep="\t", header=False)
 
 
 if __name__ == "__main__":
