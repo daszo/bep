@@ -53,12 +53,12 @@ git commit -m "$MESSAGE"
 git push origin main
 
 # 1. Sync Data UP (Arch -> Ubuntu)
-# echo "Syncing files to Ubuntu..."
+echo "Syncing files to Ubuntu..."
 rsync -avz ./$PROJECT_DIR/$DB $REMOTE_USER@$REMOTE_IP:$REMOTE_PATH/$DB
 
 # 2. Execute Script
 echo "Running script on Ubuntu..."
-ssh $REMOTE_USER@$REMOTE_IP "cd $REMOTE_PATH && git pull && python3 $FIRST_ARG $REST_ARGS"
+ssh $REMOTE_USER@$REMOTE_IP "cd $REMOTE_PATH && git pull && python3 $FILE $ARGS"
 
 # 3. Sync Results DOWN (Ubuntu -> Arch)
 # Assuming your python script saves output to an 'output' folder
