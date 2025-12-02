@@ -1,6 +1,7 @@
 from utils.database import load_db, write_to_db
 from summa import summarizer
 from summa import keywords
+import time
 
 
 def get_keywords_safe(text, num_words=8):
@@ -50,10 +51,14 @@ def main():
     df = load_db(table)
 
     print("Starting query generation")
+    start_time = time.perf_counter()
 
     df_queries = df.apply(lambda x: calculate_query_and_ed(x), axis=1)
 
-    print("Finished query generation")
+    end_time = time.perf_counter()
+    elapsed_time = end_time - start_time
+
+    print(f"Finished query generation in {elapsed_time:.4f} seconds.")
 
     write_to_db(df_queries, destination_table)
 
