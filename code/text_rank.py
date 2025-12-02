@@ -49,6 +49,10 @@ def main():
 
     df = load_db(table)
 
+    print("Starting query generation")
+
     df_queries = df.apply(lambda x: calculate_query_and_ed(x), axis=1)
+
+    print("Finished query generation")
 
     write_to_db(df_queries, destination_table)

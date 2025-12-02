@@ -4,6 +4,8 @@ import pandas as pd
 
 def load_db(table: str, DB_PATH: str = "enron.db") -> pd.DataFrame:
 
+    print(f"Started, Loading DB {DB_PATH}")
+
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
 
@@ -14,12 +16,14 @@ def load_db(table: str, DB_PATH: str = "enron.db") -> pd.DataFrame:
     conn.commit()
     conn.close()
 
-    print(f"dataframe of size {df.columns}")
+    print(f"Finished, Loading Dataframe of size {df.columns}")
 
     return df
 
 
 def write_to_db(df: pd.DataFrame, table: str, DB_PATH: str = "enron.db"):
+
+    print(f"Started, Writing {table} to database {DB_PATH}")
 
     conn = sqlite3.connect(DB_PATH)
 
@@ -27,7 +31,7 @@ def write_to_db(df: pd.DataFrame, table: str, DB_PATH: str = "enron.db"):
     # if_exists='replace' drops the table if it exists and creates a new one
     # if_exists='append' adds to it
     df.to_sql(
-        name="N10k_text_rank",
+        name=table,
         con=conn,
         if_exists="replace",
         index=False,
@@ -39,3 +43,5 @@ def write_to_db(df: pd.DataFrame, table: str, DB_PATH: str = "enron.db"):
     conn.commit()
 
     conn.close()
+
+    print(f"Finished, Writing {table} to database {DB_PATH}")
