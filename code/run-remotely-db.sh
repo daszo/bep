@@ -65,8 +65,7 @@ ssh $REMOTE_USER@$REMOTE_IP "
     python3 $FILE $ARGS"
 
 # 3. Sync Results DOWN (Ubuntu -> Arch)
-# Assuming your python script saves output to an 'output' folder
 echo "Retrieving results..."
-rsync -avz $REMOTE_USER@$REMOTE_IP:$REMOTE_PATH/output/ ./$PROJECT_DIR/output/
+rsync -avz $REMOTE_USER@$REMOTE_IP:$REMOTE_PATH/$DB ./$PROJECT_DIR/$DB
 
 echo "Done."

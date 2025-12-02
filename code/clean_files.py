@@ -69,6 +69,7 @@ def clean_email_body(text):
 
 
 def main():
+    print("starting to load")
     DB_PATH = "enron.db"
 
     conn = sqlite3.connect(DB_PATH)
@@ -117,4 +118,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
