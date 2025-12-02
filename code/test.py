@@ -16,6 +16,7 @@ def main():
         "--sleep", type=int, default=0, help="Simulate long running process (seconds)"
     )
 
+    print("Parsing arguments...")
     args = parser.parse_args()
 
     # 2. Simulate work (useful to test connection stability)
