@@ -57,12 +57,13 @@ echo "Syncing files to Ubuntu..."
 rsync -avz ./$PROJECT_DIR/$DB $REMOTE_USER@$REMOTE_IP:$REMOTE_PATH/$DB
 
 # 2. Execute Script
+# -u makes it print the print statements which it would not otherwise because it is not connected to a tty.
 echo "Running script on Ubuntu..."
 ssh $REMOTE_USER@$REMOTE_IP "
     cd $REMOTE_PATH && \
     git pull && \
     source .venv/bin/activate && \
-    python3 $FILE $ARGS"
+    python3 -u $FILE $ARGS"
 
 # 3. Sync Results DOWN (Ubuntu -> Arch)
 echo "Retrieving results..."

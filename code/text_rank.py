@@ -18,7 +18,7 @@ def get_keywords_safe(text, num_words=8):
         kw_str = keywords.keywords(text)
         return kw_str.split("\n") if kw_str else []
     except Exception:
-        return text.split()
+        return " ".join(text.split())
 
 
 def calculate_query_and_ed(row):
