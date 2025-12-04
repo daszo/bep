@@ -49,18 +49,31 @@
 
 \section{Introduction}
 
+A perpetual problem in financial markets is corporate fraud. Recently, fears of this have returned, with analysts drawing the comparison between Nvidea and the historic corporate fraud case of Enron. Although the validity of this claim is to be debated it is imperative that their are methods that can aid with the detection of such fraud. 
 
-To what extend can GR be applied to detect fraudulent language markers in the Enron Corpus?
-(intent detection or emotion detection)
+\subsection{Orienting Information}
 
-1. RQ1: How does Generative Retrieval outperform BM25 and dense vector embeddings on general document retrieval within the Enron Corpus. \\
-2. RQ2: How effectively does GR retrieve fraudulent documents in the Enron Corpus. \\
-\\
-- TODO: write introduction
+In the domain of fraud detection the goal is to predict if a certain scenario is fraudulent. This can be done in two main ways. The first way is to use to utilize financial data and do anomaly detection [TODO: find papers on this.]. The second way is to see fraud as an intention and to utilize textual data to predict this intention. Intent prediction is used for optimizing retrieval systems [explain retrieval more?] and Intention prediction is currently handeled as a classification problem.[https://dl.acm.org/doi/pdf/10.1145/3295750.3298924] Using intent prediction to detect fraud has not yet been done. There have been attempts to use linguistic markers and sentiment analysis to detect fraud in the enron corpus \cite{noever2020enroncorpusemailbodies} \cite{blanco2020manifestation} \cite{klimt2004introducing}, but none have been proven.
 
-introduce task definition 
-task barkground and limitation that I want to adress. And key idea of your method
-and results
+With the Emergence of Large Language Models new ways of retrieving information have been developed. So is the newest addition DSI \cite{NEURIPS2022_892840a6}, which is simply put a LLM that predicts the id of document given a query. Solving intent detection task internally.
+
+\subsection{Whats at stake}
+As generative retrieval is a new and novel field it is stil unclear what the practical applications are. Further, currently there is no method that has been proven to be able to predict fraudulent behavior is text. 
+
+\subsection{My Thesis}
+Using the enron corpus, this research uses GR retrieval methods to retrieve and thus detect fraudulent emails. It does so by first exploring the efficacy of GR compared to other methods like BM25 and dense vector retrieval. After that it explores how using linguistic makers and sentiment analysis to construct queries, GR retrieval can retrieve emails of prosecuted employees in the enron corpus.
+
+% To what extend can GR be applied to detect fraudulent language markers in the Enron Corpus?
+% (intent detection or emotion detection)
+%
+% 1. RQ1: How does Generative Retrieval outperform BM25 and dense vector embeddings on general document retrieval within the Enron Corpus. \\
+% 2. RQ2: How effectively does GR retrieve fraudulent documents in the Enron Corpus. \\
+% \\
+% - TODO: write introduction
+%
+% introduce task definition 
+% task barkground and limitation that I want to adress. And key idea of your method
+% and results
 
 \section{Related Research}
 
@@ -191,7 +204,47 @@ The training of the model was conducted in two stages. In the first stage, a set
   \end{itemize}
 
 
-\subsection{Query Construction}
+\subsection{Query and ID Construction}
+To construct the training set T, queries and ID was generated. The ID's were constructed using textrank keyword extraction. Queries were contructed and generated. Firstly a query set was constructed using textrank and second query set was generated using T5 title transformer. This is so there is a balance between extractive and abstractive summarization.
+
+\subsubsection{Text Rank}
+There are two versions of text rank. Sentence extraction and keyword extraction, which are used for query construction and id construction respectively. 
+
+For the sentence extraction the email bodies were split sentences. The similarities between the sentences was calculated based the amount of common words and size of the sentences.
+
+\begin{equation}
+  s(x,y) = \frac{N_{x \cup y}}{log_{10}(N_x) + log_{10}(N_y)}
+    \label{eq:textrank-sim}
+\end{equation}
+Where $N_{x \cup y}$ is the number of common words between sentence x and y. And $N_x$ and $N_y$ are the amount of words in sentence x and y respectively.
+
+or this one? 
+\begin{equation}
+  \text{Similarity}(S_i, S_j) = \frac{|\{ w_k \mid w_k \in S_i \, \& \, w_k \in S_j \}|}{\log(|S_i|) + \log(|S_j|)}
+  \label{eq:textrank-sim-v2}
+\end{equation}
+
+With these similarities a graph is constructed where words are the nodes and the verticies are weighted by the similarities between the nodes. \\
+TODO: change the symbols so that it works with each other.
+
+The score for a vertex $V_i$ is defined recursively based on the scores of the vertices $V_j$ that point to it.
+\begin{equation}
+  WS(V_i) = (1 - d) + d \sum_{V_j \in In(V_i)} \frac{w_{ji}}{\sum_{V_k \in Out(V_j)} w_{jk}} WS(V_j)
+  \label{eq:textrank-pagerank}
+\end{equation}
+
+\noindent Where:
+\begin{itemize}
+    \item $WS(V_i)$ is the TextRank score of vertex $V_i$.
+    \item $d$ is the damping factor (typically $0.85$).
+    \item $In(V_i)$ is the set of vertices that point to $V_i$ (predecessors).
+    \item $Out(V_j)$ is the set of vertices that vertex $V_j$ points to (successors).
+    \item $w_{ji}$ is the weight of the edge between vertices $j$ and $i$.
+\end{itemize}
+
+Where x is sentence 
+
+
 
 TODO: \\
   \begin{itemize}
