@@ -53,7 +53,54 @@ This paper is about the first implementation of the Differenciable Search Index 
 \titlecite{10.1145/3580305.3599903}
 This paper explores the method of generating id's for DSI. It proposes a method where the ids for the documents are just semantic descriptions of the documents. These are called Elaborative Descriptions (ED). It also describes how it acquires these descriptions. 
 
-\bigskip
+
+\titlecite{depaulo2003cues}
+This is the main papers that discusses deceptive cues. Cues are more high level and markers are more low level. This is a broad overview but not specific to the enron case.
+
+\titlecite{louwerse2010linguistic}
+Based on the Louwerse et al. (2010) paper analyzing the Enron corpus, here is the comprehensive list of linguistic cues that were statistically linked to fraudulent events.
+
+The researchers analyzed the data using two distinct models: the **Linguistic Category Model (LCM)** (Study 1) and **Standard Linguistic Cues** (Study 2).
+
+### 1. Linguistic Category Model (LCM) Cues
+This was the primary focus of the paper. The researchers found that **Abstractness** was the most reliable predictor of fraud in the social network.
+
+* **Abstractness Score:** An aggregate score derived from the categories below.
+    * **Finding:** Emails sent during fraudulent periods had significantly **higher** abstractness scores.
+    * **Reasoning:** Abstract language is harder to verify, generates more disagreement, and is less informative, making it ideal for obfuscation.
+* **Adjectives (ADJ):** Words referring to qualities or characteristics (e.g., *optimal*, *distraught*).
+    * **Finding:** This was the **strongest single predictor**. Events like "Shredding Occurs," "Fraud Announced," and "Bankruptcy Filed" all predicted a higher frequency of adjectives.
+* **State Verbs (SV):** Verbs referring to enduring cognitive or emotional states (e.g., *trust*, *understand*).
+* **State Action Verbs (SAV):** Verbs referring to the emotional consequence of an action (e.g., *surprise*, *anger*).
+* **Interpretative Action Verbs (IAV):** Verbs referring to general classes of behavior without physical invariants (e.g., *help*, *tease*).
+* **Descriptive Action Verbs (DAV):** Concrete verbs describing specific actions (e.g., *hit*, *walk*).
+    * *Note:* While DAVs are concrete, the study found positive correlations between DAVs and specific crises (like Layoffs), likely due to the need to describe specific logistical actions during those times.
+
+### 2. Standard Linguistic Cues (LIWC-style features)
+In Study 2, the researchers tested cues traditionally associated with deception in experimental settings. In the Enron corpus, many of these cues showed relationships **opposite** to what is found in laboratory experiments.
+
+* **First-Person Pronouns:** ($I, me, mine$)
+    * **Finding:** **Positive correlation** with fraudulent events (e.g., Fraud Announced, Bankruptcy Filed).
+    * *Contrast:* In lab studies, liars usually use *fewer* self-references to dissociate themselves. In the Enron network, executives used *more*.
+* **Third-Person Pronouns:** ($he, she, they$)
+    * **Finding:** Generally showed a **negative correlation** with events like "Layoffs" and "Fraudulent Paperwork Filed."
+* **Analytic Negation:** (e.g., *not*, *no*)
+    * **Finding:** **Positive correlation** with events like "SEC Inquiry" and "Shredding Stopped."
+* **Causal Adverbs:** (e.g., *because*, *effect*)
+    * **Finding:** **Negative correlation** with "Layoffs."
+* **Word Count:**
+    * **Finding:** Mixed results; "Layoffs" predicted lower word counts (negative), while "Loss Announced" predicted higher word counts (positive).
+
+### Summary Table of Directionality
+(Based on Tables 3 & 4 in the text)
+
+| Cue Category | Direction during Enron Fraud Events | Explanation |
+| :--- | :--- | :--- |
+| **Abstractness (LCM)** | **INCREASE** | Language becomes vague and harder to verify. |
+| **Adjectives (ADJ)** | **INCREASE** | High use of descriptive qualities rather than concrete actions. |
+| **1st Person Pronouns**| **INCREASE** | Contrary to lab studies; executives may have taken ownership or been more self-focused during crises. |
+| **Negations** | **INCREASE** | Higher denial or negative syntax during investigations. |
+| **3rd Person Pronouns**| **DECREASE** | Less focus on others during critical paperwork fraud or layoffs. |bigskip
 
 
 \printbibliography

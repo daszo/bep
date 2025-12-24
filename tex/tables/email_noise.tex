@@ -1,0 +1,26 @@
+\begin{table}[ht]
+    \centering
+    \caption{Discrepancy between Subject and Body with NLP Feature Generations}
+    \label{tab:email_noise_mismatch}
+    \renewcommand{\arraystretch}{1.4}
+    % @{} removes the default padding on the far left and right
+    \begin{tabularx}{\textwidth}{@{} l X @{}}
+        \toprule
+        \textbf{Field} & \textbf{Content} \\
+        \midrule
+        \textbf{Subject} & Re: FW: Enron Press Release \\
+        \midrule
+        \textbf{Body (Clean)} & Hey woman! When do you go north? I'm looking at taking you out for a free\texttt{\textbackslash n}meal the second week of Augy. I off next week and you know where I'll be.  \\
+        \midrule
+        \textbf{TextRank Query} & meal the second week of Augy. I off next week and you know where I'll be. \\
+        \midrule
+        \textbf{Doc2Query} & Re: FW: Enron Press Release - Body: Hey Woman! \\
+        \midrule
+        \textbf{Doc2Query input} & \textbf{Subject:} Re: FW: Enron Press Release \textbf{Body:} Hey woman! When do you go north? I'm looking at taking you out for a free meal the second week of Augy. I off next week and you know where I'll be. \\
+        \midrule
+        \textbf{Elaborative Desc.} & enron press release hey fw woman looking \\
+        \midrule
+
+        \bottomrule
+    \end{tabularx}
+\end{table}

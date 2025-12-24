@@ -19,6 +19,55 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
+    \entry{AHMED2016278}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=7fb2375082bc9ad06db36522c8341d67}{%
+           family={Ahmed},
+           familyi={A\bibinitperiod},
+           given={Mohiuddin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=79c3752772e9248f7d4a4e9e419300b8}{%
+           family={Mahmood},
+           familyi={M\bibinitperiod},
+           given={Abdun\bibnamedelima Naser},
+           giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=4bfdb9872107eb1e5f742bc03f7a83d4}{%
+           family={Islam},
+           familyi={I\bibinitperiod},
+           given={Md.\bibnamedelimi Rafiqul},
+           giveni={M\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{3be106c3a97b3ae290b3281361238086}
+      \strng{fullhash}{3be106c3a97b3ae290b3281361238086}
+      \strng{fullhashraw}{3be106c3a97b3ae290b3281361238086}
+      \strng{bibnamehash}{3be106c3a97b3ae290b3281361238086}
+      \strng{authorbibnamehash}{3be106c3a97b3ae290b3281361238086}
+      \strng{authornamehash}{3be106c3a97b3ae290b3281361238086}
+      \strng{authorfullhash}{3be106c3a97b3ae290b3281361238086}
+      \strng{authorfullhashraw}{3be106c3a97b3ae290b3281361238086}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Anomaly detection is an important data analysis task. It is used to identify interesting and emerging patterns, trends and anomalies from data. Anomaly detection is an important tool to detect abnormalities in many different domains including financial fraud detection, computer network intrusion, human behavioural analysis, gene expression analysis and many more. Recently, in the financial sector, there has been renewed interest in research on detection of fraudulent activities. There has been a lot of work in the area of clustering based unsupervised anomaly detection in the financial domain. This paper presents an in-depth survey of various clustering based anomaly detection technique and compares them from different perspectives. In addition, we discuss the lack of real world data and how synthetic data has been used to validate current detection techniques.}
+      \field{issn}{0167-739X}
+      \field{journaltitle}{Future Generation Computer Systems}
+      \field{title}{A survey of anomaly detection techniques in financial domain}
+      \field{volume}{55}
+      \field{year}{2016}
+      \field{pages}{278\bibrangedash 288}
+      \range{pages}{11}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.future.2015.01.001
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0167739X15000023
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0167739X15000023
+      \endverb
+      \keyw{Clustering,Fraud detection,Anomaly detection}
+    \endentry
     \entry{bengio2003neural}{article}{}{}
       \name{author}{4}{}{%
         {{hash=40a8e4774982146adc2688546f54efb2}{%
@@ -120,6 +169,64 @@
       \field{note}{Accessed: 2025-11-05}
       \field{title}{Enron scandal | Summary, Explained, History, \& Facts}
       \field{year}{2025}
+    \endentry
+    \entry{casanueva2020efficientintentdetectiondual}{misc}{}{}
+      \name{author}{5}{}{%
+        {{hash=999e753ec11c6c23825b0db372dfdff5}{%
+           family={Casanueva},
+           familyi={C\bibinitperiod},
+           given={Iñigo},
+           giveni={I\bibinitperiod}}}%
+        {{hash=6f120e04382d4eb4ee95061d2cc0c462}{%
+           family={Temčinas},
+           familyi={T\bibinitperiod},
+           given={Tadas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=ddc74127d9beaf12f7a7b89bc135bb1d}{%
+           family={Gerz},
+           familyi={G\bibinitperiod},
+           given={Daniela},
+           giveni={D\bibinitperiod}}}%
+        {{hash=fb006047ebc1f743248cab3e7fb0827c}{%
+           family={Henderson},
+           familyi={H\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod}}}%
+        {{hash=9fa17331489449c86886282786aa6111}{%
+           family={Vulić},
+           familyi={V\bibinitperiod},
+           given={Ivan},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c3e1c400a5ba7df939a5744a34ae1d1}
+      \strng{fullhash}{a26e5ceeba2c8603dabfc2b0a5653080}
+      \strng{fullhashraw}{a26e5ceeba2c8603dabfc2b0a5653080}
+      \strng{bibnamehash}{9c3e1c400a5ba7df939a5744a34ae1d1}
+      \strng{authorbibnamehash}{9c3e1c400a5ba7df939a5744a34ae1d1}
+      \strng{authornamehash}{9c3e1c400a5ba7df939a5744a34ae1d1}
+      \strng{authorfullhash}{a26e5ceeba2c8603dabfc2b0a5653080}
+      \strng{authorfullhashraw}{a26e5ceeba2c8603dabfc2b0a5653080}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Building conversational systems in new domains and with added functionality requires resource-efficient models that work under low-data regimes (i.e., in few-shot setups). Motivated by these requirements, we introduce intent detection methods backed by pretrained dual sentence encoders such as USE and ConveRT. We demonstrate the usefulness and wide applicability of the proposed intent detectors, showing that: 1) they outperform intent detectors based on fine-tuning the full BERT-Large model or using BERT as a fixed black-box encoder on three diverse intent detection data sets; 2) the gains are especially pronounced in few-shot setups (i.e., with only 10 or 30 annotated examples per intent); 3) our intent detectors can be trained in a matter of minutes on a single CPU; and 4) they are stable across different hyperparameter settings. In hope of facilitating and democratizing research focused on intention detection, we release our code, as well as a new challenging single-domain intent detection dataset comprising 13,083 annotated examples over 77 intents.}
+      \field{eprintclass}{cs.CL}
+      \field{eprinttype}{arXiv}
+      \field{title}{Efficient Intent Detection with Dual Sentence Encoders}
+      \field{year}{2020}
+      \verb{doi}
+      \verb https://doi.org/10.48550/arXiv.2003.04807
+      \endverb
+      \verb{eprint}
+      \verb 2003.04807
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2003.04807
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2003.04807
+      \endverb
     \endentry
     \entry{enron_dataset}{misc}{}{}
       \name{author}{1}{}{%
@@ -304,6 +411,159 @@
       \field{pages}{217\bibrangedash 226}
       \range{pages}{10}
     \endentry
+    \entry{LI2023103475}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=4c1dbf67b53210ff707448664f3a2184}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Yongqi},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=a44174a97a52d8b64289ef831cb1ac37}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Nan},
+           giveni={N\bibinitperiod}}}%
+        {{hash=cce05cab2c437e9c128f853684ee3137}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Liang},
+           giveni={L\bibinitperiod}}}%
+        {{hash=e5bfd490d91c5d1b935092ce3132a083}{%
+           family={Wei},
+           familyi={W\bibinitperiod},
+           given={Furu},
+           giveni={F\bibinitperiod}}}%
+        {{hash=318a797cfb1e6f8da35b79287d226780}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Wenjie},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{a6fd6cb0bc64e7c20538473f411c6c4b}
+      \strng{fullhash}{7573bcc788ddb3f90ec6980f34080f8f}
+      \strng{fullhashraw}{7573bcc788ddb3f90ec6980f34080f8f}
+      \strng{bibnamehash}{a6fd6cb0bc64e7c20538473f411c6c4b}
+      \strng{authorbibnamehash}{a6fd6cb0bc64e7c20538473f411c6c4b}
+      \strng{authornamehash}{a6fd6cb0bc64e7c20538473f411c6c4b}
+      \strng{authorfullhash}{7573bcc788ddb3f90ec6980f34080f8f}
+      \strng{authorfullhashraw}{7573bcc788ddb3f90ec6980f34080f8f}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0306-4573}
+      \field{journaltitle}{Information Processing \& Management}
+      \field{number}{5}
+      \field{title}{Generative retrieval for conversational question answering}
+      \field{volume}{60}
+      \field{year}{2023}
+      \field{pages}{103475}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.ipm.2023.103475
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0306457323002121
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0306457323002121
+      \endverb
+      \keyw{Conversational question answering,Generative retrieval}
+    \endentry
+    \entry{ni-etal-2022-sentence}{inproceedings}{}{}
+      \name{author}{7}{}{%
+        {{hash=03c157e0c0813ae391fc255395467a5e}{%
+           family={Ni},
+           familyi={N\bibinitperiod},
+           given={Jianmo},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c0474602e54657c536e00ac7ca18616a}{%
+           family={Hernandez\bibnamedelima Abrego},
+           familyi={H\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={Gustavo},
+           giveni={G\bibinitperiod}}}%
+        {{hash=6a8ed325a5622cf4ec06f17777376a1b}{%
+           family={Constant},
+           familyi={C\bibinitperiod},
+           given={Noah},
+           giveni={N\bibinitperiod}}}%
+        {{hash=4d364bcd997afac4c26edfb781a5b912}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Ji},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e01ef8812581349c0f03661f39872fb4}{%
+           family={Hall},
+           familyi={H\bibinitperiod},
+           given={Keith},
+           giveni={K\bibinitperiod}}}%
+        {{hash=73291503692ca44df1071d1d8a59a3a1}{%
+           family={Cer},
+           familyi={C\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=c3469691a86ad5a26b5cb41949a4846d}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Yinfei},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=d0bc8f5f636cd15bd288897f91468b6e}{%
+           family={Muresan},
+           familyi={M\bibinitperiod},
+           given={Smaranda},
+           giveni={S\bibinitperiod}}}%
+        {{hash=b1e0f88aae37cfd1c213a370797c03b3}{%
+           family={Nakov},
+           familyi={N\bibinitperiod},
+           given={Preslav},
+           giveni={P\bibinitperiod}}}%
+        {{hash=f6f9fb78091bb2bfb2914d20d4cbd3ef}{%
+           family={Villavicencio},
+           familyi={V\bibinitperiod},
+           given={Aline},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Dublin, Ireland}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computational Linguistics}%
+      }
+      \strng{namehash}{d963105c4a5873c205f5d1fac119f131}
+      \strng{fullhash}{0ff3221149118b12c769860481906c69}
+      \strng{fullhashraw}{0ff3221149118b12c769860481906c69}
+      \strng{bibnamehash}{d963105c4a5873c205f5d1fac119f131}
+      \strng{authorbibnamehash}{d963105c4a5873c205f5d1fac119f131}
+      \strng{authornamehash}{d963105c4a5873c205f5d1fac119f131}
+      \strng{authorfullhash}{0ff3221149118b12c769860481906c69}
+      \strng{authorfullhashraw}{0ff3221149118b12c769860481906c69}
+      \strng{editorbibnamehash}{fcdf09816a280b295b4bcc26f6453221}
+      \strng{editornamehash}{fcdf09816a280b295b4bcc26f6453221}
+      \strng{editorfullhash}{fcdf09816a280b295b4bcc26f6453221}
+      \strng{editorfullhashraw}{fcdf09816a280b295b4bcc26f6453221}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We provide the first exploration of sentence embeddings from text-to-text transformers (T5) including the effects of scaling up sentence encoders to 11B parameters. Sentence embeddings are broadly useful for language processing tasks. While T5 achieves impressive performance on language tasks, it is unclear how to produce sentence embeddings from encoder-decoder models. We investigate three methods to construct Sentence-T5 (ST5) models: two utilize only the T5 encoder and one using the full T5 encoder-decoder. We establish a new sentence representation transfer benchmark, SentGLUE, which extends the SentEval toolkit to nine tasks from the GLUE benchmark. Our encoder-only models outperform the previous best models on both SentEval and SentGLUE transfer tasks, including semantic textual similarity (STS). Scaling up ST5 from millions to billions of parameters shown to consistently improve performance. Finally, our encoder-decoder method achieves a new state-of-the-art on STS when using sentence embeddings.}
+      \field{booktitle}{Findings of the Association for Computational Linguistics: ACL 2022}
+      \field{month}{5}
+      \field{title}{Sentence-T5: Scalable Sentence Encoders from Pre-trained Text-to-Text Models}
+      \field{year}{2022}
+      \field{pages}{1864\bibrangedash 1874}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.18653/v1/2022.findings-acl.146
+      \endverb
+      \verb{urlraw}
+      \verb https://aclanthology.org/2022.findings-acl.146/
+      \endverb
+      \verb{url}
+      \verb https://aclanthology.org/2022.findings-acl.146/
+      \endverb
+    \endentry
     \entry{noever2020enroncorpusemailbodies}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=41add38406f00b5351e8e48f4bccb5f1}{%
@@ -337,6 +597,159 @@
       \verb{url}
       \verb https://arxiv.org/abs/2001.10374
       \endverb
+    \endentry
+    \entry{ilprints422}{report}{}{}
+      \name{author}{4}{}{%
+        {{hash=5ca20489809aaab392f875d6bc785086}{%
+           family={Page},
+           familyi={P\bibinitperiod},
+           given={Lawrence},
+           giveni={L\bibinitperiod}}}%
+        {{hash=ade8269d287e9c1531e4a1cbad0b4b82}{%
+           family={Brin},
+           familyi={B\bibinitperiod},
+           given={Sergey},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2f555526320a1c4028ad0f6328953999}{%
+           family={Motwani},
+           familyi={M\bibinitperiod},
+           given={Rajeev},
+           giveni={R\bibinitperiod}}}%
+        {{hash=9270c737346819f33742a35de2661f82}{%
+           family={Winograd},
+           familyi={W\bibinitperiod},
+           given={Terry},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Stanford InfoLab}%
+      }
+      \list{publisher}{1}{%
+        {Stanford InfoLab}%
+      }
+      \strng{namehash}{07b677797f2f761de27121ff4ec8b078}
+      \strng{fullhash}{d9b2cbd8494ef6058fe2436ee7edd977}
+      \strng{fullhashraw}{d9b2cbd8494ef6058fe2436ee7edd977}
+      \strng{bibnamehash}{07b677797f2f761de27121ff4ec8b078}
+      \strng{authorbibnamehash}{07b677797f2f761de27121ff4ec8b078}
+      \strng{authornamehash}{07b677797f2f761de27121ff4ec8b078}
+      \strng{authorfullhash}{d9b2cbd8494ef6058fe2436ee7edd977}
+      \strng{authorfullhashraw}{d9b2cbd8494ef6058fe2436ee7edd977}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The importance of a Web page is an inherently subjective matter, which depends on the readers interests, knowledge and attitudes. But there is still much that can be said objectively about the relative importance of Web pages. This paper describes PageRank, a mathod for rating Web pages objectively and mechanically, effectively measuring the human interest and attention devoted to them. We compare PageRank to an idealized random Web surfer. We show how to efficiently compute PageRank for large numbers of pages. And, we show how to apply PageRank to search and to user navigation.}
+      \field{month}{11}
+      \field{note}{Previous number = SIDL-WP-1999-0120}
+      \field{number}{1999-66}
+      \field{title}{The PageRank Citation Ranking: Bringing Order to the Web.}
+      \field{type}{Technical Report}
+      \field{year}{1999}
+      \verb{urlraw}
+      \verb http://ilpubs.stanford.edu:8090/422/
+      \endverb
+      \verb{url}
+      \verb http://ilpubs.stanford.edu:8090/422/
+      \endverb
+    \endentry
+    \entry{pleban2020t5headline}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=ae4265c973d149df069ecc9a4ef895f9}{%
+           family={Pleban},
+           familyi={P\bibinitperiod},
+           given={Michal},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Hugging Face}%
+      }
+      \strng{namehash}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{fullhash}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{fullhashraw}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{bibnamehash}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{authorbibnamehash}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{authornamehash}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{authorfullhash}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{authorfullhashraw}{ae4265c973d149df069ecc9a4ef895f9}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://huggingface.co/Michau/t5-base-en-generate-headline}}
+      \field{note}{Hugging Face Model Hub}
+      \field{title}{T5-base-en-generate-headline}
+      \field{year}{2020}
+    \endentry
+    \entry{10.1145/3295750.3298924}{inproceedings}{}{}
+      \name{author}{6}{}{%
+        {{hash=554f47cd258d61756aa3dfd993355ecc}{%
+           family={Qu},
+           familyi={Q\bibinitperiod},
+           given={Chen},
+           giveni={C\bibinitperiod}}}%
+        {{hash=13b67d4d83b1d3002d9480fa84cdc9ee}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Liu},
+           giveni={L\bibinitperiod}}}%
+        {{hash=22a3acd630de01e41b8b316cdaad7ddf}{%
+           family={Croft},
+           familyi={C\bibinitperiod},
+           given={W.\bibnamedelimi Bruce},
+           giveni={W\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=fd8216a36735a9f3107aef444551ecb2}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yongfeng},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=b67aa998ca82f9318a6775b1afbf420b}{%
+           family={Trippas},
+           familyi={T\bibinitperiod},
+           given={Johanne\bibnamedelima R.},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=57a28a956d780b8a4616b8bf14e7ec7b}{%
+           family={Qiu},
+           familyi={Q\bibinitperiod},
+           given={Minghui},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Glasgow, Scotland UK}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{0fcb71264975e21303b7692ee0804709}
+      \strng{fullhash}{da3e7774a32988b0c493d8f0cfcaedb7}
+      \strng{fullhashraw}{da3e7774a32988b0c493d8f0cfcaedb7}
+      \strng{bibnamehash}{0fcb71264975e21303b7692ee0804709}
+      \strng{authorbibnamehash}{0fcb71264975e21303b7692ee0804709}
+      \strng{authornamehash}{0fcb71264975e21303b7692ee0804709}
+      \strng{authorfullhash}{da3e7774a32988b0c493d8f0cfcaedb7}
+      \strng{authorfullhashraw}{da3e7774a32988b0c493d8f0cfcaedb7}
+      \field{sortinit}{Q}
+      \field{sortinithash}{ce69a400a872ddd02ee7fdb3b38c6abd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Conversational assistants are being progressively adopted by the general population. However, they are not capable of handling complicated information-seeking tasks that involve multiple turns of information exchange. Due to the limited communication bandwidth in conversational search, it is important for conversational assistants to accurately detect and predict user intent in information-seeking conversations. In this paper, we investigate two aspects of user intent prediction in an information-seeking setting. First, we extract features based on the content, structural, and sentiment characteristics of a given utterance, and use classic machine learning methods to perform user intent prediction. We then conduct an in-depth feature importance analysis to identify key features in this prediction task. We find that structural features contribute most to the prediction performance. Given this finding, we construct neural classifiers to incorporate context information and achieve better performance without feature engineering. Our findings can provide insights into the important factors and effective methods of user intent prediction in information-seeking conversations.}
+      \field{booktitle}{Proceedings of the 2019 Conference on Human Information Interaction and Retrieval}
+      \field{isbn}{9781450360258}
+      \field{series}{CHIIR '19}
+      \field{title}{User Intent Prediction in Information-seeking Conversations}
+      \field{year}{2019}
+      \field{pages}{25\bibrangedash 33}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1145/3295750.3298924
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3295750.3298924
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3295750.3298924
+      \endverb
+      \keyw{user intent prediction,multi-turn question answering,information-seeking conversations,conversational search}
     \endentry
     \entry{JMLR:v21:20-074}{article}{}{}
       \name{author}{9}{}{%
@@ -455,6 +868,89 @@
       \verb http://dx.doi.org/10.1561/1500000019
       \endverb
     \endentry
+    \entry{10.1145/3690624.3709435}{inproceedings}{}{}
+      \name{author}{8}{}{%
+        {{hash=b7daf707c77e15063af4049d13e4e2a5}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Yubao},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=b81bf0de98d741047b84d65d15117f32}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Ruqing},
+           giveni={R\bibinitperiod}}}%
+        {{hash=3a4015314b36f50d72a43c8fb03ca87e}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={Jiafeng},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ce8500c4435316ca20758d1f88f330bb}{%
+           family={Rijke},
+           familyi={R\bibinitperiod},
+           given={Maarten},
+           giveni={M\bibinitperiod},
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{hash=30fa12cc39400c77936416f97b11774d}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Shihao},
+           giveni={S\bibinitperiod}}}%
+        {{hash=643e7d4623069c06fde728f3a80e9613}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Shuaiqiang},
+           giveni={S\bibinitperiod}}}%
+        {{hash=866fc31d9db55acbc0a55c2b3c929414}{%
+           family={Yin},
+           familyi={Y\bibinitperiod},
+           given={Dawei},
+           giveni={D\bibinitperiod}}}%
+        {{hash=48dc8864d7a369badfb5b1b7dab6f4fa}{%
+           family={Cheng},
+           familyi={C\bibinitperiod},
+           given={Xueqi},
+           giveni={X\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Toronto ON, Canada}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{2c4faa4248387646f1a2a6e833db6c05}
+      \strng{fullhash}{095be92044fc98f542cc30f4aa9de46b}
+      \strng{fullhashraw}{095be92044fc98f542cc30f4aa9de46b}
+      \strng{bibnamehash}{2c4faa4248387646f1a2a6e833db6c05}
+      \strng{authorbibnamehash}{2c4faa4248387646f1a2a6e833db6c05}
+      \strng{authornamehash}{2c4faa4248387646f1a2a6e833db6c05}
+      \strng{authorfullhash}{095be92044fc98f542cc30f4aa9de46b}
+      \strng{authorfullhashraw}{095be92044fc98f542cc30f4aa9de46b}
+      \field{extraname}{1}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In book search, relevant book information should be returned in response to a query. Books contain complex, multi-faceted information such as metadata, outlines, and main text, where the outline provides hierarchical information between chapters and sections. Generative retrieval (GR) is a new retrieval paradigm that consolidates corpus information into a single model to generate identifiers of documents that are relevant to a given query. How can GR be applied to book search? Directly applying GR to book search is a challenge due to the unique characteristics of book search: The model needs to retain the complex, multi-faceted information of the book, which increases the demand for labeled data. Splitting book information and treating it as a collection of separate segments for learning might result in a loss of hierarchical information.We propose an effective Generative retrieval framework for Book Search (GBS) that features two main components: data augmentation and outline-oriented book encoding. For data augmentation, GBS constructs multiple query-book pairs for training; it constructs multiple book identifiers based on the outline, various forms of book contents, and simulates real book retrieval scenarios with varied pseudo-queries. This includes coverage-promoting book identifier augmentation, allowing the model to learn to index effectively, and diversity-enhanced query augmentation, allowing the model to learn to retrieve effectively. Outline-oriented book encoding improves length extrapolation through bi-level positional encoding and retentive attention mechanisms to maintain context over long sequences. Experiments on a proprietary Baidu dataset demonstrate that GBS outperforms strong baselines, achieving a 9.8\% improvement in terms of MRR@20, over the state-of-the-art RIPOR method. Experiments on public datasets confirm the robustness and generalizability of GBS, highlighting its potential to enhance book retrieval.}
+      \field{booktitle}{Proceedings of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.1}
+      \field{isbn}{9798400712456}
+      \field{series}{KDD '25}
+      \field{title}{Generative Retrieval for Book Search}
+      \field{year}{2025}
+      \field{pages}{2606\bibrangedash 2617}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1145/3690624.3709435
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3690624.3709435
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3690624.3709435
+      \endverb
+      \keyw{book retrieval,generative models,generative retrieval}
+    \endentry
     \entry{10.1145/3580305.3599903}{inproceedings}{}{}
       \name{author}{8}{}{%
         {{hash=b7daf707c77e15063af4049d13e4e2a5}{%
@@ -512,6 +1008,7 @@
       \strng{authornamehash}{2c4faa4248387646f1a2a6e833db6c05}
       \strng{authorfullhash}{80ccd1a3fdda8e121f959159ce2a3108}
       \strng{authorfullhashraw}{80ccd1a3fdda8e121f959159ce2a3108}
+      \field{extraname}{2}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{labelnamesource}{author}
@@ -776,6 +1273,34 @@
       \verb{url}
       \verb https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf
       \endverb
+    \endentry
+    \entry{zhuang2022dsiqg}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=e3ead0fec18117a867cf91d22d9afb67}{%
+           family={Zhuang},
+           familyi={Z\bibinitperiod},
+           given={Shengyao},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {GitHub}%
+      }
+      \strng{namehash}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{fullhash}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{fullhashraw}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{bibnamehash}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{authorbibnamehash}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{authornamehash}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{authorfullhash}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{authorfullhashraw}{e3ead0fec18117a867cf91d22d9afb67}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://github.com/ArvinZhuang/DSI-QG}}
+      \field{journaltitle}{GitHub repository}
+      \field{title}{DSI-QG: Bridging the Gap Between Indexing and Retrieval for Differentiable Search Index with Query Generation}
+      \field{year}{2022}
     \endentry
   \enddatalist
 \endrefsection
