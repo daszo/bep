@@ -1,5 +1,6 @@
 sentence-transformers/*
 mt5-base-local/*
+mt5-bin-local/*
 output/*
 data/*
 .npz

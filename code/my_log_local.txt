@@ -1,0 +1,170 @@
+W1219 13:13:35.547848 832860 .venv/lib/python3.9/site-packages/torch/distributed/run.py:792] 
+W1219 13:13:35.547848 832860 .venv/lib/python3.9/site-packages/torch/distributed/run.py:792] *****************************************
+W1219 13:13:35.547848 832860 .venv/lib/python3.9/site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1219 13:13:35.547848 832860 .venv/lib/python3.9/site-packages/torch/distributed/run.py:792] *****************************************
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/gpfs/work5/0/prjs1828/DSI-QG/run.py", line 438, in <module>
+  File "/gpfs/work5/0/prjs1828/DSI-QG/run.py", line 438, in <module>
+  File "/gpfs/work5/0/prjs1828/DSI-QG/run.py", line 438, in <module>
+Traceback (most recent call last):
+          File "/gpfs/work5/0/prjs1828/DSI-QG/run.py", line 438, in <module>
+main()main()
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/run.py", line 200, in main
+      File "/gpfs/work5/0/prjs1828/DSI-QG/run.py", line 200, in main
+main()
+  File "/gpfs/work5/0/prjs1828/DSI-QG/run.py", line 200, in main
+        training_args, run_args = parser.parse_args_into_dataclasses()training_args, run_args = parser.parse_args_into_dataclasses()
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/hf_argparser.py", line 224, in parse_args_into_dataclasses
+      File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/hf_argparser.py", line 224, in parse_args_into_dataclasses
+training_args, run_args = parser.parse_args_into_dataclasses()    
+main()  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/hf_argparser.py", line 224, in parse_args_into_dataclasses
+
+      File "/gpfs/work5/0/prjs1828/DSI-QG/run.py", line 200, in main
+    obj = dtype(**inputs)
+obj = dtype(**inputs)  File "<string>", line 102, in __init__
+
+      File "<string>", line 102, in __init__
+    obj = dtype(**inputs)training_args, run_args = parser.parse_args_into_dataclasses()
+
+  File "<string>", line 102, in __init__
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/hf_argparser.py", line 224, in parse_args_into_dataclasses
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/training_args.py", line 1086, in __post_init__
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/training_args.py", line 1086, in __post_init__
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/training_args.py", line 1086, in __post_init__
+    obj = dtype(**inputs)
+  File "<string>", line 102, in __init__
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/training_args.py", line 1086, in __post_init__
+        and (self.device.type != "cuda")and (self.device.type != "cuda")
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/utils/import_utils.py", line 926, in wrapper
+      File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/utils/import_utils.py", line 926, in wrapper
+and (self.device.type != "cuda")
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/utils/import_utils.py", line 926, in wrapper
+    and (self.device.type != "cuda")    
+    return func(*args, **kwargs)  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/utils/import_utils.py", line 926, in wrapper
+
+return func(*args, **kwargs)  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/training_args.py", line 1389, in device
+
+      File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/training_args.py", line 1389, in device
+    return func(*args, **kwargs)
+return func(*args, **kwargs)  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/training_args.py", line 1389, in device
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/training_args.py", line 1389, in device
+    return self._setup_devices
+      File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/utils/generic.py", line 49, in __get__
+return self._setup_devices
+      File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/utils/generic.py", line 49, in __get__
+return self._setup_devices        
+return self._setup_devicescached = self.fget(obj)  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/utils/generic.py", line 49, in __get__
+
+
+      File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/utils/generic.py", line 49, in __get__
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/utils/import_utils.py", line 926, in wrapper
+cached = self.fget(obj)
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/utils/import_utils.py", line 926, in wrapper
+    cached = self.fget(obj)    
+cached = self.fget(obj)  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/utils/import_utils.py", line 926, in wrapper
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/utils/import_utils.py", line 926, in wrapper
+    return func(*args, **kwargs)    
+return func(*args, **kwargs)  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/training_args.py", line 1374, in _setup_devices
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/training_args.py", line 1374, in _setup_devices
+    return func(*args, **kwargs)    
+return func(*args, **kwargs)  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/training_args.py", line 1374, in _setup_devices
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/transformers/training_args.py", line 1374, in _setup_devices
+    torch.distributed.init_process_group(backend="nccl")    
+torch.distributed.init_process_group(backend="nccl")  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/c10d_logger.py", line 81, in wrapper
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/c10d_logger.py", line 81, in wrapper
+        torch.distributed.init_process_group(backend="nccl")    return func(*args, **kwargs)    
+return func(*args, **kwargs)
+torch.distributed.init_process_group(backend="nccl")  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/c10d_logger.py", line 81, in wrapper
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/c10d_logger.py", line 95, in wrapper
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/c10d_logger.py", line 95, in wrapper
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/c10d_logger.py", line 81, in wrapper
+            return func(*args, **kwargs)func_return = func(*args, **kwargs)func_return = func(*args, **kwargs)    
+
+
+return func(*args, **kwargs)  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/c10d_logger.py", line 95, in wrapper
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/distributed_c10d.py", line 1721, in init_process_group
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/distributed_c10d.py", line 1721, in init_process_group
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/c10d_logger.py", line 95, in wrapper
+    func_return = func(*args, **kwargs)    
+func_return = func(*args, **kwargs)  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/distributed_c10d.py", line 1721, in init_process_group
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/distributed_c10d.py", line 1721, in init_process_group
+        default_pg, _ = _new_process_group_helper(default_pg, _ = _new_process_group_helper(
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/distributed_c10d.py", line 1982, in _new_process_group_helper
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/distributed_c10d.py", line 1982, in _new_process_group_helper
+    default_pg, _ = _new_process_group_helper(    
+default_pg, _ = _new_process_group_helper(  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/distributed_c10d.py", line 1982, in _new_process_group_helper
+
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/distributed_c10d.py", line 1982, in _new_process_group_helper
+        backend_class = ProcessGroupNCCL(backend_class = ProcessGroupNCCL(
+
+ValueErrorValueError: : ProcessGroupNCCL is only supported with GPUs, no GPUs found!ProcessGroupNCCL is only supported with GPUs, no GPUs found!
+
+    backend_class = ProcessGroupNCCL(    
+backend_class = ProcessGroupNCCL(ValueError
+: ValueErrorProcessGroupNCCL is only supported with GPUs, no GPUs found!: 
+ProcessGroupNCCL is only supported with GPUs, no GPUs found!
+E1219 13:13:41.317636 832860 .venv/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 0 (pid: 832877) of binary: /gpfs/work5/0/prjs1828/DSI-QG/.venv/bin/python
+Traceback (most recent call last):
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/gpfs/work5/0/prjs1828/DSI-QG/.venv/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+run.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2025-12-19_13:13:41
+  host      : tcn282.local.snellius.surf.nl
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 832878)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2025-12-19_13:13:41
+  host      : tcn282.local.snellius.surf.nl
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 832879)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2025-12-19_13:13:41
+  host      : tcn282.local.snellius.surf.nl
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 832880)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-12-19_13:13:41
+  host      : tcn282.local.snellius.surf.nl
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 832877)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

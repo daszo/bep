@@ -16,14 +16,14 @@ def load_db(table: str, DB_PATH: str = "enron.db") -> pd.DataFrame:
     conn.commit()
     conn.close()
 
-    print(f"Finished, Loading Dataframe of size {df.columns}")
+    print(f"Finished, Loading Dataframe of size {df.size}")
 
     return df
 
 
 def write_to_db(df: pd.DataFrame, table: str, DB_PATH: str = "enron.db"):
 
-    print(f"Started, Writing {table} to database {DB_PATH}")
+    print(f"Started, Writing {table} to database {DB_PATH} of size {df.size}")
 
     conn = sqlite3.connect(DB_PATH)
 

@@ -1,4 +1,4 @@
-from utils.database import load_db
+from utils.database import load_db, write_to_db
 
 
 def main():
@@ -12,7 +12,7 @@ def main():
 
     df = load_db(sql_table_name)
 
-    df.set_index("mid", inplace=True)
+    # df.set_index("mid", inplace=True)
 
     df_table_name = "body_clean_and_subject"
     # 1. Clean the body column first (Vectorized)
@@ -25,15 +25,9 @@ def main():
         "subject: " + df["subject"].astype(str) + " body: " + cleaned_body
     )
 
-    df_output = df[df_table_name]
+    new_sql_table_name = sql_table_name + "_and_subject"
 
-    df_output.index.name = None
-
-    print(df_output.head(1))
-
-    df_output.to_csv(
-        "data/N10k_text_rank_and_subject_msmarco.tsv", sep="\t", header=False
-    )
+    write_to_db(df, new_sql_table_name)
 
 
 if __name__ == "__main__":
