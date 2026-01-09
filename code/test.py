@@ -1,42 +1,31 @@
-import argparse
-import os
-import time
+import json
 
 
 def main():
     # 1. Setup Argument Parsing
-    parser = argparse.ArgumentParser(
-        description="Test remote execution with arguments."
-    )
-    parser.add_argument("--name", type=str, required=True, help="Your name")
-    parser.add_argument(
-        "--count", type=int, default=1, help="Number of times to repeat"
-    )
-    parser.add_argument(
-        "--sleep", type=int, default=0, help="Simulate long running process (seconds)"
-    )
 
-    print("Parsing arguments...")
-    args = parser.parse_args()
+    input_path = "data/test.N10k_text_rank_d2q_q1.docTquery"
+    output_path = "data/test_examples.txt"
 
-    # 2. Simulate work (useful to test connection stability)
-    if args.sleep > 0:
-        print(f"Simulating heavy task for {args.sleep} seconds...")
-        time.sleep(args.sleep)
+    key_to_keep = ["text_id", "text"]
 
-    # 3. Ensure output directory exists (Critical for the rsync script)
-    output_dir = "output"
-    os.makedirs(output_dir, exist_ok=True)
-    file_path = os.path.join(output_dir, "test.txt")
+    with open(input_path, "r") as fr, open(output_path, "w") as fw:
+        for i, line in enumerate(fr, 1):
+            line = line.strip()
+            if not line:
+                continue
 
-    # 4. Write to file
-    with open(file_path, "w") as f:
-        for i in range(args.count):
-            line = f"Row {i+1}: Hello {args.name}, this was generated on the remote machine.\n"
-            f.write(line)
-            print(f"Processing... {i+1}/{args.count}")
+            # Parse the individual JSON object on this line
+            row = json.loads(line)
+            output = {k: row[k] for k in key_to_keep}
+            fw.write(json.dumps(output) + "\n")
+            if i % 3 == 0:
+                fw.write("=" * 20 + "\n")
+                fw.write("=" * 20 + "\n")
+            else:
+                fw.write("-" * 20 + "\n")
 
-    print(f"\n[Success] File saved to {file_path}")
+    print(f"\n[Success] File saved to {output_path}")
 
 
 if __name__ == "__main__":
