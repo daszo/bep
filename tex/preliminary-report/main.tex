@@ -191,10 +191,8 @@ To clean the bodies of the emails, it is imperative to remove the extra syntax t
 For the word count the Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_box_plot} is substantially larger than the Median \wordMedian{} which indicates that this is not a normal distribution. This becomes clearer when comparing the Q3 \wordQthree{} to the Max value \wordMax{}. The substantial gap explains the size of the mean. The same is applicable to the character count.  (TODO: add the skewness of the )
 
 To determine if the subjects of the emails have any similarity to their respective bodies a sentence transformer will be used to calculate the embedding and the cosine similarity will be computed. In the process of calculating the cosine similarity the dot product of the subject and body embeddings is taken and the distribution is plotted in figure \ref{fig:similarities}. Although the distribution is unimodal, it is not a perfect bell curve. This is also apparent when looking at the Skewness which is a negative skew of \similaritiesSkewness. It is clear that the subjects and the bodies are very similar. \\
-
-The training of the model was conducted in two stages. In the first stage, a set containing 10,000 emails was curated to verify if the data was suitable for the current objective and that the experimental setup contained no errors. When it was confirmed that the experimental setup was successful, a 100,000-email dataset was curated for the final training. \textcite{NEURIPS2022_892840a6} uses different sizes in datasets to give better insight into the performance of a retrieval methods, because different systems perform better at different size datasets. Due to limited emails contained in this dataset the 320.000-email dataset mentioned in the original DSI paper was not created in this experiment. In all curated datasets the ratio of emails per user-folder was maintained.
-\\\\
-- TODO:
+\\
+TODO:
   \begin{itemize}
     \item analyze subject body similarity (how do I decide what model to use?). Similarity, Sentence transformer T5 \cite{ni-etal-2022-sentence}
     \item distribute folder size per user (bar plot automatically generated size and not automatically generated (maybe top 10))  
@@ -219,8 +217,13 @@ Identifiers should capture the essence of the mail while remaining compact. Foll
 
 A problem that arose is that text rank generates ids that are not always unique. In line with  \textcite{10.1145/3580305.3599903}, this issue was ignored because duplicate ids are for emails that are similar in contents.
 
-\subsection{Pseudo-query construction}
+\subsubsection{Pseudo-query construction}
 When constructing queries it is important that the original words are contained but also cover the essence of the email. Which is why we use an extractve method and an abstractive method is construction. Textrank was employed to extract the most important sentence as pseudo query. For the abstractive query construction method the t5-headline transformer model \cite{pleban2020t5headline} was used for summarizing the email bodies.
+
+
+\subsubsection{Training set constsruction}
+
+Following \cite{10.1145/3580305.3599903}, a 10k subset is used, and that this size is a reasonable scale for T5 to learn from. Per data point 3 data pairs are created. These pairs consist of the Semantic Document Identifier paired with one of the following: email body and subject, the extractive query or the abstractive query.
 
 \subsection{Model training}
 Question: do I comment on the improvements between the original DSI paper \cite{NEURIPS2022_892840a6} and your improvement \cite{10.1145/3580305.3599903} or can I just quote that?
@@ -247,6 +250,9 @@ For training the model, \textcite{10.1145/3580305.3599903} used top 10 greedy be
 
 For training, the data set queries were split up in three groups. The first 80\% was reserved for training and then 10\% for both validating and testing. The email bodies were exclusively reserved for training, because they serve only for learning the model what each unique document identifier means.
 
+The data was truncated before traing to x amount of tokens. 
+
+The model was trained similar to \textcite{10.1145/3580305.3599903} with some adjustments made based on what was provided with the code used \cite{zhuang2022dsiqg}. We employed a Transformer-based encoder-decoder architecture for our DSI task, initializing the model with the pre-trained T5-base \cite{JMLR:v21:20-074}. This architecture comprises a hidden size of 768, 12 Transformer layers, and 12 self-attention heads. We use the Adam optimizer with a learning rate of $5e-4$ and a linear warm-up over 100,000 steps. The model is trained for a maximum of 100,000 steps with a global batch size of 64 (32 per device) on two GPUs. The maximum sequence length is set to 32.
 TODO: 
   \begin{itemize}
     \item add more information about the combination trainging and the beam search method
@@ -262,26 +268,26 @@ BM25 vector embedding
 For training of the model the code of \textcite{zhuang2022dsiqg} was used as a basis. It did need to be adapted to work with the sqlite database used in this research. This code however was made for numerical tokens and not semantic tokens. To solve this problem the code to build the trie was used from \textcite{LI2023103475}. 
 
 
-\subsection{sentiment Analysis}
-TODO: 
-  \begin{itemize}
-    \item Sentiment analysis on emotions like fear, anger, trust, anticipation, fear, love, sadness and surprise and analyze their relation ship to the convicted people. \cite{noever2020enroncorpusemailbodies}
-  \end{itemize}
-
-\subsection{Reproducing research linguistic markers}
-TOO: 
-Use the linguistic Markers datasets to analyze which emails and users contain the most \cite{blanco2020manifestation} % TODO: refer to the direct datasets
-
-
-\subsection{Query Construction}
-TODO:
-Create queries depending on the Linguistic markers dataset \cite{blanco2020manifestation} % TODO: refer to the direct datasets
-
-\subsection{Fraud Evaluation}
-TODO:
-- Compare what was found to results found in \titlecite{blanco2020manifestation} and \titlecite{noever2020enroncorpusemailbodies}
-- see if the found documents which are of the users that have committed fraud. This can be checked to which people have been persecuted (find source for this here \cite{FBIEnronCase})
-
+% \subsection{sentiment Analysis}
+% TODO: 
+%   \begin{itemize}
+%     \item Sentiment analysis on emotions like fear, anger, trust, anticipation, fear, love, sadness and surprise and analyze their relation ship to the convicted people. \cite{noever2020enroncorpusemailbodies}
+%   \end{itemize}
+%
+% \subsection{Reproducing research linguistic markers}
+% TOO: 
+% Use the linguistic Markers datasets to analyze which emails and users contain the most \cite{blanco2020manifestation} % TODO: refer to the direct datasets
+%
+%
+% \subsection{Query Construction}
+% TODO:
+% Create queries depending on the Linguistic markers dataset \cite{blanco2020manifestation} % TODO: refer to the direct datasets
+%
+% \subsection{Fraud Evaluation}
+% TODO:
+% - Compare what was found to results found in \titlecite{blanco2020manifestation} and \titlecite{noever2020enroncorpusemailbodies}
+% - see if the found documents which are of the users that have committed fraud. This can be checked to which people have been persecuted (find source for this here \cite{FBIEnronCase})
+%
 \section{Experimental setup}
 
 \subsection{Evaluation metrics}
@@ -292,6 +298,8 @@ This could be because the data is too noisy and it started overfitting on the no
 \section{Discussion}
 
 The first 10k model had its pique performance at 15k steps, which is quite small compared to 100k steps. This highlights the model's sensitivity to structural patterns. It learned to prioritize the frequent 'Subject' token over the actual email content, a phenomenon known as [shortcut learning/template bias].
+
+% truncating the emails might be the issue.
 
 \begin{itemize}
   \item emails with a too low similariy, don't use the subject
