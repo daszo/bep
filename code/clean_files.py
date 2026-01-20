@@ -1,6 +1,7 @@
 import sqlite3
 import pandas as pd
 import re
+import numpy as np
 
 
 def remove_legal_disclaimer(text: str) -> str:
@@ -116,9 +117,8 @@ def clean_email_body(text):
     return text.strip()
 
 
-def main():
+def clean_email_bodies_pipeline(DB_PATH="enron.db"):
     print("starting to load")
-    DB_PATH = "enron.db"
 
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -141,6 +141,27 @@ def main():
     # 100x faster
     df["clean_length_character"] = df["body_clean"].str.len()
     df["clean_length_word"] = df["body_clean"].str.split().str.len()
+
+    # add subject to clean body
+
+    df_table_name = "body_clean_and_subject"
+    # 1. Clean the body column first (Vectorized)
+    cleaned_body = (
+        df["body_clean"].astype(str).str.replace(r"[\n\r\t]", " ", regex=True)
+    )
+
+    cleaned_subject = (
+        df["subject"]
+        .astype(str)
+        .str.replace(r"^Re:\s*", "", case=False, regex=True)
+        .str.strip()
+    )
+
+    # 1. Determine the separator: If it ends with '.', use " \n", else ". \n"
+    separators = np.where(cleaned_subject.str.endswith("."), "\n", ".\n")
+
+    # 2. Concatenate strings element-wise (Vectorized)
+    df[df_table_name] = cleaned_subject + separators + cleaned_body
 
     conn = sqlite3.connect(DB_PATH)
 
@@ -165,142 +186,141 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
-#     test_email = """
-# Oliver,
-#
-# I will attend.
-#
-# Vince
-#
-#
-#
-#
-#
-# "Oliver Bennett" <oliver@risk.co.uk> on 06/01/2000 07:11:52 AM
-# Please respond to "Oliver Bennett" <oliver@risk.co.uk>
-# To: "Young, Derek" <Derek.Young@fmr.com>, "Vince J Kaminski"
-# <Vince_J_Kaminski@enron.com>, "Steven E Shreve" <shreve@matt.math.cmu.edu>,
-# "Stephen Ross" <sross@MIT.EDU>, "Staley, Mark" <STALEY@CIBC.CA>, "Mark D
-# Ames" <Mark.D.Ames@marshmc.com>, "Selvaggio, Robert" <rselvaggio@ambac.com>,
-# <robert.harrison@gm.com>, "Ross Mayfield" <ross@ratexchange.com>, "Ritchken,
-# Peter" <phr@guinness.som.cwru.edu>, "Peter. N.C. Davies" <peter@askari.com>,
-# "Prasad Nanisetty" <prasad.nanisetty@prudential.com>, "Philipp Schoenbucher"
-# <P.Schonbucher@finasto.uni-bonn.de>, "Pesco, Anthony"
-# <anthony.pesco@csfb.com>, "Merrell Hora" <mhora@Oppenheimerfunds.com>,
-# "Lirtzman, Harris" <hlirtzm@comlan.cn.ci.nyc.ny.us>, "Leslie Rahl"
-# <LESLIE@CMRA.COM>, "John McEvoy" <john@creditex.com>, "John Hull"
-# <hull@mgmt.utoronto.ca>, "Joe Pimbley" <pimbley@sbcm.com>, "Jeremy Berkowitz"
-# <jeremy.berkowitz@frb.gov>, "Ethan Berman" <ethan.berman@riskmetrics.com>,
-# "Browne, Sid" <sid.browne@gs.com>, "Bob Maynard"
-# <BMaynard@persi.state.id.us>, "Derman, Emanuel" <emanuel.derman@gs.com>,
-# <edumas@bkb.com>, <tracy@lehman.com>, <eric.zz-reiner@wdr.com>,
-# <jlgertie@bkb.com>, <david_rowe@infinity.com>, "gene.guill"
-# <gene.guill@db.com>, <gleason_william@jpmorgan.com>, "Kaiser, Daniel"
-# <dkaiser@bofasecurities.com>, <klaus.toft@gs.com>,
-# <bryan.mix@ny.email.gs.com>, <holaph@tdusa.com>, <peter.zangari@gs.com>,
-# <atriantis@rhsmith.umd.edu>, "Neil Chriss" <neil.chriss@mindspring.com>,
-# <corinne.poupard-neale@iqfinancial.com>, <turnbust@cibc.ca>,
-# <shaheen.dil@pncbank.com>, <moore@natgas.com>, <eraab@aigtelecom.com>,
-# <mvalencia@arbinet.com>, <biggersk@measurisk.com>,
-# <jay.newberry@citicorp.com>, <michael.haubenstock@us.pwcglobal.com>,
-# <lars_schmidtott@swissre.com>, <francis.longstaff@anderson.ucla.edu>,
-# <coleman@tc.cornell.edu>, <jim@exchange.ml.com>, <kou@ieor.columbia.edu>,
-# <michael.ong@abnamro.com>, <mike.brosnan@occ.treas.gov>, "Adrian.B.DSilva"
-# <Adrian.B.DSilva@chi.frb.org>, <alex.lipton@db.com>, <landerse@genre.com>,
-# "Ashvin B Chhabra" <chhabra_ashvin@jpmorgan.com>,
-# <darryll.hendricks@ny.frb.org>, <ray.meadows@ssmb.com>, <alla.gil@ssmb.com>,
-# <leo_de_bever@otpp.com>, <rcuckh@gic.com.sg>, <eduard.van.gelderen@apch.nl>,
-# <zerolisj@brinson.com>, <jlam@owc.com>, <jane.hiscock@barra.com>, "Culp,
-# Christopher" <culp@chipar.com>, "Rosengarten, Jacob"
-# <jacob.rosengarten@gs.com>, <michelle.mccarthy@db.com>,
-# <erwin_martens@putnaminv.com>, <joe.mclaughlin@db.com>,
-# <ken.weiller@saccapital.com>, <lizeng.zhang@bankofamerica.com>,
-# <james.j.vinci@us.pwcglobal.com>, <ben@blackrock.com>,
-# <brian.Ranson@bmo.com>, <jefferid@kochind.com>, <sbramlet@utilicorp.com>,
-# <jean_mrha@enron.net>, <rbanaszek@sdinet.com>, <paul.ellis@credittrade.com>,
-# <wmiller@cfund.org>, "Gary Galante" <galante_gary@jpmorgan.com>,
-# <Juan.Pujadas@Us.Pwcglobal.Com>
-# cc:
-# Subject: Risk 2000 Boston - speaker reception 12 June 2000
-#
-#
-#
-# There will be a drinks reception taking place on  monday 12 June 2000 between
-# 6.00-7.00pm in the Lower Level of the congress  center - for speakers,
-# sponsors and exhibitors of Risk 2000, Boston
-# ?
-# Please let me know if you would like to attend so we can guage  numbers.
-# ?
-# Best regards,
-# Oliver
-# ?
-# ?
-# ?
-# Direct: +44 (0)20 7484 9880
-# ?
-# Risk Publications, 28-29 Haymarket, London SW1Y  4RX
-# Fax: +44 (0)20 7484 9800? Email: oliver@risk.co.uk
-# www.riskpublications.com
-#
-#
-# "Oliver Bennett" <oliver@risk.co.uk> on 06/01/2000 07:11:52 AM
-# To: "Young, Derek" <Derek.Young@fmr.com>, "Vince J Kaminski"
-# <Vince_J_Kaminski@enron.com>, "Steven E Shreve" <shreve@matt.math.cmu.edu>,
-# "Stephen Ross" <sross@MIT.EDU>, "Staley, Mark" <STALEY@CIBC.CA>, "Mark D
-# Ames" <Mark.D.Ames@marshmc.com>, "Selvaggio, Robert" <rselvaggio@ambac.com>,
-# <robert.harrison@gm.com>, "Ross Mayfield" <ross@ratexchange.com>, "Ritchken,
-# Peter" <phr@guinness.som.cwru.edu>, "Peter. N.C. Davies" <peter@askari.com>,
-# "Prasad Nanisetty" <prasad.nanisetty@prudential.com>, "Philipp Schoenbucher"
-# <P.Schonbucher@finasto.uni-bonn.de>, "Pesco, Anthony"
-# <anthony.pesco@csfb.com>, "Merrell Hora" <mhora@Oppenheimerfunds.com>,
-# "Lirtzman, Harris" <hlirtzm@comlan.cn.ci.nyc.ny.us>, "Leslie Rahl"
-# <LESLIE@CMRA.COM>, "John McEvoy" <john@creditex.com>, "John Hull"
-# <hull@mgmt.utoronto.ca>, "Joe Pimbley" <pimbley@sbcm.com>, "Jeremy Berkowitz"
-# <jeremy.berkowitz@frb.gov>, "Ethan Berman" <ethan.berman@riskmetrics.com>,
-# "Browne, Sid" <sid.browne@gs.com>, "Bob Maynard"
-# <BMaynard@persi.state.id.us>, "Derman, Emanuel" <emanuel.derman@gs.com>,
-# <edumas@bkb.com>, <tracy@lehman.com>, <eric.zz-reiner@wdr.com>,
-# <jlgertie@bkb.com>, <david_rowe@infinity.com>, "gene.guill"
-# <gene.guill@db.com>, <gleason_william@jpmorgan.com>, "Kaiser, Daniel"
-# <dkaiser@bofasecurities.com>, <klaus.toft@gs.com>,
-# <bryan.mix@ny.email.gs.com>, <holaph@tdusa.com>, <peter.zangari@gs.com>,
-# <atriantis@rhsmith.umd.edu>, "Neil Chriss" <neil.chriss@mindspring.com>,
-# <corinne.poupard-neale@iqfinancial.com>, <turnbust@cibc.ca>,
-# <shaheen.dil@pncbank.com>, <moore@natgas.com>, <eraab@aigtelecom.com>,
-# <mvalencia@arbinet.com>, <biggersk@measurisk.com>,
-# <jay.newberry@citicorp.com>, <michael.haubenstock@us.pwcglobal.com>,
-# <lars_schmidtott@swissre.com>, <francis.longstaff@anderson.ucla.edu>,
-# <coleman@tc.cornell.edu>, <jim@exchange.ml.com>, <kou@ieor.columbia.edu>,
-# <michael.ong@abnamro.com>, <mike.brosnan@occ.treas.gov>, "Adrian.B.DSilva"
-# <Adrian.B.DSilva@chi.frb.org>, <alex.lipton@db.com>, <landerse@genre.com>,
-# "Ashvin B Chhabra" <chhabra_ashvin@jpmorgan.com>,
-# <darryll.hendricks@ny.frb.org>, <ray.meadows@ssmb.com>, <alla.gil@ssmb.com>,
-# <leo_de_bever@otpp.com>, <rcuckh@gic.com.sg>, <eduard.van.gelderen@apch.nl>,
-# <zerolisj@brinson.com>, <jlam@owc.com>, <jane.hiscock@barra.com>, "Culp,
-# Christopher" <culp@chipar.com>, "Rosengarten, Jacob"
-# <jacob.rosengarten@gs.com>, <michelle.mccarthy@db.com>,
-# <erwin_martens@putnaminv.com>, <joe.mclaughlin@db.com>,
-# <ken.weiller@saccapital.com>, <lizeng.zhang@bankofamerica.com>,
-# <james.j.vinci@us.pwcglobal.com>, <ben@blackrock.com>,
-# <brian.Ranson@bmo.com>, <jefferid@kochind.com>, <sbramlet@utilicorp.com>,
-# <jean_mrha@enron.net>, <rbanaszek@sdinet.com>, <paul.ellis@credittrade.com>,
-# <wmiller@cfund.org>, "Gary Galante" <galante_gary@jpmorgan.com>,
-# <Juan.Pujadas@Us.Pwcglobal.Com>
-# cc:
-# Subject: Risk 2000 Boston - speaker reception 12 June 2000
-#
-#
-#
-#
-#  - fortune.jpg
-#  - bombtech.jpg
-#  - airolane.jpg
-#  - watchp.jpg
-#
-#
-#  ---------------------
-#
-#     """
-#
-#     print(clean_email_body(test_email))
+    test_email = """
+Oliver,
+
+I will attend.
+
+Vince
+
+
+
+
+
+"Oliver Bennett" <oliver@risk.co.uk> on 06/01/2000 07:11:52 AM
+Please respond to "Oliver Bennett" <oliver@risk.co.uk>
+To: "Young, Derek" <Derek.Young@fmr.com>, "Vince J Kaminski"
+<Vince_J_Kaminski@enron.com>, "Steven E Shreve" <shreve@matt.math.cmu.edu>,
+"Stephen Ross" <sross@MIT.EDU>, "Staley, Mark" <STALEY@CIBC.CA>, "Mark D
+Ames" <Mark.D.Ames@marshmc.com>, "Selvaggio, Robert" <rselvaggio@ambac.com>,
+<robert.harrison@gm.com>, "Ross Mayfield" <ross@ratexchange.com>, "Ritchken,
+Peter" <phr@guinness.som.cwru.edu>, "Peter. N.C. Davies" <peter@askari.com>,
+"Prasad Nanisetty" <prasad.nanisetty@prudential.com>, "Philipp Schoenbucher"
+<P.Schonbucher@finasto.uni-bonn.de>, "Pesco, Anthony"
+<anthony.pesco@csfb.com>, "Merrell Hora" <mhora@Oppenheimerfunds.com>,
+"Lirtzman, Harris" <hlirtzm@comlan.cn.ci.nyc.ny.us>, "Leslie Rahl"
+<LESLIE@CMRA.COM>, "John McEvoy" <john@creditex.com>, "John Hull"
+<hull@mgmt.utoronto.ca>, "Joe Pimbley" <pimbley@sbcm.com>, "Jeremy Berkowitz"
+<jeremy.berkowitz@frb.gov>, "Ethan Berman" <ethan.berman@riskmetrics.com>,
+"Browne, Sid" <sid.browne@gs.com>, "Bob Maynard"
+<BMaynard@persi.state.id.us>, "Derman, Emanuel" <emanuel.derman@gs.com>,
+<edumas@bkb.com>, <tracy@lehman.com>, <eric.zz-reiner@wdr.com>,
+<jlgertie@bkb.com>, <david_rowe@infinity.com>, "gene.guill"
+<gene.guill@db.com>, <gleason_william@jpmorgan.com>, "Kaiser, Daniel"
+<dkaiser@bofasecurities.com>, <klaus.toft@gs.com>,
+<bryan.mix@ny.email.gs.com>, <holaph@tdusa.com>, <peter.zangari@gs.com>,
+<atriantis@rhsmith.umd.edu>, "Neil Chriss" <neil.chriss@mindspring.com>,
+<corinne.poupard-neale@iqfinancial.com>, <turnbust@cibc.ca>,
+<shaheen.dil@pncbank.com>, <moore@natgas.com>, <eraab@aigtelecom.com>,
+<mvalencia@arbinet.com>, <biggersk@measurisk.com>,
+<jay.newberry@citicorp.com>, <michael.haubenstock@us.pwcglobal.com>,
+<lars_schmidtott@swissre.com>, <francis.longstaff@anderson.ucla.edu>,
+<coleman@tc.cornell.edu>, <jim@exchange.ml.com>, <kou@ieor.columbia.edu>,
+<michael.ong@abnamro.com>, <mike.brosnan@occ.treas.gov>, "Adrian.B.DSilva"
+<Adrian.B.DSilva@chi.frb.org>, <alex.lipton@db.com>, <landerse@genre.com>,
+"Ashvin B Chhabra" <chhabra_ashvin@jpmorgan.com>,
+<darryll.hendricks@ny.frb.org>, <ray.meadows@ssmb.com>, <alla.gil@ssmb.com>,
+<leo_de_bever@otpp.com>, <rcuckh@gic.com.sg>, <eduard.van.gelderen@apch.nl>,
+<zerolisj@brinson.com>, <jlam@owc.com>, <jane.hiscock@barra.com>, "Culp,
+Christopher" <culp@chipar.com>, "Rosengarten, Jacob"
+<jacob.rosengarten@gs.com>, <michelle.mccarthy@db.com>,
+<erwin_martens@putnaminv.com>, <joe.mclaughlin@db.com>,
+<ken.weiller@saccapital.com>, <lizeng.zhang@bankofamerica.com>,
+<james.j.vinci@us.pwcglobal.com>, <ben@blackrock.com>,
+<brian.Ranson@bmo.com>, <jefferid@kochind.com>, <sbramlet@utilicorp.com>,
+<jean_mrha@enron.net>, <rbanaszek@sdinet.com>, <paul.ellis@credittrade.com>,
+<wmiller@cfund.org>, "Gary Galante" <galante_gary@jpmorgan.com>,
+<Juan.Pujadas@Us.Pwcglobal.Com>
+cc:
+Subject: Risk 2000 Boston - speaker reception 12 June 2000
+
+
+
+There will be a drinks reception taking place on  monday 12 June 2000 between
+6.00-7.00pm in the Lower Level of the congress  center - for speakers,
+sponsors and exhibitors of Risk 2000, Boston
+?
+Please let me know if you would like to attend so we can guage  numbers.
+?
+Best regards,
+Oliver
+?
+?
+?
+Direct: +44 (0)20 7484 9880
+?
+Risk Publications, 28-29 Haymarket, London SW1Y  4RX
+Fax: +44 (0)20 7484 9800? Email: oliver@risk.co.uk
+www.riskpublications.com
+
+
+"Oliver Bennett" <oliver@risk.co.uk> on 06/01/2000 07:11:52 AM
+To: "Young, Derek" <Derek.Young@fmr.com>, "Vince J Kaminski"
+<Vince_J_Kaminski@enron.com>, "Steven E Shreve" <shreve@matt.math.cmu.edu>,
+"Stephen Ross" <sross@MIT.EDU>, "Staley, Mark" <STALEY@CIBC.CA>, "Mark D
+Ames" <Mark.D.Ames@marshmc.com>, "Selvaggio, Robert" <rselvaggio@ambac.com>,
+<robert.harrison@gm.com>, "Ross Mayfield" <ross@ratexchange.com>, "Ritchken,
+Peter" <phr@guinness.som.cwru.edu>, "Peter. N.C. Davies" <peter@askari.com>,
+"Prasad Nanisetty" <prasad.nanisetty@prudential.com>, "Philipp Schoenbucher"
+<P.Schonbucher@finasto.uni-bonn.de>, "Pesco, Anthony"
+<anthony.pesco@csfb.com>, "Merrell Hora" <mhora@Oppenheimerfunds.com>,
+"Lirtzman, Harris" <hlirtzm@comlan.cn.ci.nyc.ny.us>, "Leslie Rahl"
+<LESLIE@CMRA.COM>, "John McEvoy" <john@creditex.com>, "John Hull"
+<hull@mgmt.utoronto.ca>, "Joe Pimbley" <pimbley@sbcm.com>, "Jeremy Berkowitz"
+<jeremy.berkowitz@frb.gov>, "Ethan Berman" <ethan.berman@riskmetrics.com>,
+"Browne, Sid" <sid.browne@gs.com>, "Bob Maynard"
+<BMaynard@persi.state.id.us>, "Derman, Emanuel" <emanuel.derman@gs.com>,
+<edumas@bkb.com>, <tracy@lehman.com>, <eric.zz-reiner@wdr.com>,
+<jlgertie@bkb.com>, <david_rowe@infinity.com>, "gene.guill"
+<gene.guill@db.com>, <gleason_william@jpmorgan.com>, "Kaiser, Daniel"
+<dkaiser@bofasecurities.com>, <klaus.toft@gs.com>,
+<bryan.mix@ny.email.gs.com>, <holaph@tdusa.com>, <peter.zangari@gs.com>,
+<atriantis@rhsmith.umd.edu>, "Neil Chriss" <neil.chriss@mindspring.com>,
+<corinne.poupard-neale@iqfinancial.com>, <turnbust@cibc.ca>,
+<shaheen.dil@pncbank.com>, <moore@natgas.com>, <eraab@aigtelecom.com>,
+<mvalencia@arbinet.com>, <biggersk@measurisk.com>,
+<jay.newberry@citicorp.com>, <michael.haubenstock@us.pwcglobal.com>,
+<lars_schmidtott@swissre.com>, <francis.longstaff@anderson.ucla.edu>,
+<coleman@tc.cornell.edu>, <jim@exchange.ml.com>, <kou@ieor.columbia.edu>,
+<michael.ong@abnamro.com>, <mike.brosnan@occ.treas.gov>, "Adrian.B.DSilva"
+<Adrian.B.DSilva@chi.frb.org>, <alex.lipton@db.com>, <landerse@genre.com>,
+"Ashvin B Chhabra" <chhabra_ashvin@jpmorgan.com>,
+<darryll.hendricks@ny.frb.org>, <ray.meadows@ssmb.com>, <alla.gil@ssmb.com>,
+<leo_de_bever@otpp.com>, <rcuckh@gic.com.sg>, <eduard.van.gelderen@apch.nl>,
+<zerolisj@brinson.com>, <jlam@owc.com>, <jane.hiscock@barra.com>, "Culp,
+Christopher" <culp@chipar.com>, "Rosengarten, Jacob"
+<jacob.rosengarten@gs.com>, <michelle.mccarthy@db.com>,
+<erwin_martens@putnaminv.com>, <joe.mclaughlin@db.com>,
+<ken.weiller@saccapital.com>, <lizeng.zhang@bankofamerica.com>,
+<james.j.vinci@us.pwcglobal.com>, <ben@blackrock.com>,
+<brian.Ranson@bmo.com>, <jefferid@kochind.com>, <sbramlet@utilicorp.com>,
+<jean_mrha@enron.net>, <rbanaszek@sdinet.com>, <paul.ellis@credittrade.com>,
+<wmiller@cfund.org>, "Gary Galante" <galante_gary@jpmorgan.com>,
+<Juan.Pujadas@Us.Pwcglobal.Com>
+cc:
+Subject: Risk 2000 Boston - speaker reception 12 June 2000
+
+
+
+
+ - fortune.jpg
+ - bombtech.jpg
+ - airolane.jpg
+ - watchp.jpg
+
+
+ ---------------------
+
+    """
+
+    print(clean_email_body(test_email))

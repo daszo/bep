@@ -5,7 +5,7 @@ def main():
 
     experiments = True
 
-    if experiments == True:
+    if experiments:
         sql_table_name = "N10k_text_rank"
     else:
         sql_table_name = "N100k_text_rank"
@@ -21,9 +21,7 @@ def main():
     )
 
     # 2. Concatenate strings element-wise (Vectorized)
-    df[df_table_name] = (
-        "subject: " + df["subject"].astype(str) + " body: " + cleaned_body
-    )
+    df[df_table_name] = df["subject"].astype(str) + " " + cleaned_body
 
     new_sql_table_name = sql_table_name + "_and_subject"
 
