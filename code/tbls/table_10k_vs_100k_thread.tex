@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\centering
+\caption{Comparison: 10k vs 100k Thread}
+\label{tab:t2}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccccc}
+\toprule
+ & \multicolumn{4}{c}{\textbf{10K THREAD}} & \multicolumn{4}{c}{\textbf{100K THREAD}} \\
+\cmidrule(lr){2-5} \cmidrule(lr){6-9}
+Methods & MRR@3 & MRR@20 & Hits@1 & Hits@10 & MRR@3 & MRR@20 & Hits@1 & Hits@10 \\
+\midrule
+    BM25 & 0.4498 & 0.4503 & 0.4404 & 0.4618 & 0.4178 & 0.4233 & 0.3807 & 0.4859 \\
+    DSI & 0.0439 & 0.0507 & 0.0326 & 0.0954 & 0.0308 & 0.0342 & 0.0250 & 0.0546 \\
+    DSI (v1.2) & - & - & - & - & - & - & - & - \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}

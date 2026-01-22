@@ -311,33 +311,53 @@ The model was trained similar to \textcite{10.1145/3580305.3599903} with some ad
 
 \subsection{Code}
 For training of the model the code of \textcite{zhuang2022dsiqg} was used as a basis. It did need to be adapted to work with the sqlite database used in this research. This code however was made for numerical tokens and not semantic tokens. To solve this problem the code to build the trie was used from \textcite{LI2023103475}. 
-\subsection{Evaluation metrics}
+
+\section{Results}
+\input{../../code/tbls/table_combined.tex}
+\input{../../code/tbls/table_ratios.tex}
+
+The comparison of the baseline with the DSI and impact of data cleaning or data size is shown in  table \ref{tab:combined_results}. This table is split into two tables where the methods used are in the left column. In the top table the thread settings are compared and in the bottom the training size is compared. Besides the methods column, the tables are split into two main columns, corresponding to a dataset, which are under divided into the 4 evaluation metrics, MRR@3, MRR@20, Hits@1 and Hits@10. The ratio between between DSI's performance and BM25 performance is shown in table \ref{tab:ratio_results}
+
+BM25 performed well on all metrics, but especially the No Thread dataset. BM25 performed on all tests better then DSI significantly. BM25 performed best on the 10.000 no thread dataset, but performed comparatively to DSI best on 10.000 thread same mid. 
+
+BM25 was better at scoring right emails higher on the 10.000 tread dataset then on the 100.000 thread dataset. This is visible because it scored higher on MRR@3 and Hits@1, but worse on MRR@20 and Hits@10. 
+
+DSI also performed best on the 10.000 no thread dataset, it also scored the highest comparatively to BM25. DSI scored at least 2x better thread settings comparison then on 10.000 thread.
+
+
 
 \section{Experimental Analysis}
 
-The comparison of the baseline with the DSI and impact of datacleaning or data size is shown in  table \ref{tab:main_results}
-The first row denotes the cleaning type and data set size and the second row the statistics used. The left column are the type of model used. 
+\textbf{Performance baseline BM25:} BM25 performs well on all metrics, but especially the No Thread dataset. The latter is not in line with  findings in \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}. The reason for this might be because the No Thread dataset does not include the emails history, making the emails small, which is when BM25 performs best. Comparing 10,000 thread and 100,000 thread the performance drops a little which is similar to \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}.
 
-\textbf{Performance baseline BM25}: BM25 performs well on all metrics, but especially the No Thread dataset. The latter is not in line with  findings in \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}. The reason for this might be because the --refer to dataanalysis-- No Thread dataset does not include the emails history, making the emails small, which is when BM25 performs best. Comparing 10,000 thread and 100,000 thread the performance drops a little which is similar to \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}.
+\textbf{Performance DSI:} DSI performed poor and becomes worse when when the dataset size goes from 10k to 100k, which is not in line with the findings in \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}. A reason for the poor performance is that the emails are generally smaller then the datasets used in \textcite{10.1145/3580305.3599903} --check if true--. Although the Thread is bigger then no thread it would be expected for the former to perform better with an average word mean of (temp) \wordMean over (word mean), but the history might be confusing the model, because these emails might also be present in other parts of the dataset. 
 
-\textbf{Performance DSI} DSI performed poor and becomes worse when when the dataset size goes from 10k to 100k, which is not in line with the findings in \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}. A reason for the poor performance is that the emails are generally smaller then the datasets used in \textcite{10.1145/3580305.3599903} --check if true--. Although the Thread is bigger then no thread it would be expected for the former to perform better with an average word mean of (temp) \wordMean over (word mean), but the history might be confusing the model, because these emails might also be present in other parts of the dataset. 
+Also, when cleaning the 10k no thread dataset, less emails were bigger then 93.000
 
-Also, when cleaning the 10k no thread dataset, it was 
+\textbf{Thread settings comparison:} There is a slight better performance between both BM25 and DSI on no thread then on thread. This could be explained by Thread containing a lot of duplicate email, confusing the algorithm. When inspecting the ratios thread performed a bit better, which could be because the training data contained more words, thus providing more data for the DSI model to learn from.
 
-\input{../../code/tbls/results_table}
+\textbf{Scale comparison:} As shown in \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, we would expect DSI to improve from the 10.000 dataset to the 100.000 dataset. This however is not the case. DSI perfoms significantly worse. 
+
+
 \section{Discussion}
 
+In all but the thread same mid, the doc to query generation was done using the subject and body. This was done my including "subject:" or "body:" respectively. This cluttered the queries as the model found that always very important. In further work this could be used 
 
-
-The first 10k model had its pique performance at 15k steps, which is quite small compared to 100k steps. This highlights the model's sensitivity to structural patterns. It learned to prioritize the frequent 'Subject' token over the actual email content, a phenomenon known as [shortcut learning/template bias].
-
+% In the thread dataset the history of the emails in included, which could cause overlap between the contents of data points. This could be the cause for the drop in performance for both metods
+%
+% It would have been nice to compare the 10.000 no thread to the 100.000 no thread, however this was not possible because the no thread dataset was smaller then 100.000.
+%
+%
+%
+% The first 10k model had its pique performance at 15k steps, which is quite small compared to 100k steps. This highlights the model's sensitivity to structural patterns. It learned to prioritize the frequent 'Subject' token over the actual email content, a phenomenon known as [shortcut learning/template bias].
+%
 % truncating the emails might be the issue.
 % it there a way possible to use the thread or history between two users as rehearsal content?
 
-\begin{itemize}
-  \item emails with a too low similariy, don't use the subject
-  \item discuss the different between keeping threads and removing them. Maybe keeping threads is good for context, but should should it be used for textrank queries?
-\end{itemize}
+% \begin{itemize}
+%   \item emails with a too low similariy, don't use the subject
+%   \item discuss the different between keeping threads and removing them. Maybe keeping threads is good for context, but should should it be used for textrank queries?
+% \end{itemize}
 \section{Conclusion}
 -
 \printbibliography
