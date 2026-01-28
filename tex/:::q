@@ -311,15 +311,16 @@ The model was trained similar to \textcite{10.1145/3580305.3599903} with some ad
 \subsection{Code}
 For training of the model the code of \textcite{zhuang2022dsiqg} was used as a basis. It did need to be adapted to work with the sqlite database used in this research. This code however was made for numerical tokens and not semantic tokens. To solve this problem the code to build the trie was used from \textcite{LI2023103475}. 
 
+\section{Results}
 \input{../../code/tbls/table_combined.tex}
 \input{../../code/tbls/table_ratios.tex}
 
-%
-% BM25 performed well on all metrics, but especially the No Thread dataset. BM25 performed on all tests better then DSI significantly. BM25 performed best on the 10.000 no thread dataset, but performed comparatively to DSI best on 10.000 thread same mid. 
-%
-% BM25 was better at scoring right emails higher on the 10.000 tread dataset then on the 100.000 thread dataset. This is visible because it scored higher on MRR@3 and Hits@1, but worse on MRR@20 and Hits@10. 
-%
-% DSI also performed best on the 10.000 no thread dataset, it also scored the highest comparatively to BM25. DSI scored at least 2x better thread settings comparison then on 10.000 thread.
+
+BM25 performed well on all metrics, but especially the No Thread dataset. BM25 performed on all tests better then DSI significantly. BM25 performed best on the 10.000 no thread dataset, but performed comparatively to DSI best on 10.000 thread same mid. 
+
+BM25 was better at scoring right emails higher on the 10.000 tread dataset then on the 100.000 thread dataset. This is visible because it scored higher on MRR@3 and Hits@1, but worse on MRR@20 and Hits@10. 
+
+DSI also performed best on the 10.000 no thread dataset, it also scored the highest comparatively to BM25. DSI scored at least 2x better thread settings comparison then on 10.000 thread.
 
 
 
@@ -332,9 +333,8 @@ The comparison of the baseline with the DSI and impact of data cleaning or data 
 \textbf{Performance DSI:} DSI performed best when there was no Context. This could be because the email context could have more topics, which might confuse the model. DSI performs worse on bigger datasets. This is not inline with the findings of \textcite{10.1145/3580305.3599903}, but is in line with \textcite{NEURIPS2022_892840a6}. 
 
 
-\textbf{Comparison BM25 and DSI} Compared to BM25, DSI performs worse on all metrics. This stands in Contrast to \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, who reported significant improvement over BM25. A reason for the poor performance might be because this research uses only 2 training queries compared to 10 \cite{10.1145/3580305.3599903}. Also the enron dataset is a real world dataset and might introduce a lot more noise then curated Q&A datasets.
-
-% Also, when cleaning the 10k No Context dataset, less emails were bigger then 93.000
+\textbf{Comparison BM25 and DSI} Compared to BM25, DSI performs worse on all metrics. This stands in Contrast to \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, who reported significant improvement over BM25. A reason for the poor performance might be because this research uses only 2 training queries compared to 10 \cite{10.1145/3580305.3599903}. Also the enron dataset is a real world dataset and might introduce a lot of noise.
+Also, when cleaning the 10k No Context dataset, less emails were bigger then 93.000
 
 \textbf{Thread settings comparison:} There is a slight better performance between both BM25 and DSI on no thread then on thread. This could be explained by Thread containing a lot of duplicate email, confusing the algorithm. When inspecting the ratios thread performed a bit better, which could be because the training data contained more words, thus providing more data for the DSI model to learn from.
 
@@ -344,8 +344,6 @@ The comparison of the baseline with the DSI and impact of data cleaning or data 
 \section{Discussion}
 
 In all but the thread same mid, the doc to query generation was done using the subject and body. This was done my including "subject:" or "body:" respectively. This cluttered the queries as the model found that always very important. In further work this could be used 
-
-
 
 % In the thread dataset the history of the emails in included, which could cause overlap between the contents of data points. This could be the cause for the drop in performance for both metods
 %
