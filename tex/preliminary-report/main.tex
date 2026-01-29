@@ -10,6 +10,9 @@
 \usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage{geometry}
+\usepackage{xurl}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 
 \usepackage[backend=biber, style=numeric, sorting=nty]{biblatex}
 \addbibresource{../references.bib}
@@ -29,7 +32,7 @@
 %   group-separator = {.}
 % }
 
-\title{Research proposal: Detecting fraud in language with Generative Retrieval models. An Enron Corpus study.}
+\title{Using a Generative Retrieval model on a natural dataset. An Enron Corpus study.}
 \author{Daniël van Oosteroom, \\
   \small Supervisor: Yubao Tang
 }
@@ -46,16 +49,14 @@
 % Conclusions 
 \begin{document}
 
-
 \maketitle
 
 % \begin{multicols}{2}
 
 \section{Introduction}
-A perpetual problem of searching through emails is the sematic mismatch problem. THis causes a lot of searching time when users search through their emails. Currently the most used searching method is bm25[reference bm25]. ------ To circumvent this issue normalization, toke ionization, stop word removal and stemming is used. This however is not sufficient as it still needs a query to be quite similar to the context of the documents. It would be better if uses could ask question and the meaning of such question would be used for searching. Do this, dense vector retrieval [reference] could be used. ---- This turns text into a one dimensional vector and calculates the similarities between the query and the documents. This works better, but has the problem not being end to end differential. To solve this the [tay et all] proposed a generative method called the differentable search index (DSI) turning indexing and task training into one optimizable step. 
+A perpetual problem of searching through emails is the semantic mismatch problem. This causes a lot of searching time when users search through their emails. Currently the most used searching method is BM25 \cite{INR-019} and it searches using word matching. This is not sufficient as it still needs a query to be quite similar to the contents of the documents. It would be better if users could ask question and the meaning of such questions would be used for searching. An improvement on this is dense vector retrieval \cite{karpukhin-etal-2020-dense}. This turns text into a one dimensional vector and calculates the similarities between the query and the documents. This works better as users may now ask question in language that comes natural to them, but has the problem of not being end to end differential. To solve this \textcite{NEURIPS2022_892840a6} proposed a generative method called the differentable search index (DSI) turning indexing and task training into one optimizable step. 
 
-[SE-DSI, why because output likely to be similar and used in this research]
-Generative retrieval (GR) is still a novel field and DSI has been mainly used for curated datasets or books. It is interesting to explore what DSI could be used for. To see how well DSI performs on an email dataset, the Enron corpus could be used [Enron reference]. In this research, we explore to what extent DSI can be used to search on the Enron cropus and how well does it compare to BM25. 
+Generative retrieval (GR) is still a novel field and DSI has been mainly used for curated datasets or books, thus it is interesting to explore what else DSI could be used for. To see how well DSI performs on an email dataset, the Enron corpus could be used \cite{klimt2004introducing}. In this research, we explore to what extent DSI can be used to search on the Enron corpus and how well does it compare to BM25. 
 
 % A perpetual problem in financial markets is corporate fraud. Recently, fears of this have returned, with Nvidia rebutting its comparison to, Enron. Although the validity of this comparison is debatable, it is imperative that there are methods that can aid with the detection of such fraud. 
 %
@@ -87,11 +88,15 @@ Generative retrieval (GR) is still a novel field and DSI has been mainly used fo
 
 \section{Related Research}
 
-For years search relied on exact word matching. BM25 work wel on precise word extraction. To increase the likelyhood of word mathing normalization, tokenization, stop word removal and stemming is used. This however is not sufficient as it still needs a query to be quite similar to the context of the documents. This is often referred to as the sematic gap and is the focus of a lot of active research. 
+For years search relied on exact word matching. BM25 is the flagship method of this and works well on precise word extraction. To increase the likelihood of word matching: normalization, tokenization, stop word removal and stemming is used. This however is not sufficient as it still needs a query to be quite similar to the context of the documents. This problem is often referred to as the sematic gap and is the focus of a lot of active research. 
 
-The first breakthrough were transformer models [reference transformers]. This is a version of a recurrent neural network which could take sentences and attributes weights to the position of the words called attention. This attention allowed search on meaning and not exact word matching. This technique resulted in the creation of large language models (LLM) [reference LLM]. These were highly specialized in question and answering, which is very useful for retrieval as it allowed users to specify their question in the users natural language [to intoduction]. The big problem with LLM's is that they hallucinate and are not faitfull to sources. Dense vector retrieval solves this issue because it turns text into a one dimensional vector and calculates the similarities between the query and the documents. Although Dense vector retrieval can also use the transformer architecture it stays faitfull to the sources, by only retrieving the relevant doucments and not augmenting them. 
+The first big breakthrough on this was the transformer model \cite{NIPS2017_3f5ee243}. This is a version of a recurrent neural network which takes sentences and attributes weights to the position of the words. This is called attention and allows search on meaning and not exact word matching. These models are also called large language models (LLM). A common used case for LLM's is question and answering, which is very useful for retrieval as it allowed users to specify their question in the users natural language [to intoduction]. The big problem with these types of LLM's is that they hallucinate and are not faithful to sources. Dense vector retrieval solves this issue because it turns text into a one dimensional vector and calculates the similarities between the query and the documents. Although Dense vector retrieval can also use the transformer architecture it stays faitfull to the sources, by only retrieving the relevant doucments and not augmenting them. 
 
 The problem in dense vector retrieval is that the indexing and retieval are two seperate tasks. [tay et all] introduced a method where the indexing and the retrieval are trained at the same time, allowing for end to end optimalization. This is called the differentiable search index (DSI) which is part of the generative retrieval domain (GR). SE-DSI [reference y.tang] improves on this as it takes docids and makes them semantic and similar to the index documents it refers to. Using the geometric shape for the input as the output and constraining the retrieval using a tree allows the model to find relevant documents more easily. Even when the model is wrong, the given output is likely to be similar. Because of this, SE-DSI seems to be the most likely fit for our task.
+
+Email datasets have widely been used for the training of spam detection algorithms [find reference] and for studying network relations [find reference]. One of these datasets is the Enron dataset \cite{klimt2004introducing,klimt2004enron, enron_dataset}. Enron was energy company that specialized in oil and gas and filed for bankruptcy in 2001 \cite{BritannicaEnron, FBIEnronCase}. During the investigation this dataset was made public and a cleaned version is publicly available \cite{enron_dataset}. 
+%
+
 
 
 
@@ -164,11 +169,11 @@ To clean the bodies of the emails, it is imperative to remove the extra syntax t
 \begin{figure*}[ht!]
     \centering
     \subfloat[Character Count]{
-        \includegraphics[width=0.48\textwidth]{../../code/plots/character_count_kde.png}
+        \includegraphics[width=0.45\textwidth]{../../code/plots/character_count_kde.png}
         \label{fig:chr_count_kde}
     }%
     \subfloat[Word Count]{
-        \includegraphics[width=0.48\textwidth]{../../code/plots/word_count_kde.png}
+        \includegraphics[width=0.45\textwidth]{../../code/plots/word_count_kde.png}
         \label{fig:wrd_count_kde}
     }%
     \caption{KDE plot}
@@ -179,11 +184,11 @@ To clean the bodies of the emails, it is imperative to remove the extra syntax t
 \begin{figure*}[ht!]
     \centering
     \subfloat[Character Count]{
-        \includegraphics[width=0.48\textwidth]{../../code/plots/character_counts_boxplot.png}
+        \includegraphics[width=0.45\textwidth]{../../code/plots/character_counts_boxplot.png}
         \label{fig:chr_box_plot}
     }%
     \subfloat[Word Count]{
-        \includegraphics[width=0.48\textwidth]{../../code/plots/word_counts_boxplot.png}
+        \includegraphics[width=0.45\textwidth]{../../code/plots/word_counts_boxplot.png}
         \label{fig:wrd_box_plot}
     }%
     \caption{Box plot}
@@ -205,7 +210,7 @@ To clean the bodies of the emails, it is imperative to remove the extra syntax t
 
 For the word count the Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_box_plot} is substantially larger than the Median \wordMedian{} which indicates that this is not a normal distribution. This becomes clearer when comparing the Q3 \wordQthree{} to the Max value \wordMax{}. The substantial gap explains the size of the mean. The same is applicable to the character count.  (TODO: add the skewness of the )
 
-To determine if the subjects of the emails have any similarity to their respective bodies a sentence transformer will be used to calculate the embedding and the cosine similarity will be computed. In the process of calculating the cosine similarity the dot product of the subject and body embeddings is taken and the distribution is plotted in figure \ref{fig:similarities}. Although the distribution is unimodal, it is not a perfect bell curve. This is also apparent when looking at the Skewness which is a negative skew of \similaritiesSkewness. It is clear that the subjects and the bodies are very similar. \\
+To determine if the subjects of the emails have any similarity to their respective bodies a sentence transformer will be used to calculate the embedding and the cosine similarity will be computed. In the process of calculating the cosine similarity the dot product of the subject and body embeddings is taken and the distribution is plotted in figure \ref{fig:similarities}. Although the distribution is unimodal, it is not a perfect bell curve. This is also apparent when looking at the Skewness which is a negative skew of \similaritiesSkewness. It is clear that the subjects and the bodies are very similar.
 \\
 TODO:
   \begin{itemize}
@@ -356,8 +361,9 @@ The comparison of the baseline with the DSI and impact of data cleaning or data 
 
 
 \section{Discussion}
+On the current version of the dataset, DSI performs worse than BM25, which suggests that DSI is a method that is quite sensitive to the dataset and training setup, and this dataset is particularly challenging for it. 
 
-The limitations of this research is because we use MLE the task is a dichotomy, which takes relevance as binary which might not be representative of real world data contained in the Enron dataset.
+A cause for this could be that this research uses the most direct MLE objective, which models relevance as a binary signal. This dichotomy, takes relevance as binary which might not be representative of real world data contained in the Enron dataset.
 
 The inclusion of context has the effect that there are a many duplicates of emails, making a lot of emails similar. A score could be given for emails that are contained in the context and are retrieved.
 
