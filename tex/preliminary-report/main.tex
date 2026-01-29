@@ -52,6 +52,10 @@
 % \begin{multicols}{2}
 
 \section{Introduction}
+A perpetual problem of searching through emails is the sematic mismatch problem. THis causes a lot of searching time when users search through their emails. Currently the most used searching method is bm25[reference bm25]. ------ To circumvent this issue normalization, toke ionization, stop word removal and stemming is used. This however is not sufficient as it still needs a query to be quite similar to the context of the documents. It would be better if uses could ask question and the meaning of such question would be used for searching. Do this, dense vector retrieval [reference] could be used. ---- This turns text into a one dimensional vector and calculates the similarities between the query and the documents. This works better, but has the problem not being end to end differential. To solve this the [tay et all] proposed a generative method called the differentable search index (DSI) turning indexing and task training into one optimizable step. 
+
+[SE-DSI, why because output likely to be similar and used in this research]
+Generative retrieval (GR) is still a novel field and DSI has been mainly used for curated datasets or books. It is interesting to explore what DSI could be used for. To see how well DSI performs on an email dataset, the Enron corpus could be used [Enron reference]. In this research, we explore to what extent DSI can be used to search on the Enron cropus and how well does it compare to BM25. 
 
 % A perpetual problem in financial markets is corporate fraud. Recently, fears of this have returned, with Nvidia rebutting its comparison to, Enron. Although the validity of this comparison is debatable, it is imperative that there are methods that can aid with the detection of such fraud. 
 %
@@ -82,6 +86,16 @@
 % and results
 
 \section{Related Research}
+
+For years search relied on exact word matching. BM25 work wel on precise word extraction. To increase the likelyhood of word mathing normalization, tokenization, stop word removal and stemming is used. This however is not sufficient as it still needs a query to be quite similar to the context of the documents. This is often referred to as the sematic gap and is the focus of a lot of active research. 
+
+The first breakthrough were transformer models [reference transformers]. This is a version of a recurrent neural network which could take sentences and attributes weights to the position of the words called attention. This attention allowed search on meaning and not exact word matching. This technique resulted in the creation of large language models (LLM) [reference LLM]. These were highly specialized in question and answering, which is very useful for retrieval as it allowed users to specify their question in the users natural language [to intoduction]. The big problem with LLM's is that they hallucinate and are not faitfull to sources. Dense vector retrieval solves this issue because it turns text into a one dimensional vector and calculates the similarities between the query and the documents. Although Dense vector retrieval can also use the transformer architecture it stays faitfull to the sources, by only retrieving the relevant doucments and not augmenting them. 
+
+The problem in dense vector retrieval is that the indexing and retieval are two seperate tasks. [tay et all] introduced a method where the indexing and the retrieval are trained at the same time, allowing for end to end optimalization. This is called the differentiable search index (DSI) which is part of the generative retrieval domain (GR). SE-DSI [reference y.tang] improves on this as it takes docids and makes them semantic and similar to the index documents it refers to. Using the geometric shape for the input as the output and constraining the retrieval using a tree allows the model to find relevant documents more easily. Even when the model is wrong, the given output is likely to be similar. Because of this, SE-DSI seems to be the most likely fit for our task.
+
+
+
+
 
 % (add pshycho linguistic references)
 % To Fraud detection is a growing field. In particular, fraud detection on textual unstructured data is novel and unsolved \cite{blanco2020manifestation, noever2020enroncorpusemailbodies}. Moreover, no trustworthy, peer reviewed research has been published about this. It could be possible to detect fraud from text because perpetrators might leave behind linguistic markers or show emotions that are common with fraud.
@@ -329,21 +343,41 @@ The comparison of the baseline with the DSI and impact of data cleaning or data 
 
 \textbf{Performance baseline BM25:} BM25 performed best without context. The reason for this might be because the No Context dataset does not include the emails history, making the emails small, which is when BM25 performs best. Comparing 10k Context and 100k Context the performance drops a little which is similar previous findings \cite{10.1145/3580305.3599903} \cite{NEURIPS2022_892840a6}.
 
-\textbf{Performance DSI:} DSI performed best when there was no Context. This could be because the email context could have more topics, which might confuse the model. DSI performs worse on bigger datasets. This is not inline with the findings of \textcite{10.1145/3580305.3599903}, but is in line with \textcite{NEURIPS2022_892840a6}. 
+\textbf{Performance DSI:} DSI performed best when there was no Context. This could be because the email context could have more topics, which might confuse the model. The difference between Context and no context is not too large, which might be because of the automatic truncation. DSI performs worse on bigger datasets. This is not inline with the findings of \textcite{10.1145/3580305.3599903}, but is in line with \textcite{NEURIPS2022_892840a6}.
 
 
-\textbf{Comparison BM25 and DSI} Compared to BM25, DSI performs worse on all metrics. This stands in Contrast to \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, who reported significant improvement over BM25. A reason for the poor performance might be because this research uses only 2 training queries compared to 10 \cite{10.1145/3580305.3599903}. Also the enron dataset is a real world dataset and might introduce a lot more noise then curated Q&A datasets.
+\textbf{Comparison BM25 and DSI} Compared to BM25, DSI performs worse on all metrics. This stands in Contrast to \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, who reported significant improvement over BM25. A reason for the poor performance might be because this research uses only 2 training queries compared to 10 \cite{10.1145/3580305.3599903}. Also the enron dataset is a real world dataset and might introduce a lot more noise then curated Q\&A datasets. Further, the data might be too complex for binary relevance of our MLE method.
 
 % Also, when cleaning the 10k No Context dataset, less emails were bigger then 93.000
 
-\textbf{Thread settings comparison:} There is a slight better performance between both BM25 and DSI on no thread then on thread. This could be explained by Thread containing a lot of duplicate email, confusing the algorithm. When inspecting the ratios thread performed a bit better, which could be because the training data contained more words, thus providing more data for the DSI model to learn from.
+\textbf{Thread settings comparison:} There is a slight better performance between both BM25 and DSI when there is no context on context. This could be explained by the context dataset containing a lot of duplicate email, because the email history is of email addresses also contained in the dataset. When inspecting the ratios context performed a bit better, which could be because the training data contained more words, thus providing more data for the DSI model to learn from.
 
 \textbf{Scale comparison:} As shown in \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, we would expect DSI to improve from the 10.000 dataset to the 100.000 dataset. This however is not the case. DSI perfoms significantly worse. 
 
 
 \section{Discussion}
 
-In all but the thread same mid, the doc to query generation was done using the subject and body. This was done my including "subject:" or "body:" respectively. This cluttered the queries as the model found that always very important. In further work this could be used 
+The limitations of this research is because we use MLE the task is a dichotomy, which takes relevance as binary which might not be representative of real world data contained in the Enron dataset.
+
+The inclusion of context has the effect that there are a many duplicates of emails, making a lot of emails similar. A score could be given for emails that are contained in the context and are retrieved.
+
+Further, due to resource limitations the amount of queries generated for training was less then other works. Rehearsal content could be added, especially for the context dataset, to increase performance.
+
+To see if the current metods work, a curated Q\&A dataset could be used. Further, to check if the data has potential, a simpler task could used that does for a dichotomy. A task like spam detection, which has done before and was its original use. [reference to spam detection on the enron dataset].
+
+For DSI the context and no context performance was very close, which could because by truncation. To include the important information of the context [tang et all book] an extraction of important information could be done.
+
+
+Again because of resource limitations the cleaning of the data was done with regex patterns, which might not have been sufficient, because different users might have different layouts. A more flexible approach like text classification or LLM cleaning would have been a better option if not for resource availability.
+
+To generate the doc to queries the model was instructed by including "subject:" or "body:" followed by the subject and body respectively. This cluttered the queries as the doctoquery model was not made to accept instructions. This had the effect that the words subject and body where included often in the queries \ref{app:schema_impact}, because the model might be sensitive to structural patterns. Thus inducing noise. In further work this could be omitted. 
+
+Currently the Context data set uses the whole context for generating the docids and queries. This might induce clutter and might result in very similar docids and queries.
+
+The context dataset might have to many topics, to verify a study could be conducted modeling the topics using LDA or calculating the similarity using dense vector embeddings.
+
+
+
 
 
 
@@ -363,7 +397,8 @@ In all but the thread same mid, the doc to query generation was done using the s
 %   \item discuss the different between keeping threads and removing them. Maybe keeping threads is good for context, but should should it be used for textrank queries?
 % \end{itemize}
 \section{Conclusion}
--
+In this paper we show that it is not conclusive if the DSI is a good fit for searching email datasets like the enron corpus. Cleaning has an effect on the performance, but the main impact comes for the method used. BM25 is clear to be better method for this task and we propose investigating adapations to the DSI method. j
+
 \printbibliography
 \appendix
 \section{Impact of Schema Artifacts on Model Performance}
