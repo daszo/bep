@@ -1,0 +1,410 @@
+\documentclass[a4paper, 12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{xcolor}
+\usepackage{afterpage}
+
+\usepackage{relsize}
+\usepackage{moresize}
+
+\usepackage{graphicx}
+\usepackage{geometry}
+
+
+% my additions
+
+\usepackage{subfig}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{cleveref}
+% \usepackage[margin=1in]{geometry}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{xurl}
+\usepackage{lmodern}
+
+\usepackage[backend=biber, style=numeric, sorting=nty]{biblatex}
+\addbibresource{../references.bib}
+
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+\setcounter{biburlnumpenalty}{8000}
+
+\input{../../code/tbls/character_stats.tex}
+\input{../../code/tbls/word_stats.tex}
+\input{../../code/tbls/general_stats.tex}
+\input{../../code/tbls/similarities_stats.tex}
+% [CHANGE] The title of your thesis. If your thesis has a subtitle, then this
+% should appear right below the main title, in a smaller font.
+\newcommand{\theTitle}{The first sentence \\
+\vspace{0.5em}
+the second sentence}
+\newcommand{\theSubTitle}{a smaller subtitle}
+
+
+% [CHANGE] Your full name. In case of multiple names, you can include their
+% initials as well, e.g. "Robin G.J. van Achteren".
+\newcommand{\theAuthor}{Daniël S. van Oosteroom}
+
+% [CHANGE] Your student ID, as this has been assigned to you by the UvA
+% administration.
+\newcommand{\theStudentID}{13354582}
+
+% [CHANGE] The name of your supervisor(s). Include the titles of your supervisor(s),
+% as well as the initials for *all* of his/her first names.
+\newcommand{\theSupervisor}{dr. Y. Tang} % Dr. Ing. L. Dorst
+
+% [CHANGE] The address of the institute at which your supervisor is working.
+% Be sure to include (1) institute (is appropriate), (2) faculty (if
+% appropriate), (3) organisation name, (4) organisation address (2 lines).
+\newcommand{\theInstitute}{
+Informatics Institute \\ %Institute for Logic, Language and Computation
+Faculty of Science\\
+University of Amsterdam\\
+Science Park 900 \\ 
+1098 XH Amsterdam 
+}
+
+% [CHANGE] The semester in which you started your thesis. (Semester 1 or Semester 2, academic year)
+\newcommand{\theDate}{Semester 1, 2025-2026}
+
+\begin{document}
+
+\pagestyle{empty}
+% Page I
+
+% This page should contain your title and name and will create a thumbnail
+% which should be readable at https://scripties.uba.uva.nl/
+
+
+
+    \newgeometry{margin=1cm}
+    \thispagestyle{empty}
+    
+    % [CHANGE]
+    % You can also use one of the other background colors, 
+    % preferably one that fits with your cover-image
+    % see https://en.wikibooks.org/wiki/LaTeX/Colors for suggestions
+    \pagecolor{black}\afterpage{\nopagecolor}
+ 
+    \begin{minipage}[t][0.8\paperheight]{0.8\paperwidth}
+        \begin{center}
+        
+                  %% Print the title a at the top in white.
+                  {\color{white} \fontsize{52}{104}\selectfont \textbf{\theTitle} }
+               
+                  \vspace{0.2\paperheight}
+                  
+                  % [CHANGE]
+                  % Replace this image with one that is relevant for your research, 
+                  % If possible, use one of your own illustrations
+                 
+                  \includegraphics[width=0.75\paperwidth]{augmented-intelligence}
+                  
+                   %% Print the author at the bottom 
+                  \vspace{0.2\paperheight}
+                  
+                 {\color{white} \fontsize{24}{48}\selectfont \textbf{\theAuthor} }
+        \end{center}
+    \end{minipage}   
+   
+    \restoregeometry
+    
+\newpage
+
+% Page II
+
+\newgeometry{margin=1cm}
+\vspace*{0.8\textheight}
+\noindent
+Layout: typeset by the author using \LaTeX. \\
+Cover illustration: Unknown artist 
+\restoregeometry
+
+\newpage
+
+% Page III
+\begin{center}
+
+\vspace{2.5cm}
+
+
+\begin{Huge}
+% see definition at beginning of document
+\theTitle
+\end{Huge} \\
+
+\vspace{0.5 cm}
+
+\begin{Large}
+\theSubTitle
+\end{Large}
+
+\vspace{1.5cm}
+
+% see definition at beginning of document
+\theAuthor\\
+% see definition at beginning of document
+\theStudentID
+
+\vspace{1.5cm}
+
+% [DO NOT CHANGE]
+Bachelor thesis\\
+Credits: 18 EC
+
+\vspace{0.5cm}
+
+% [DO NOT CHANGE] The name of the educational programme.
+Bachelor \textit{Kunstmatige Intelligentie} \\
+\vspace{0.25cm}
+\includegraphics[width=0.075\paperwidth]{uva_logo} \\
+\vspace{0.1cm}
+
+% [DO NOT CHANGE] The address of the educational programme.
+University of Amsterdam\\
+Faculty of Science\\
+Science Park 900\\
+1098 XH Amsterdam
+
+\vspace{2cm}
+
+\emph{Supervisor}\\
+
+% see definition at beginning of document
+\theSupervisor
+
+\vspace{0.25cm}
+
+% see definition at beginning of document
+\theInstitute
+
+\vspace{1.0cm}
+
+% see definition at beginning of document
+\theDate
+
+\end{center}
+\newpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\pagestyle{plain} 
+
+\chapter{Introduction}
+A perpetual problem of searching through emails is the semantic mismatch problem. This causes a lot of searching time when users search through their emails. Currently the most used searching method is BM25 \cite{INR-019} and it searches using word matching. This is not sufficient as it still needs a query to be quite similar to the contents of the documents. It would be better if users could ask question and the meaning of such questions would be used for searching. An improvement on this is dense vector retrieval \cite{karpukhin-etal-2020-dense}. This turns text into a one dimensional vector and calculates the similarities between the query and the documents. This works better as users may now ask question in language that comes natural to them, but has the problem of not being end to end differential. To solve this \textcite{NEURIPS2022_892840a6} proposed a generative method called the differentable search index (DSI) turning indexing and task training into one optimizable step. 
+
+Generative retrieval (GR) is still a novel field and DSI has been mainly used for curated datasets or books, thus it is interesting to explore what else DSI could be used for. To see how well DSI performs on an email dataset, the Enron corpus could be used \cite{klimt2004introducing}. In this research, we explore to what extent DSI can be used to search on the Enron corpus and how well does it compare to BM25. 
+
+\chapter{Related Research}
+For years search relied on exact word matching. BM25 is the flagship method of this and works well on precise word extraction. To increase the likelihood of word matching: normalization, tokenization, stop word removal and stemming is used. This however is not sufficient as it still needs a query to be quite similar to the context of the documents. This problem is often referred to as the sematic gap and is the focus of a lot of active research. 
+
+The first big breakthrough on this was the transformer model \cite{NIPS2017_3f5ee243}. This is a version of a recurrent neural network which takes sentences and attributes weights to the position of the words. This is called attention and allows search on meaning and not exact word matching. These models are also called large language models (LLM). A common used case for LLM's is question and answering, which is very useful for retrieval as it allowed users to specify their question in the users natural language [to intoduction]. The big problem with these types of LLM's is that they hallucinate and are not faithful to sources. Dense vector retrieval solves this issue because it turns text into a one dimensional vector and calculates the similarities between the query and the documents. Although Dense vector retrieval can also use the transformer architecture it stays faitfull to the sources, by only retrieving the relevant doucments and not augmenting them. 
+
+The problem in dense vector retrieval is that the indexing and retieval are two seperate tasks. [tay et all] introduced a method where the indexing and the retrieval are trained at the same time, allowing for end to end optimalization. This is called the differentiable search index (DSI) which is part of the generative retrieval domain (GR). SE-DSI [reference y.tang] improves on this as it takes docids and makes them semantic and similar to the index documents it refers to. Using the geometric shape for the input as the output and constraining the retrieval using a tree allows the model to find relevant documents more easily. Even when the model is wrong, the given output is likely to be similar. Because of this, SE-DSI seems to be the most likely fit for our task.
+
+Email datasets have widely been used for the training of spam detection algorithms [find reference] and for studying network relations [find reference]. One of these datasets is the Enron dataset \cite{klimt2004introducing,klimt2004enron, enron_dataset}. Enron was energy company that specialized in oil and gas and filed for bankruptcy in 2001 \cite{BritannicaEnron, FBIEnronCase}. During the investigation this dataset was made public and a cleaned version is publicly available \cite{enron_dataset}. 
+
+\chapter{Methods}
+
+\section{Task Definition}
+\label{subsec:task-definition}
+
+Let $\mathcal{D} = \{d_1, d_2, \dots d_N \}$ denote the corpus of N email documents, which consists of subject, sender, recipient and sender. Let $\mathcal{Q} = \{q_1, q_2, \dots q_M \}$ represent the set of M queries. Further, we define $\mathcal{Y} = \{y_1, y_2, \dots y_N \}$ as the set of unique document identifiers corresponding to each email document. \\
+Let $f_\theta$ be the GR model parameterized by $\theta$. The task of the model is to map query $q \in \mathcal{Q}$ or $d \in \mathcal{D}$ to output relevant documents identifier $y \in \mathcal{Y}$.
+
+To do this, a training set is construction $\mathcal{T}$, this is defined as the union of the document-id pair and query-id pair~\eqref{eq:training-set}.
+\begin{equation}
+  \mathcal{T} = \{(d,y_d) | d \in \mathcal{D} \} \cup \{(q, y_q) | q \in \mathcal{Q}\}
+  \label{eq:training-set}
+\end{equation}
+Where $y_d \in \mathcal{Y}$ is the unique identifier assigned to document d and $y_q \in \mathcal{Q}$ is the unique identifier assigned to document q.
+
+The GR retrieval model, $f_\theta$ follows an encoder-decoder architecture. The encoder encodes the query q or the email document d and generates the unique document identifier y.
+
+\section{Dataset}
+The datalanalys is done before truncating the emails.
+The number of emails present after dropping automatically generated folders is \NoFolderLength. This include the inbox folders and sent / sent\_items / outbox. This is a similar number to the cleaned dataset found in \citeauthor{klimt2004enron}. They found a value of 200,399 documents after cleaning. Their different number of selected emails may have been due to their objective to classify the folders that each email belonged to, for which reason they sought only folders created by humans. 
+
+After cleaning further the number of remaining emails left is \GeneralLength. 
+
+To clean the bodies of the emails, it is imperative to remove the extra syntax that email providers like outlook enter automatically. Preliminary experiments showed that retaining schema tags introduced significant noise. For a detailed ablation study comparing raw versus cleaned inputs, see Appendix \ref{app:schema_impact}. Also, messages smaller then 20 words are removed as they are to small to create queries and docids of.
+
+\begin{figure*}[ht!]
+    \centering
+    \subfloat[Character Count]{
+        \includegraphics[width=0.45\textwidth]{../../code/plots/character_count_kde.png}
+        \label{fig:chr_count_kde}
+    }%
+    \subfloat[Word Count]{
+        \includegraphics[width=0.45\textwidth]{../../code/plots/word_count_kde.png}
+        \label{fig:wrd_count_kde}
+    }%
+    \caption{KDE plot}
+    \label{fig:main_kde_plots}
+\end{figure*}
+
+
+\begin{figure*}[ht!]
+    \centering
+    \subfloat[Character Count]{
+        \includegraphics[width=0.45\textwidth]{../../code/plots/character_counts_boxplot.png}
+        \label{fig:chr_box_plot}
+    }%
+    \subfloat[Word Count]{
+        \includegraphics[width=0.45\textwidth]{../../code/plots/word_counts_boxplot.png}
+        \label{fig:wrd_box_plot}
+    }%
+    \caption{Box plot}
+    \label{fig:main_box_plots}
+\end{figure*}
+
+\begin{figure*}[ht!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{../../code/plots/similarities_hist.png}
+  \caption{Distribution of similarities}
+  \label{fig:similarities}
+\end{figure*}
+
+
+For the word count the Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_box_plot} is substantially larger than the Median \wordMedian{} which indicates that this is not a normal distribution. This becomes clearer when comparing the Q3 \wordQthree{} to the Max value \wordMax{}. The substantial gap explains the size of the mean. The same is applicable to the character count.  (TODO: add the skewness of the )
+
+To determine if the subjects of the emails have any similarity to their respective bodies a sentence transformer will be used to calculate the embedding and the cosine similarity will be computed. In the process of calculating the cosine similarity the dot product of the subject and body embeddings is taken and the distribution is plotted in figure \ref{fig:similarities}. Although the distribution is unimodal, it is not a perfect bell curve. This is also apparent when looking at the Skewness which is a negative skew of \similaritiesSkewness. It is clear that the subjects and the bodies are very similar.
+
+\section{Generating labels}
+To train the model without manual labels, we construct training data solely on the email content and email subject itself, including email identifiers and pseudo queries.
+
+
+\subsection{Email ID construction}
+Identifiers should capture the essence of the mail while remaining compact. Following \textcite{10.1145/3690624.3709435}, we use text rank to extract key words of interest from the emails bodies. These keywords will server as IDs. Text rank is a graph based ranking system that scores text units, like words or sentences, based on their co-occurence or similarity respectively and selects the best text units using Page Rank \cite{ilprints422}.
+
+A problem that arose is that text rank generates ids that are not always unique. In line with  \textcite{10.1145/3580305.3599903}, this issue was ignored because duplicate ids are for emails that are similar in contents.
+
+\subsection{Pseudo-query construction}
+When constructing queries it is important that the original words are contained but also cover the essence of the email. Which is why we use an extractve method and an abstractive method is construction. Textrank was employed to extract the most important sentence as pseudo query. For the abstractive query construction method the t5-headline transformer model \cite{pleban2020t5headline} was used for summarizing the email bodies. When textrank was empty the mail was truncated to 15 words and used instead.
+
+
+\subsection{Training set construction}
+
+Following \cite{10.1145/3580305.3599903}, a 10k subset is used, and that this size is a reasonable scale for T5 to learn from. Per data point 3 data pairs are created. These pairs consist of the Semantic Document Identifier paired with one of the following: email body and subject, the extractive query or the abstractive query.
+
+\section{Model training}
+Question: do I comment on the improvements between the original DSI paper \cite{NEURIPS2022_892840a6} and your improvement \cite{10.1145/3580305.3599903} or can I just quote that?
+As specified in \cref{subsec:task-definition} $f_\theta$ is a GR model with the encoder decoder architecture. For this the T5 model was chosen because that is the standard used in previous works \cite{NEURIPS2022_892840a6}\cite{10.1145/3580305.3599903}. The training of the model is a joint mode of two parts i.e., indexing and the retrieval in an end to end way.\\
+\textbf{Indexing:} This step is for memorizing information about the email documents, \textcite{NEURIPS2022_892840a6} takes a document and maps it to an unique document identifier.
+
+\begin{equation}
+  \mathcal{L}_{Indexing}{(\theta)} = \displaystyle\sum_{d_i \in \mathcal{D}} log P(y | T5_{\theta}(d_i))
+  \label{eq:indexing-los}
+\end{equation}
+
+While \textcite{NEURIPS2022_892840a6} use only numerical ids \textcite{10.1145/3580305.3599903} use Elaborative Descriptions as the identifier. 
+
+\textbf{Retrieval:} Given a query $q \in \mathcal{Q}$, the DSI model outputs the relevant document identifier y. For this the T5 model, previously fine tuned for indexing, is trained on the query-id pair.
+
+
+
+\begin{equation}
+  \mathcal{L}_{Retrieval}{(\theta)} = \displaystyle\sum_{d_i \in \mathcal{D}} log P(y | T5_{\theta}(d_i))
+  \label{eq:retrieval-loss}
+\end{equation}
+
+For training the model, \textcite{10.1145/3580305.3599903} used top 10 greedy beam first search to help the model find a valid document identifier. This has also been used in this research. This works because a trie has been build using the unique document identifiers and guides the model to the right answers. For every word it generates, it predicts for every possible word the probability that it is that word. From that list, only the words that are in the trie are selected and the 10 highest probability are kept. For every consecutive the current probability is summed with the new word. At some point the trie ends and then the 10 most probable are ranked acordingly and scored.
+
+For training, the data set queries were split up in three groups. The first 80\% was reserved for training and then 10\% for both validating and testing. The email bodies were exclusively reserved for training, because they serve only for learning the model what each unique document identifier means.
+
+The data was truncated before training to x amount of tokens.
+
+\chapter{Experimental Setup}
+
+
+\section{Baseline Methods}
+
+BM25 vector embedding
+
+\section{Evaluation metrics}
+For the evaluation metric, the same metrics were used as in \textcite{NEURIPS2022_892840a6} and \textcite{10.1145/3580305.3599903}. These are mean reciprocal rank (MRR) for 3 and 20 and hits at 1 and 10.
+
+MRR is calculated as the mean of the reciprocal rank \ref{eq:mrr}, the latter is the first position of a relavant document.
+
+Hits at k is calculated \ref{eq:hits} by taking the mean of all the ranks up to k of relevant documents.
+
+
+\begin{equation}
+  \text{MRR}  = \frac{1}{N} \sum_{i=1}^{N} \text{RR}_i
+  \label{eq:mrr}
+\end{equation}
+
+
+\begin{equation}
+\text{Hits}@k = \frac{1}{N} \sum_{i=1}^{N} \mathbb{I}(\text{rank}_i \le k)
+  \label{eq:hits}
+\end{equation}
+
+\section{Implementation details}
+The model was trained similar to \textcite{10.1145/3580305.3599903} with some adjustments made based on what was provided with the code used \cite{zhuang2022dsiqg}. We employed a Transformer-based encoder-decoder architecture for our DSI task, initializing the model with the pre-trained T5-base \cite{JMLR:v21:20-074}. This architecture comprises a hidden size of 768, 12 Transformer layers, and 12 self-attention heads. We use the Adam optimizer with a learning rate of $5e-4$ and a linear warm-up over 100,000 steps. The model is trained for a maximum of 100,000 steps with a global batch size of 64 (32 per device) on two GPUs. The maximum sequence length is set to 32.
+
+\section{Code}
+For training of the model the code of \textcite{zhuang2022dsiqg} was used as a basis. It did need to be adapted to work with the sqlite database used in this research. This code however was made for numerical tokens and not semantic tokens. To solve this problem the code to build the trie was used from \textcite{LI2023103475}. 
+
+\input{../../code/tbls/table_combined.tex}
+\input{../../code/tbls/table_ratios.tex}
+
+\chapter{Experimental Analasys}
+
+The comparison of the baseline with the DSI and impact of data cleaning or data size is shown in  table \ref{tab:combined_results}. This table is split into two tables where the methods used are in the left column. In the top table the thread settings are compared and in the bottom the training size is compared. Besides the methods column, the tables are split into two main columns, corresponding to a dataset, which are under divided into the 4 evaluation metrics, MRR@3, MRR@20, Hits@1 and Hits@10. The ratio between between DSI's performance and BM25 performance is shown in table \ref{tab:ratio_results}
+
+\textbf{Performance baseline BM25:} BM25 performed best without context. The reason for this might be because the No Context dataset does not include the emails history, making the emails small, which is when BM25 performs best. Comparing 10k Context and 100k Context the performance drops a little which is similar previous findings \cite{10.1145/3580305.3599903} \cite{NEURIPS2022_892840a6}.
+
+\textbf{Performance DSI:} DSI performed best when there was no Context. This could be because the email context could have more topics, which might confuse the model. The difference between Context and no context is not too large, which might be because of the automatic truncation. DSI performs worse on bigger datasets. This is not inline with the findings of \textcite{10.1145/3580305.3599903}, but is in line with \textcite{NEURIPS2022_892840a6}.
+
+
+\textbf{Comparison BM25 and DSI} Compared to BM25, DSI performs worse on all metrics. This stands in Contrast to \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, who reported significant improvement over BM25. A reason for the poor performance might be because this research uses only 2 training queries compared to 10 \cite{10.1145/3580305.3599903}. Also the enron dataset is a real world dataset and might introduce a lot more noise then curated Q\&A datasets. Further, the data might be too complex for binary relevance of our MLE method.
+
+% Also, when cleaning the 10k No Context dataset, less emails were bigger then 93.000
+
+\textbf{Thread settings comparison:} There is a slight better performance between both BM25 and DSI when there is no context on context. This could be explained by the context dataset containing a lot of duplicate email, because the email history is of email addresses also contained in the dataset. When inspecting the ratios context performed a bit better, which could be because the training data contained more words, thus providing more data for the DSI model to learn from.
+
+\textbf{Scale comparison:} As shown in \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, we would expect DSI to improve from the 10.000 dataset to the 100.000 dataset. This however is not the case. DSI perfoms significantly worse. 
+
+
+\chapter{Discussion}
+On the current version of the dataset, DSI performs worse than BM25, which suggests that DSI is a method that is quite sensitive to the dataset and training setup, and this dataset is particularly challenging for it. 
+
+A cause for this could be that this research uses the most direct MLE objective, which models relevance as a binary signal. This dichotomy, takes relevance as binary which might not be representative of real world data contained in the Enron dataset.
+
+The inclusion of context has the effect that there are a many duplicates of emails, making a lot of emails similar. A score could be given for emails that are contained in the context and are retrieved.
+
+Further, due to resource limitations the amount of queries generated for training was less then other works. Rehearsal content could be added, especially for the context dataset, to increase performance.
+
+To see if the current metods work, a curated Q\&A dataset could be used. Further, to check if the data has potential, a simpler task could used that does for a dichotomy. A task like spam detection, which has done before and was its original use. [reference to spam detection on the enron dataset].
+
+For DSI the context and no context performance was very close, which could because by truncation. To include the important information of the context [tang et all book] an extraction of important information could be done.
+
+
+Again because of resource limitations the cleaning of the data was done with regex patterns, which might not have been sufficient, because different users might have different layouts. A more flexible approach like text classification or LLM cleaning would have been a better option if not for resource availability.
+
+To generate the doc to queries the model was instructed by including "subject:" or "body:" followed by the subject and body respectively. This cluttered the queries as the doctoquery model was not made to accept instructions. This had the effect that the words subject and body where included often in the queries \ref{app:schema_impact}, because the model might be sensitive to structural patterns. Thus inducing noise. In further work this could be omitted. 
+
+Currently the Context data set uses the whole context for generating the docids and queries. This might induce clutter and might result in very similar docids and queries.
+
+The context dataset might have to many topics, to verify a study could be conducted modeling the topics using LDA or calculating the similarity using dense vector embeddings.
+
+An other option for Generative retrieval on the Enron corpus is constructing a model that natively takes in the relationship between emails and users. 
+\chapter{Conclusion}
+
+In this paper we show that it is not conclusive if the DSI is a good fit for searching email datasets like the enron corpus. Cleaning has an effect on the performance, but the main impact comes for the method used. BM25 is clear to be better method for this task and we propose investigating adapations to the DSI method. j
+
+{\raggedright
+\printbibliography
+}
+
+\appendix
+\chapter{Impact of Schema Artifacts on Model Performance}
+\label{app:schema_impact}
+
+\input{../tables/email_noise}
+\end{document}
