@@ -11,7 +11,8 @@
 \usepackage{graphicx}
 \usepackage{geometry}
 
-
+\usepackage{longtable}
+\usepackage{array}
 % my additions
 
 \usepackage{subfig}
@@ -39,9 +40,9 @@
 \input{../../code/tbls/similarities_stats.tex}
 % [CHANGE] The title of your thesis. If your thesis has a subtitle, then this
 % should appear right below the main title, in a smaller font.
-\newcommand{\theTitle}{The first sentence \\
+\newcommand{\theTitle}{Email Content Search: \\
 \vspace{0.5em}
-the second sentence}
+A Comparison Between BM25 and Generative Retrieval }
 \newcommand{\theSubTitle}{a smaller subtitle}
 
 
@@ -194,10 +195,33 @@ Science Park 900\\
 \setcounter{page}{1}
 \pagestyle{plain} 
 
-\chapter{Introduction}
-A perpetual problem of searching through emails is the semantic mismatch problem. This causes a lot of searching time when users search through their emails. Currently the most used searching method is BM25 \cite{INR-019} and it searches using word matching. This is not sufficient as it still needs a query to be quite similar to the contents of the documents. It would be better if users could ask question and the meaning of such questions would be used for searching. An improvement on this is dense vector retrieval \cite{karpukhin-etal-2020-dense}. This turns text into a one dimensional vector and calculates the similarities between the query and the documents. This works better as users may now ask question in language that comes natural to them, but has the problem of not being end to end differential. To solve this \textcite{NEURIPS2022_892840a6} proposed a generative method called the differentable search index (DSI) turning indexing and task training into one optimizable step. 
+\abstract{}
 
-Generative retrieval (GR) is still a novel field and DSI has been mainly used for curated datasets or books, thus it is interesting to explore what else DSI could be used for. To see how well DSI performs on an email dataset, the Enron corpus could be used \cite{klimt2004introducing}. In this research, we explore to what extent DSI can be used to search on the Enron corpus and how well does it compare to BM25. 
+\chapter{Introduction}
+
+
+Email is to this day a widely used communication medium, yet it consumes a disproportionate time of users day. While surveys often estimate email usage at over three hours per day \cite{Adobe2019}, empirical logging studies reveal that knowledge workers spend approximately 1.5 hours of actual focused time on email daily, checking their inboxes an average of 77 times per day \cite{inproceedings} This is why retrieving relevant past messages is a common and challenging task. The nature of email content is noisy and unstructured, with long threads, quoted replies, inconsistent formatting, and other artifacts that does not contribute to its meaning, making content-based search difficult. We validate our results using the Enron Corpus, which remains the de facto standard benchmark for open-source email analysis.
+
+Currently the most used method is BM25 \cite{INR-019}, which uses term frequency and inverse document frequency to score and rank documents based on query content. BM25 remains a strong baseline in many text retrieval tasks due to its simplicity, interpretability and robust performance, representing strong improvement over prior work. These earlier methods have often relied on lexical matching and indexing approaches, such as the vector space model,for ranking content \cite{strathprints2621}. However, even though words do not have to match exactly, BM25 still suffers from the same semantic gap, which necessitates the presence of the same keywords in the emails as in the search query
+
+Recently, natural language processing (NLP) has seen developments in pretrained language models. Generative retrieval has emerged as a new paradigm that directly generates docuemnt identifiers or representations based on query semantics rather than relying purely on lexical overlap. While generative retrieval shows promise in general IR benchmarks, its performance on noisy, real-world email content has not been systematically evaluated.
+
+\noindent Research questions:
+\begin{enumerate}
+  \item To what extend can email retrieval performance be imporoved by moving away for lexical matching to a generative approach, and what role does thread history play in bridging the semantic gap?
+  \begin{enumerate}
+    \item How effective is BM25 for email content retrieval on the Enron corpus?
+    \item How does generative retrieval compare with BM25 in this task?
+    \item Does email thread context influence retrieval performance across methods?
+  \end{enumerate}
+\end{enumerate}
+
+
+In this paper we will construct and email content retrieval benchmark using the enron corpus with both threaded and non-threaded text variants, to identify the impact of conversation history. We first establish a lexical baseline using BM25, followed by the implementation and evaluation of a generative retrieval method. This study will conclude with a comparative analysis, providing qualitative results and qualitative insights into the retrieval behaviors and performance disparities between the generative and lexical approaches. 
+%
+% A perpetual problem of searching through emails is the semantic mismatch problem. This causes a lot of searching time when users search through their emails. Currently the most used searching method is BM25 \cite{INR-019} and it searches using word matching. This is not sufficient as it still needs a query to be quite similar to the contents of the documents. It would be better if users could ask question and the meaning of such questions would be used for searching. An improvement on this is dense vector retrieval \cite{karpukhin-etal-2020-dense}. This turns text into a one dimensional vector and calculates the similarities between the query and the documents. This works better as users may now ask question in language that comes natural to them, but has the problem of not being end to end differential. To solve this \textcite{NEURIPS2022_892840a6} proposed a generative method called the differentable search index (DSI) turning indexing and task training into one optimizable step. 
+%
+% Generative retrieval (GR) is still a novel field and DSI has been mainly used for curated datasets or books, thus it is interesting to explore what else DSI could be used for. To see how well DSI performs on an email dataset, the Enron corpus could be used \cite{klimt2004introducing}. In this research, we explore to what extent DSI can be used to search on the Enron corpus and how well does it compare to BM25. 
 
 \chapter{Related Research}
 For years search relied on exact word matching. BM25 is the flagship method of this and works well on precise word extraction. To increase the likelihood of word matching: normalization, tokenization, stop word removal and stemming is used. This however is not sufficient as it still needs a query to be quite similar to the context of the documents. This problem is often referred to as the sematic gap and is the focus of a lot of active research. 
@@ -396,7 +420,9 @@ The context dataset might have to many topics, to verify a study could be conduc
 An other option for Generative retrieval on the Enron corpus is constructing a model that natively takes in the relationship between emails and users. 
 \chapter{Conclusion}
 
-In this paper we show that it is not conclusive if the DSI is a good fit for searching email datasets like the enron corpus. Cleaning has an effect on the performance, but the main impact comes for the method used. BM25 is clear to be better method for this task and we propose investigating adapations to the DSI method. j
+In this paper we show that it is not conclusive if the DSI is a good fit for searching email datasets like the enron corpus. Cleaning has an effect on the performance, but the main impact comes for the method used. BM25 is clear to be better method for this task and we propose investigating adapations to the DSI method.
+
+
 
 {\raggedright
 \printbibliography
@@ -407,4 +433,9 @@ In this paper we show that it is not conclusive if the DSI is a good fit for sea
 \label{app:schema_impact}
 
 \input{../tables/email_noise}
+
+\chapter{Comparison between BM25 and DSI}
+% {\raggedright
+% \input{../../code/tbls.tex}
+% }
 \end{document}
