@@ -1,8 +1,10 @@
 import sqlite3
 import pandas as pd
 
+DB = "/home/daszo/uva/bachelor_ki/bep/code/data/enron.db"
 
-def load_db(table: str, DB_PATH: str = "enron.db") -> pd.DataFrame:
+
+def load_db(table: str, DB_PATH: str = DB) -> pd.DataFrame:
 
     print(f"Started, Loading DB {DB_PATH}")
 
@@ -21,7 +23,7 @@ def load_db(table: str, DB_PATH: str = "enron.db") -> pd.DataFrame:
     return df
 
 
-def write_to_db(df: pd.DataFrame, table: str, DB_PATH: str = "enron.db"):
+def write_to_db(df: pd.DataFrame, table: str, DB_PATH: str = DB) -> None:
 
     print(f"Started, Writing {table} to database {DB_PATH} of size {df.size}")
 

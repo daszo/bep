@@ -197,6 +197,8 @@ Science Park 900\\
 
 \abstract{}
 
+\tableofcontents{}
+
 \chapter{Introduction}
 
 
@@ -224,13 +226,103 @@ In this paper we will construct and email content retrieval benchmark using the 
 % Generative retrieval (GR) is still a novel field and DSI has been mainly used for curated datasets or books, thus it is interesting to explore what else DSI could be used for. To see how well DSI performs on an email dataset, the Enron corpus could be used \cite{klimt2004introducing}. In this research, we explore to what extent DSI can be used to search on the Enron corpus and how well does it compare to BM25. 
 
 \chapter{Related Research}
-For years search relied on exact word matching. BM25 is the flagship method of this and works well on precise word extraction. To increase the likelihood of word matching: normalization, tokenization, stop word removal and stemming is used. This however is not sufficient as it still needs a query to be quite similar to the context of the documents. This problem is often referred to as the sematic gap and is the focus of a lot of active research. 
 
-The first big breakthrough on this was the transformer model \cite{NIPS2017_3f5ee243}. This is a version of a recurrent neural network which takes sentences and attributes weights to the position of the words. This is called attention and allows search on meaning and not exact word matching. These models are also called large language models (LLM). A common used case for LLM's is question and answering, which is very useful for retrieval as it allowed users to specify their question in the users natural language [to intoduction]. The big problem with these types of LLM's is that they hallucinate and are not faithful to sources. Dense vector retrieval solves this issue because it turns text into a one dimensional vector and calculates the similarities between the query and the documents. Although Dense vector retrieval can also use the transformer architecture it stays faitfull to the sources, by only retrieving the relevant doucments and not augmenting them. 
+mian introduction 
 
-The problem in dense vector retrieval is that the indexing and retieval are two seperate tasks. [tay et all] introduced a method where the indexing and the retrieval are trained at the same time, allowing for end to end optimalization. This is called the differentiable search index (DSI) which is part of the generative retrieval domain (GR). SE-DSI [reference y.tang] improves on this as it takes docids and makes them semantic and similar to the index documents it refers to. Using the geometric shape for the input as the output and constraining the retrieval using a tree allows the model to find relevant documents more easily. Even when the model is wrong, the given output is likely to be similar. Because of this, SE-DSI seems to be the most likely fit for our task.
+In this section an overview of the current state of information retrieval is given. Here there will be explained how IR moved from exact word matching to searching using meaning. 
 
-Email datasets have widely been used for the training of spam detection algorithms [find reference] and for studying network relations [find reference]. One of these datasets is the Enron dataset \cite{klimt2004introducing,klimt2004enron, enron_dataset}. Enron was energy company that specialized in oil and gas and filed for bankruptcy in 2001 \cite{BritannicaEnron, FBIEnronCase}. During the investigation this dataset was made public and a cleaned version is publicly available \cite{enron_dataset}. 
+\section{Traditional Information Retrieval}
+
+In this section the techinques that were very domiant and are sometimes still used to day. THese techinques are characterized by their heaving empasis on lexical matching. What unites these techniques is the use of tokenization and normalization. Tokenization is the act of splitting up text into a set unit. A common way to tokenize it to break down a teks into words.
+Part of Normalization is making all words lowercase. Stemming is also part of this pricess and involves casting words to their simplest for i.e. running to run and stop words removal.
+
+\subsection{Inverse Index}
+
+Inverted Index \cite{strathprints2621} is a method that creates a dictionary that saves for every term the documents it is part of. To search for a document, the tokens from the query where input into this dictionary and the intersection of all the documents that contained the tokens was retrieved. 
+
+\subsection{BM25}
+BM25 is a sparse retrieval ranking function that is the industry standard baseline for retrieval tasks. d works well on precise word extraction [source]. The order of words is not important as it uses the bag of words theorem. 
+
+The formula for BM25 \ref{eq:bm25_score} takes query tokens of $Q = {q_1, q_2, ..., q_i}$ to score a given document D.
+
+
+
+
+\begin{equation}
+\label{eq:bm25_score}
+\text{score}(D, Q) = \sum_{i=1}^{n} \text{IDF}(q_i) \cdot \frac{f(q_i, D) \cdot (k_1 + 1)}{f(q_i, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\text{avgdl}}\right)}
+\end{equation}
+
+This method is made up of 3 parts. THe first part is the term frequency, $f(q_i, D)$. This is the amount of times that that a keyword $q_i$ occurs in the given document.
+
+The second parts is the document lenght normalization, $\frac{|D|}{\text{avgdl}}$. This function of this is penalizing large documents, which otherwise would be dominant.
+
+The last part is the inverted document frequency (IDF) \ref{eq:IDF}. This acts as a weight that rewards rarity by calculating how much it occurs in the entire corpus. 
+\begin{equation}
+\label{eq:IDF}
+\text{IDF}(q_i) = \ln\left( \frac{N - n(q_i) + 0.5}{n(q_i) + 0.5} + 1 \right)
+\end{equation}
+
+
+The variable k controls how important the occurence of new words are. Higher term frequency might not have to weight much more then a lower one.
+
+The variable b controls the amount of lenght normalization
+
+The variable k controls how important the occurence of new words are. Higher term frequency might not have to weight much more then a lower one.
+
+The variable b controls the amount of lenght normalization.
+% TODO: explain the variables better
+
+\section{Transformer architecture}
+
+In this section the transformer method is introduced [cite],. This is a method that utilizes position of words and derives meaning form this. The methods discussed in the previous section both suffer form the sematic gap. Which is a problem where the query uses a differnt lexical form to the documents itself. Tranfomers, are a deep neural neworks and cast words into ins latent space, which solves a large part of this problem. The latent space is a term used in deep learning and refers to the hidden parameters tha reside inside of the model and is of a different form then text. Transformer architecture excels at sequence to sequence tasks, which are tasks where the input and the output are sequences. [bert]
+
+These there two types of NLP tasks, holistic and tokenized ones [bert]. The holistic type operates owith text on the sentence level. The tokenized answers question on the attribution entities. 
+ 
+
+% TODO: make this flow better
+
+\subsection{BERT}
+Bert is a deep bi-directional and holistic linguistic model. It uses masked language modeling to train the model. This is where random words are selected and masked and predicted by the model, taking only into account they surrounding context. Bert allows for fine tuning.
+
+\subsection{Dense Retrieval}
+
+
+Dense retrieval method  \cite{karpukhin-etal-2020-dense} replaces sparse retrieval methods like BM25 with a dense embedding based system for open domain question answering. This method uses a tokenizer and dual-encoder frame work which encodes queries into a dense vector representation. The similarity between two passages is calculated by taking the dot product between their  respective vectors \ref{eq:dense_retrieval}.
+
+\begin{equation}
+\text{sim}(q, p) = E_Q(q)^\top E_P(p)
+\label{eq:dense_retrieval}
+\end{equation}
+
+
+\section{Generative Retrieval}
+
+In the previous sections the methods described are what is sometimes called retrieve-then-rank strategiesOn the other hand, generative retrieval integrates the indexing and retrieval into one model. This allows for end to end optimization as the whole task is one differentiable model. It's output is the document identifier (docid) and learns the connection between the documents and the docids.
+
+
+\subsection{DSI}
+
+Differentiable search index is a finetuned transformer [source] which encodes all the trained information of the corpus withing the parameters of the model itself. Beam first search may be used to produce a ranked list of potentially-relevant docids. The indexing and training of the task are done at the same time which allows for end to end optimization. The unique identifiers can be atomic intergers, strings integers or semantically structured string. The semantically structured strings are generated by hierachical clustering and giving names depeding on the cluster the documents are in. 
+
+
+
+\subsection{SE-DSI}
+
+SE-DSI stands for sematic-enhanced differentiable search index and improves over the DSI method by including rehearsal steps and preplacing the unique indentifier with a unique strings derived from the contents of the documet.
+
+
+%
+% The first big breakthrough on this was the transformer model \cite{NIPS2017_3f5ee243}. This is a version of a recurrent neural network which takes sentences and attributes weights to the position of the words. This is called attention and allows search on meaning and not exact word matching. These models are also called large language models (LLM). A common used case for LLM's is question and answering, which is very useful for retrieval as it allowed users to specify their question in the users natural language [to intoduction]. The big problem with these types of LLM's is that they hallucinate and are not faithful to sources. Dense vector retrieval solves this issue because it turns text into a one dimensional vector and calculates the similarities between the query and the documents. Although Dense vector retrieval can also use the transformer architecture it stays faitfull to the sources, by only retrieving the relevant doucments and not augmenting them. 
+%
+% The problem in dense vector retrieval is that the indexing and retieval are two seperate tasks. [tay et all] introduced a method where the indexing and the retrieval are trained at the same time, allowing for end to end optimalization. This is called the differentiable search index (DSI) which is part of the generative retrieval domain (GR). SE-DSI [reference y.tang] improves on this as it takes docids and makes them semantic and similar to the index documents it refers to. Using the geometric shape for the input as the output and constraining the retrieval using a tree allows the model to find relevant documents more easily. Even when the model is wrong, the given output is likely to be similar. Because of this, SE-DSI seems to be the most likely fit for our task.
+
+
+\section{The Enron Corpus}
+
+Enron was an oil and gas company that  was under investigation of the FBI \cite{BritannicaEnron, FBIEnronCase} after it filed for bankruptcy in 2001. Subsequently, during the investigation, the FBI made the emails of mostly Enron's high management avaiable. Later the dataset was bought by MIT and cleaned, because it contained integrity problems. It has been used to study network relations [source]. Also it has been used widely in spam detection. The original version of the dataset is not available anymore as it contained a lot of privacy sensative information. The dataset was re released by mit and in 2016 and is the dataset that will be used in this paper.
+
+% Email datasets have widely been used for the training of spam detection algorithms [find reference] and for studying network relations [find reference]. One of these datasets is the Enron dataset \cite{klimt2004introducing,klimt2004enron, enron_dataset}. Enron was energy company that specialized in oil and gas and filed for bankruptcy in 2001 \cite{BritannicaEnron, FBIEnronCase}. During the investigation this dataset was made public and a cleaned version is publicly available \cite{enron_dataset}. 
 
 \chapter{Methods}
 
@@ -374,10 +466,10 @@ The model was trained similar to \textcite{10.1145/3580305.3599903} with some ad
 \section{Code}
 For training of the model the code of \textcite{zhuang2022dsiqg} was used as a basis. It did need to be adapted to work with the sqlite database used in this research. This code however was made for numerical tokens and not semantic tokens. To solve this problem the code to build the trie was used from \textcite{LI2023103475}. 
 
+\chapter{Experimental Analasys}
+
 \input{../../code/tbls/table_combined.tex}
 \input{../../code/tbls/table_ratios.tex}
-
-\chapter{Experimental Analasys}
 
 The comparison of the baseline with the DSI and impact of data cleaning or data size is shown in  table \ref{tab:combined_results}. This table is split into two tables where the methods used are in the left column. In the top table the thread settings are compared and in the bottom the training size is compared. Besides the methods column, the tables are split into two main columns, corresponding to a dataset, which are under divided into the 4 evaluation metrics, MRR@3, MRR@20, Hits@1 and Hits@10. The ratio between between DSI's performance and BM25 performance is shown in table \ref{tab:ratio_results}
 
@@ -435,7 +527,7 @@ In this paper we show that it is not conclusive if the DSI is a good fit for sea
 \input{../tables/email_noise}
 
 \chapter{Comparison between BM25 and DSI}
-% {\raggedright
-% \input{../../code/tbls.tex}
-% }
+{\raggedright
+\input{../../code/tbls.tex}
+}
 \end{document}
