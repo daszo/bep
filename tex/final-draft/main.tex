@@ -331,7 +331,7 @@ The GR retrieval model, $f_\theta$ follows an encoder-decoder architecture. The 
 The number of emails present after dropping automatically generated folders is \NoFolderLength. This include the inbox folders and sent / sent\_items / outbox. This is a similar number to the cleaned dataset found in \citeauthor{klimt2004enron}. They found a value of 200,399 documents after cleaning. Their different number of selected emails may have been due to their objective to classify the folders that each email belonged to, for which reason they sought only folders created by humans. After cleaning further the number of remaining emails left is \GeneralLength.
 
 [how was the data intially loaded?]
-To use the email bodies, it is important to clean them to reduce the real world noise. Case studies on random samples were conducted to construct regex patterns to clean the data. Headers, emails, websites, phone numbers, signature footers, legal disclaimers and email provider artifacts were removed this way. Email history threads were split and cleaned individually. For the analysis in this section the history threads are kept.  Preliminary experiments showed that email header data creates noise, thus were removed. To generate the queries, the model was told what was the subject and body. This also created noise, though this was kept because of an error and time constraints. For a detailed ablation study comparing raw versus cleaned inputs, see Appendix \ref{app:schema_impact}. Following earlier work on cleaning data \cite{JMLR:v21:20-074}, the emails smaller then 30 words are removed. Also they would be too  small to create queries and docids of.
+To use the email bodies, it is important to clean them to reduce the real world noise. Case studies on random samples were conducted to construct regex patterns to clean the data. Headers, emails, websites, phone numbers, signature footers, legal disclaimers and email provider artifacts were removed this way. Email history threads were split and cleaned individually. For the analysis in this section the history threads are kept.  Preliminary experiments showed that email header data creates noise, thus were removed. We employed input lionization by concatenating the subject and body, utilizing field identifiers. This also created noise, though this was kept for some of the datasets because of an error and time constraints, more detail on this in section \ref{subsec:traingin-set-construction}. For a detailed case study showing the effects email header data and including field identifiers, see Appendix \ref{app:schema_impact}. Following earlier work on cleaning data \cite{JMLR:v21:20-074}, the emails smaller then 30 words are removed. Also they would be too  small to create queries and docids of.
 
 \begin{figure*}[ht!]
     \centering
@@ -392,8 +392,14 @@ When constructing queries it is important that the original words are contained 
 % TODO:[cite package sumsum]
 
 \subsection{Training set construction}
+\label{subsec:traingin-set-construction}
 
 For the history thread dataset \cite{10.1145/3580305.3599903}, a 10k and a 100k subset is used, because and that this size is a reasonable scale for T5 to learn from. For the dataset without history thread only a 10k dataset was used as after dropping email smaller then 30 only 93k emails were left. Per data point 3 data pairs are created. These pairs consist of the Semantic Document Identifier paired with one of the following: email body and subject, the extractive query or the abstractive query \ref{eq:training-set}.
+
+As briefly covered in [ref dataset methods] it was planned to remove the field identifier when applying input linerization for the title generation. Due to an error it only applied to the 10k history thread dataset. See appendix \ref{app:schema_impact} for a more in depth table.
+
+
+
 
 \section{Model training}
  % \cite{NEURIPS2022_892840a6} and your improvement \cite{10.1145/3580305.3599903} or can I just quote that?
@@ -420,10 +426,11 @@ For training, the data set queries were split up in three groups. The first 80\%
 
 \chapter{Experimental Setup}
 
+In this chapter the setup of the experiment is covered. Upon the methods in the previous chapter is expanded.
 
 \section{Baseline Methods}
 
-BM25 vector embedding
+As a baseline method only BM25 is used with the pyserini package \cite{DBLP:conf/sigir/LinMLYPN21}. Because our dataset is simlar to the MS MARCO dataset used in the pyserini paper, those optimized hyperparameters are use. Those are k1 = 0.9 and b = 0.4.
 
 \section{Evaluation metrics}
 For the evaluation metric, the same metrics were used as in \textcite{NEURIPS2022_892840a6} and \textcite{10.1145/3580305.3599903}. These are mean reciprocal rank (MRR) for 3 and 20 and hits at 1 and 10.
@@ -445,11 +452,10 @@ Hits at k is calculated \ref{eq:hits} by taking the mean of all the ranks up to 
 \end{equation}
 
 \section{Implementation details}
-The model was trained similar to \textcite{10.1145/3580305.3599903} with some adjustments made based on what was provided with the code used \cite{zhuang2022dsiqg}. We employed a Transformer-based encoder-decoder architecture for our DSI task, initializing the model with the pre-trained T5-base \cite{JMLR:v21:20-074}. This architecture comprises a hidden size of 768, 12 Transformer layers, and 12 self-attention heads. We use the Adam optimizer with a learning rate of $5e-4$ and a linear warm-up over 100,000 steps. The model is trained for a maximum of 100,000 steps with a global batch size of 64 (32 per device) on two GPUs. The maximum sequence length is set to 32.
-Right before training the emails are truncated to x tokens as the model does not allow more. 
+The model was trained similar to \textcite{10.1145/3580305.3599903} with some adjustments made based on what was provided with the code used \cite{zhuang2022dsiqg}. We employed a Transformer-based encoder-decoder architecture for our DSI task, initializing the model with the pre-trained T5-base \cite{JMLR:v21:20-074}. This architecture comprises a hidden size of 768, 12 Transformer layers, and 12 self-attention heads. We use the Adam optimizer with a learning rate of $5e-4$ and a linear warm-up over 100,000 steps. The model is trained for a maximum of 100,000 steps with a global batch size of 64 (32 per device) on two GPUs. The maximum sequence length is set to 32. Right before training the emails are truncated to x tokens as the model does not allow more. 
 
 \section{Code}
-For training of the model the code of \textcite{zhuang2022dsiqg} was used as a basis. It did need to be adapted to work with the sqlite database used in this research. This code however was made for numerical tokens and not semantic tokens. To solve this problem the code to build the trie was used from \textcite{LI2023103475}. 
+For training of the model the code of \textcite{zhuang2022dsiqg} was used as a basis. It did need to be adapted to work with the sqlite database used in this research. This code however was made for numerical tokens and not semantic tokens. To solve this problem the code to build the trie was used from \textcite{LI2023103475}.
 
 \chapter{Experimental Analyses}
 
@@ -467,40 +473,59 @@ The comparison of the baseline with the DSI and impact of data cleaning or data 
 
 % Also, when cleaning the 10k No Context dataset, less emails were bigger then 93.000
 
-\textbf{Thread settings comparison:} There is a slight better performance between both BM25 and DSI when there is no context on context. This could be explained by the context dataset containing a lot of duplicate email, because the email history is of email addresses also contained in the dataset. When inspecting the ratios context performed a bit better, which could be because the training data contained more words, thus providing more data for the DSI model to learn from.
+\textbf{Thread settings comparison:} Although the thread dataset did not contain the field identifiers there is a slight better performance between both BM25 and DSI when there is no context on context. On the one hand this is surprising because by including the field identifiers, more noise would be present in generating the title generated pseudo queries. On the other hand this could be explained by the context dataset containing a lot of duplicate email, because the email history is of email addresses also contained in the dataset. When inspecting the ratios context performed a bit better, which could be because the training data contained more words, thus providing more data for the DSI model to learn from or because no field identifiers were present.
+
 
 \textbf{Scale comparison:} As shown in \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, we would expect DSI to improve from the 10.000 dataset to the 100.000 dataset. This however is not the case. DSI perfoms significantly worse. 
 
 
-regex cleaning is brittle on natural data. Not all cleaning was succesfull \ref{app:compare}. Even after the research is over, artefacting is still present. A more robust way of cleaning is necessary to continue the use of the dataset for this task. 
-
 
 \chapter{Discussion}
-On the current version of the dataset, DSI performs worse than BM25, which suggests that DSI is a method that is quite sensitive to the dataset and training setup, and this dataset is particularly challenging for it. 
 
-A cause for this could be that this research uses the most direct MLE objective, which models relevance as a binary signal. This dichotomy, takes relevance as binary which might not be representative of real world data contained in the Enron dataset.
+On the current version of the data set, BM25 remains a strong baseline for the Enron corpus, particularly on shorter documents. 
+DSI underperformed significantly compared across all metrics. Which stands in stark contrast to the trends in recent literature [cite], where DSI outperforms sparce retrieval. 
+Including thread history did not significalntly bridge the semantic gap and in the case of the 100k dataset, degraded the performance or introduced noise.
 
-The inclusion of context has the effect that there are a many duplicates of emails, making a lot of emails similar. A score could be given for emails that are contained in the context and are retrieved.
+In previous works DSI was used on Natural Questions or MS MARCO, which are clean encyclopedic texts. Enron is a real world dataset, whcih means that it is noisy and unstructured. This makes it harder to sematically map between the pseudo-queries and the docids. 
+An other cause for DSI poor performance could be that this research uses the most direct MLE objective, which models relevance as a binary signal. This dichotomy, takes relevance as binary which might not be representative of real world data contained in the Enron dataset. This might confuse the model by "near-duplicates" in the training data.
+Further, due to resource limitations the amount of queries generated for training was 2, although earlier works used 10+ [cite], which is less then other works. The datasets that included the field identifiers art enacting for generating the doctoqueries, might have learning to mach noise instead of semantics.
 
-Further, due to resource limitations the amount of queries generated for training was less then other works. Rehearsal content could be added, especially for the context dataset, to increase performance.
+Because there are a lot of similar docids, memorizing the mapping within the model weights becomes more difficult. This could also explain why the performance of the context dataset performed worse, because the history is shared among multiple emails, the docids might have become more similar. 
+Further explanation why the thread was outperformed, might be because of topic drift. The semantic docids, might not have been able to capture the shift form i.e. "meeting on Tuesday" to "budget approval" later in the tread. Also distinct parts of emails might be at the end of the emails or thread losing unique input. 
+Regex cleaning is brittle on natural data. Not all cleaning was successful \ref{app:compare} and artifacting remains. Noise effects neural models disproportionately because they try to learn patterns, whereas BM25 ignorance /noise more easily. 
+In the case the context the comparison is not a true comparison, because they don't have consistent field identifiers. 
 
-To see if the current metods work, a curated Q\&A dataset could be used. Further, to check if the data has potential, a simpler task could used that does for a dichotomy. A task like spam detection, which has done before and was its original use. [reference to spam detection on the enron dataset].
+Because artifacting persisted a more robust way of cleaning is necessary to continue the use of the dataset for this task. To continue the exploration of this dataset with this task, a more robust cleaning strategy is necessary to combat the persisting artifacting . Because the artifacting is caused by real world data, it is inconsistent and it could be interesting to perform the cleaning by Large Language model.
 
-For DSI the context and no context performance was very close, which could because by truncation. To include the important information of the context [tang et all book] an extraction of important information could be done.
+Rehearsal content could be added, especially for the context dataset, to increase performance.
+For DSI the thread and no context performance was very close, which could because by truncation. To include the important information of the context [tang et all book] an extraction of important information could be done.
 
+The inclusion of context has the effect that there are a many duplicates of emails, making a lot of emails similar. A score could be given for emails that are contained in the context and are retrieved. Similarly a score could be given to semantically similar docids or index text, move away form the binary task.
 
-Again because of resource limitations the cleaning of the data was done with regex patterns, which might not have been sufficient, because different users might have different layouts. A more flexible approach like text classification or LLM cleaning would have been a better option if not for resource availability.
+Applying the current method on a curated Q\&A like Natural Questions or the MS MARCO dataset. This could give insight into the efficacy of the used methods. Further, to check if the data has potential, a simpler task could used that works better as a dichotomy. A task like spam detection for instance, which has been done before and was its original use. [reference to spam detection on the Enron dataset].
 
 To generate the doc to queries the model was instructed by including "subject:" or "body:" followed by the subject and body respectively. This cluttered the queries as the doctoquery model was not made to accept instructions. This had the effect that the words subject and body where included often in the queries \ref{app:schema_impact}, because the model might be sensitive to structural patterns. Thus inducing noise. In further work this could be omitted. 
 
 Currently the Context data set uses the whole context for generating the docids and queries. This might induce clutter and might result in very similar docids and queries.
 
-The context dataset might have to many topics, to verify a study could be conducted modeling the topics using LDA or calculating the similarity using dense vector embeddings.
+The context dataset might have had to many topics, to verify a study could be conducted modeling the topics using LDA or calculating the similarity using dense vector embeddings.
 
 An other option for Generative retrieval on the Enron corpus is constructing a model that natively takes in the relationship between emails and users. 
+
+It would also be interesting to see how other baselines perform on the dataset and what the performance increase could be, by optimizing the parameters of BM25
+
+[refer to the appendix]
+
+
 \chapter{Conclusion}
 
-In this paper we show that it is not conclusive if the DSI is a good fit for searching email datasets like the enron corpus. Cleaning has an effect on the performance, but the main impact comes for the method used. BM25 is clear to be better method for this task and we propose investigating adapations to the DSI method.
+This study investigated the efficacy of Generative Retrieval (GR) on the Enron email corpus. It aimed to bridge the semantic gap inherent to lexical models (BM25), by using differential search index (DSI). It did so by creating a solid baseline and varying between history thread and dataset size.
+
+BM25 proved to still be a strong baseline and was a competitive for the Enron corpus. It consistently outperformed DSI, across dataset size and thread context. Suggesting that BM25 is still a strong baseline despite the semantic limitations of lexical matching. 
+
+The DSI model proved highly sensitive to noise and failed to outperform the baseline. Indicating that ...
+
+In this paper we show that it is not conclusive if the DSI is a good fit for searching email datasets like the Enron corpus. Cleaning has an effect on the performance, but the main impact comes for the method used. BM25 is clear to be better method for this task and we propose investigating adaptions to the DSI method.
 
 
 
