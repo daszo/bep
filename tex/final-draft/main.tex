@@ -227,60 +227,41 @@ In this paper we will construct and email content retrieval benchmark using the 
 
 \chapter{Related Research}
 
-mian introduction 
 
-In this section an overview of the current state of information retrieval is given. Here there will be explained how IR moved from exact word matching to searching using meaning. 
+In this chapter just enough overview of the current state of information retrieval is given.Here there will be explained how IR moved from exact word matching to end to end optimizing a search engine. 
 
 \section{Traditional Information Retrieval}
 
-In this section the techinques that were very domiant and are sometimes still used to day. THese techinques are characterized by their heaving empasis on lexical matching. What unites these techniques is the use of tokenization and normalization. Tokenization is the act of splitting up text into a set unit. A common way to tokenize it to break down a teks into words.
-Part of Normalization is making all words lowercase. Stemming is also part of this pricess and involves casting words to their simplest for i.e. running to run and stop words removal.
+Some of the traditional techniques are sometimes still used to day. These techniques are characterized by their heaving emphasis on lexical matching. What unites these techniques is the use of tokenization and normalization. Tokenization is the act of splitting up text into a set unit. A common way for these techniques to tokenize it to break down a text into words. Part of Normalization is making all words lowercase. Stemming is also part of this practice and involves casting words to their simplest for i.e. running to run, and stop words removal.
 
 \subsection{Inverse Index}
 
-Inverted Index \cite{strathprints2621} is a method that creates a dictionary that saves for every term the documents it is part of. To search for a document, the tokens from the query where input into this dictionary and the intersection of all the documents that contained the tokens was retrieved. 
+Inverted Index \cite{strathprints2621} is a method that creates a dictionary that saves for every term the documents it is apart of. This is done to circumvent the problem of sparse vectors and thus save memory. To search for a document, the tokens from the query where input into this dictionary and the intersection of all the documents that contained the tokens was retrieved. 
 
 \subsection{BM25}
-BM25 is a sparse retrieval ranking function that is the industry standard baseline for retrieval tasks. d works well on precise word extraction [source]. The order of words is not important as it uses the bag of words theorem. 
+BM25 is a sparse retrieval ranking function [source] that is the industry standard baseline for retrieval tasks. It excels well on lexical matching, which is also it's weakness . The order of words is not important as it uses the bag of words theorem. 
 
 The formula for BM25 \ref{eq:bm25_score} takes query tokens of $Q = {q_1, q_2, ..., q_i}$ to score a given document D.
-
-
-
 
 \begin{equation}
 \label{eq:bm25_score}
 \text{score}(D, Q) = \sum_{i=1}^{n} \text{IDF}(q_i) \cdot \frac{f(q_i, D) \cdot (k_1 + 1)}{f(q_i, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\text{avgdl}}\right)}
 \end{equation}
 
-This method is made up of 3 parts. THe first part is the term frequency, $f(q_i, D)$. This is the amount of times that that a keyword $q_i$ occurs in the given document.
-
-The second parts is the document lenght normalization, $\frac{|D|}{\text{avgdl}}$. This function of this is penalizing large documents, which otherwise would be dominant.
-
-The last part is the inverted document frequency (IDF) \ref{eq:IDF}. This acts as a weight that rewards rarity by calculating how much it occurs in the entire corpus. 
+This method is made up of 3 parts. The first part is the term frequency, $f(q_i, D)$. This is the amount of times that that a keyword $q_i$ occurs in the given document. The second parts is the document length normalization, $\frac{|D|}{\text{avgdl}}$. This function of this is penalizing large documents, which otherwise would be dominant. The last part is the inverted document frequency (IDF) \ref{eq:IDF}. This acts as a weight that rewards rarity by calculating how much it occurs in the entire corpus. 
 \begin{equation}
 \label{eq:IDF}
 \text{IDF}(q_i) = \ln\left( \frac{N - n(q_i) + 0.5}{n(q_i) + 0.5} + 1 \right)
 \end{equation}
 
+The variables k an b are hyper parameters and control the weight of the term frequency and the length normalization respectively
 
-The variable k controls how important the occurence of new words are. Higher term frequency might not have to weight much more then a lower one.
-
-The variable b controls the amount of lenght normalization
-
-The variable k controls how important the occurence of new words are. Higher term frequency might not have to weight much more then a lower one.
-
-The variable b controls the amount of lenght normalization.
-% TODO: explain the variables better
 
 \section{Transformer architecture}
+The methods discussed in the previous section both suffer form the semantic gap. Which is a problem where the query uses a differnt lexical form to the documents itself. The transformer architecture [cite] aims to solve this problem. This is a method that utilizes position of words and derives meaning form this. Tranfomers, are a deep neural network and cast words into ins latent space, which solves a large part of the semantic gap. The latent space is a term used in deep learning and refers to the hidden parameters that reside inside of the model and is of a different form then text. Transformer architecture excels at sequence to sequence tasks, which are tasks where the input and the output are sequences. [bert]
 
-In this section the transformer method is introduced [cite],. This is a method that utilizes position of words and derives meaning form this. The methods discussed in the previous section both suffer form the sematic gap. Which is a problem where the query uses a differnt lexical form to the documents itself. Tranfomers, are a deep neural neworks and cast words into ins latent space, which solves a large part of this problem. The latent space is a term used in deep learning and refers to the hidden parameters tha reside inside of the model and is of a different form then text. Transformer architecture excels at sequence to sequence tasks, which are tasks where the input and the output are sequences. [bert]
+These there two types of NLP tasks, holistic and tokenized ones [bert]. The holistic type operates with text on the sentence level. The tokenized answers questions and attribution of entities.
 
-These there two types of NLP tasks, holistic and tokenized ones [bert]. The holistic type operates owith text on the sentence level. The tokenized answers question on the attribution entities. 
- 
-
-% TODO: make this flow better
 
 \subsection{BERT}
 Bert is a deep bi-directional and holistic linguistic model. It uses masked language modeling to train the model. This is where random words are selected and masked and predicted by the model, taking only into account they surrounding context. Bert allows for fine tuning.
@@ -298,7 +279,7 @@ Dense retrieval method  \cite{karpukhin-etal-2020-dense} replaces sparse retriev
 
 \section{Generative Retrieval}
 
-In the previous sections the methods described are what is sometimes called retrieve-then-rank strategiesOn the other hand, generative retrieval integrates the indexing and retrieval into one model. This allows for end to end optimization as the whole task is one differentiable model. It's output is the document identifier (docid) and learns the connection between the documents and the docids.
+In the previous sections the methods described are what is sometimes called retrieve-then-rank strategies [cite dsi]. On the other hand, generative retrieval integrates the indexing and retrieval into one model. This allows for end to end optimization as the whole task is one differentiable model. It's output is the document identifier (docid) and learns the connection between the documents and the docids.
 
 
 \subsection{DSI}
@@ -309,8 +290,11 @@ Differentiable search index is a finetuned transformer [source] which encodes al
 
 \subsection{SE-DSI}
 
-SE-DSI stands for sematic-enhanced differentiable search index and improves over the DSI method by including rehearsal steps and preplacing the unique indentifier with a unique strings derived from the contents of the documet.
+% A problem that arises with DSI is that there is a difference in data distribution \cite{2022arXiv220610128Z}. The indexing data and the docids are of different length. To combat this problem, pseudo-queries are generated of the original text and used instead. 
+SE-DSI stands for semantic-enhanced differentiable search index \cite{10.1145/3580305.3599903} and improves over the DSI method by including rehearsal steps and replacing the docids with a unique strings derived from the contents of the document call the elaborative description. Now that the input and output the model can use it's understanding of words to map queries better to the docids.
 
+
+% TODO: this is still a little bare. The individual techniques should have a bit more depth.
 
 %
 % The first big breakthrough on this was the transformer model \cite{NIPS2017_3f5ee243}. This is a version of a recurrent neural network which takes sentences and attributes weights to the position of the words. This is called attention and allows search on meaning and not exact word matching. These models are also called large language models (LLM). A common used case for LLM's is question and answering, which is very useful for retrieval as it allowed users to specify their question in the users natural language [to intoduction]. The big problem with these types of LLM's is that they hallucinate and are not faithful to sources. Dense vector retrieval solves this issue because it turns text into a one dimensional vector and calculates the similarities between the query and the documents. Although Dense vector retrieval can also use the transformer architecture it stays faitfull to the sources, by only retrieving the relevant doucments and not augmenting them. 
@@ -324,6 +308,8 @@ Enron was an oil and gas company that  was under investigation of the FBI \cite{
 
 % Email datasets have widely been used for the training of spam detection algorithms [find reference] and for studying network relations [find reference]. One of these datasets is the Enron dataset \cite{klimt2004introducing,klimt2004enron, enron_dataset}. Enron was energy company that specialized in oil and gas and filed for bankruptcy in 2001 \cite{BritannicaEnron, FBIEnronCase}. During the investigation this dataset was made public and a cleaned version is publicly available \cite{enron_dataset}. 
 
+
+% TODO: add more citations
 \chapter{Methods}
 
 \section{Task Definition}
@@ -337,17 +323,15 @@ To do this, a training set is construction $\mathcal{T}$, this is defined as the
   \mathcal{T} = \{(d,y_d) | d \in \mathcal{D} \} \cup \{(q, y_q) | q \in \mathcal{Q}\}
   \label{eq:training-set}
 \end{equation}
-Where $y_d \in \mathcal{Y}$ is the unique identifier assigned to document d and $y_q \in \mathcal{Q}$ is the unique identifier assigned to document q.
+Where $y_d$ is the unique identifier assigned to document $d \in \mathcal{D}$ and $y_q$ is the unique identifier assigned to query $q \in \mathcal{Q}$.
 
-The GR retrieval model, $f_\theta$ follows an encoder-decoder architecture. The encoder encodes the query q or the email document d and generates the unique document identifier y.
+The GR retrieval model, $f_\theta$ follows an encoder-decoder architecture. The encoder encodes the query $q$ or the email document $d$ and generates the unique document identifier $y$.
 
 \section{Dataset}
-The datalanalys is done before truncating the emails.
-The number of emails present after dropping automatically generated folders is \NoFolderLength. This include the inbox folders and sent / sent\_items / outbox. This is a similar number to the cleaned dataset found in \citeauthor{klimt2004enron}. They found a value of 200,399 documents after cleaning. Their different number of selected emails may have been due to their objective to classify the folders that each email belonged to, for which reason they sought only folders created by humans. 
+The number of emails present after dropping automatically generated folders is \NoFolderLength. This include the inbox folders and sent / sent\_items / outbox. This is a similar number to the cleaned dataset found in \citeauthor{klimt2004enron}. They found a value of 200,399 documents after cleaning. Their different number of selected emails may have been due to their objective to classify the folders that each email belonged to, for which reason they sought only folders created by humans. After cleaning further the number of remaining emails left is \GeneralLength.
 
-After cleaning further the number of remaining emails left is \GeneralLength. 
-
-To clean the bodies of the emails, it is imperative to remove the extra syntax that email providers like outlook enter automatically. Preliminary experiments showed that retaining schema tags introduced significant noise. For a detailed ablation study comparing raw versus cleaned inputs, see Appendix \ref{app:schema_impact}. Also, messages smaller then 20 words are removed as they are to small to create queries and docids of.
+[how was the data intially loaded?]
+To use the email bodies, it is important to clean them to reduce the real world noise. Case studies on random samples were conducted to construct regex patterns to clean the data. Headers, emails, websites, phone numbers, signature footers, legal disclaimers and email provider artifacts were removed this way. Email history threads were split and cleaned individually. For the analysis in this section the history threads are kept.  Preliminary experiments showed that email header data creates noise, thus were removed. To generate the queries, the model was told what was the subject and body. This also created noise, though this was kept because of an error and time constraints. For a detailed ablation study comparing raw versus cleaned inputs, see Appendix \ref{app:schema_impact}. Following earlier work on cleaning data \cite{JMLR:v21:20-074}, the emails smaller then 30 words are removed. Also they would be too  small to create queries and docids of.
 
 \begin{figure*}[ht!]
     \centering
@@ -386,53 +370,53 @@ To clean the bodies of the emails, it is imperative to remove the extra syntax t
 \end{figure*}
 
 
-For the word count the Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_box_plot} is substantially larger than the Median \wordMedian{} which indicates that this is not a normal distribution. This becomes clearer when comparing the Q3 \wordQthree{} to the Max value \wordMax{}. The substantial gap explains the size of the mean. The same is applicable to the character count.  (TODO: add the skewness of the )
+For the word count the Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and \ref{fig:wrd_box_plot} is substantially larger than the Median \wordMedian{} which indicates that this is not a normal distribution. This becomes clearer when comparing the Q3 \wordQthree{} to the Max value \wordMax{}. The substantial gap explains the size of the mean. The same is applicable to the character count.
 
-To determine if the subjects of the emails have any similarity to their respective bodies a sentence transformer will be used to calculate the embedding and the cosine similarity will be computed. In the process of calculating the cosine similarity the dot product of the subject and body embeddings is taken and the distribution is plotted in figure \ref{fig:similarities}. Although the distribution is unimodal, it is not a perfect bell curve. This is also apparent when looking at the Skewness which is a negative skew of \similaritiesSkewness. It is clear that the subjects and the bodies are very similar.
+To determine if the subjects of the emails have any similarity to their respective bodies a sentence transformer [source sentence transformer] has been used to calculate the embedding and the cosine similarity has be computed. In the process of calculating the cosine similarity [source cosine sim] the dot product of the subject and body embeddings is taken and the distribution is plotted in figure \ref{fig:similarities}. Although the distribution is unimodal, it is not a perfect bell curve. This is also apparent when looking at the Skewness which is a negative skew of \similaritiesSkewness making it clear that the subjects and the bodies are very similar.
 
 \section{Generating labels}
-To train the model without manual labels, we construct training data solely on the email content and email subject itself, including email identifiers and pseudo queries.
+To train the model without manual labels, we constructed training data solely on the email content and email subject itself. With this process we create the docids and pseudo queries.
+
 
 
 \subsection{Email ID construction}
-Identifiers should capture the essence of the mail while remaining compact. Following \textcite{10.1145/3690624.3709435}, we use text rank to extract key words of interest from the emails bodies. These keywords will server as IDs. Text rank is a graph based ranking system that scores text units, like words or sentences, based on their co-occurence or similarity respectively and selects the best text units using Page Rank \cite{ilprints422}.
+Identifiers should capture the essence of the mail while remaining compact. Following \textcite{10.1145/3690624.3709435}, we use text rank to extract key words of interest from the emails bodies. These keywords will server as docids. Text rank is a graph based ranking system that scores text units, like words or sentences, based on their co-occurence or similarity respectively and selects the best text units using Page Rank \cite{ilprints422}.
 
-A problem that arose is that text rank generates ids that are not always unique. In line with  \textcite{10.1145/3580305.3599903}, this issue was ignored because duplicate ids are for emails that are similar in contents.
+A problem that arose is that text rank generates docids that are not always unique. It is standard to ignore this issue \cite{10.1145/3580305.3599903}, because duplicate docids are for emails that are similar in contents anyway.
+
+% TODO:[cite package sumsum]
 
 \subsection{Pseudo-query construction}
-When constructing queries it is important that the original words are contained but also cover the essence of the email. Which is why we use an extractve method and an abstractive method is construction. Textrank was employed to extract the most important sentence as pseudo query. For the abstractive query construction method the t5-headline transformer model \cite{pleban2020t5headline} was used for summarizing the email bodies. When textrank was empty the mail was truncated to 15 words and used instead.
+When constructing queries it is important that the original words are contained but also cover the essence of the email. Which is why we use an extractve method and an abstractive method in constructing the pseudo-queries. Textrank was employed to extract the most important sentence as pseudo-query. For the abstractive query construction method the t5-headline transformer model \cite{pleban2020t5headline} was used for summarizing the email bodies. When textrank was empty the mail was truncated to 15 words and used instead. [How is textrank empty]
 
+% TODO:[cite package sumsum]
 
 \subsection{Training set construction}
 
-Following \cite{10.1145/3580305.3599903}, a 10k subset is used, and that this size is a reasonable scale for T5 to learn from. Per data point 3 data pairs are created. These pairs consist of the Semantic Document Identifier paired with one of the following: email body and subject, the extractive query or the abstractive query.
+For the history thread dataset \cite{10.1145/3580305.3599903}, a 10k and a 100k subset is used, because and that this size is a reasonable scale for T5 to learn from. For the dataset without history thread only a 10k dataset was used as after dropping email smaller then 30 only 93k emails were left. Per data point 3 data pairs are created. These pairs consist of the Semantic Document Identifier paired with one of the following: email body and subject, the extractive query or the abstractive query \ref{eq:training-set}.
 
 \section{Model training}
-Question: do I comment on the improvements between the original DSI paper \cite{NEURIPS2022_892840a6} and your improvement \cite{10.1145/3580305.3599903} or can I just quote that?
-As specified in \cref{subsec:task-definition} $f_\theta$ is a GR model with the encoder decoder architecture. For this the T5 model was chosen because that is the standard used in previous works \cite{NEURIPS2022_892840a6}\cite{10.1145/3580305.3599903}. The training of the model is a joint mode of two parts i.e., indexing and the retrieval in an end to end way.\\
-\textbf{Indexing:} This step is for memorizing information about the email documents, \textcite{NEURIPS2022_892840a6} takes a document and maps it to an unique document identifier.
+ % \cite{NEURIPS2022_892840a6} and your improvement \cite{10.1145/3580305.3599903} or can I just quote that?
+As specified in \cref{subsec:task-definition} $f_\theta$ is a GR model with the encoder decoder architecture. For this the T5 model was chosen because that is the standard used in previous works \cite{NEURIPS2022_892840a6}\cite{10.1145/3580305.3599903}. The training of the model is a joint mode of two parts i.e., indexing and the retrieval in an end to end way.
+\textbf{Indexing:} This step is for memorizing information about the email documents, document are mapped to an docid \cite{NEURIPS2022_892840a6}.
 
 \begin{equation}
   \mathcal{L}_{Indexing}{(\theta)} = \displaystyle\sum_{d_i \in \mathcal{D}} log P(y | T5_{\theta}(d_i))
   \label{eq:indexing-los}
 \end{equation}
 
-While \textcite{NEURIPS2022_892840a6} use only numerical ids \textcite{10.1145/3580305.3599903} use Elaborative Descriptions as the identifier. 
+% While \textcite{NEURIPS2022_892840a6} use only numerical ids \textcite{10.1145/3580305.3599903} use Elaborative Descriptions as the identifier. 
 
-\textbf{Retrieval:} Given a query $q \in \mathcal{Q}$, the DSI model outputs the relevant document identifier y. For this the T5 model, previously fine tuned for indexing, is trained on the query-id pair.
-
-
+\textbf{Retrieval:} Given a query $q \in \mathcal{Q}$, the DSI model outputs the relevant document identifier $y$. For this the T5 model, previously fine tuned for indexing, is trained on the query-id pair.
 
 \begin{equation}
   \mathcal{L}_{Retrieval}{(\theta)} = \displaystyle\sum_{d_i \in \mathcal{D}} log P(y | T5_{\theta}(d_i))
   \label{eq:retrieval-loss}
 \end{equation}
 
-For training the model, \textcite{10.1145/3580305.3599903} used top 10 greedy beam first search to help the model find a valid document identifier. This has also been used in this research. This works because a trie has been build using the unique document identifiers and guides the model to the right answers. For every word it generates, it predicts for every possible word the probability that it is that word. From that list, only the words that are in the trie are selected and the 10 highest probability are kept. For every consecutive the current probability is summed with the new word. At some point the trie ends and then the 10 most probable are ranked acordingly and scored.
+For training the model, \cite{10.1145/3580305.3599903,NEURIPS2022_892840a6} a top 10 greedy beam first search is used to help the model find a valid document identifier. This works because a trie has been build using the docids and guides the model to the right answers. For every token it generates, it predicts for every possible token the probability that it is that token. From that list, only the tokens that are in the trie are selected and the 10 highest probability are kept. For every consecutive token the current probability is summed with the new token. At some point the trie ends and then the 10 most probable are ranked accordingly and scored.
 
-For training, the data set queries were split up in three groups. The first 80\% was reserved for training and then 10\% for both validating and testing. The email bodies were exclusively reserved for training, because they serve only for learning the model what each unique document identifier means.
-
-The data was truncated before training to x amount of tokens.
+For training, the data set queries were split up in three groups. The first 80\% was reserved for training and then 10\% for both validating and testing. It was made sure that the queries of the validation and testings set were not of the same email. This was done to ensure that the model has seen at least one example of the retrieval task. The email bodies were exclusively reserved for training, because they serve only for learning the model what each unique document identifier means. 
 
 \chapter{Experimental Setup}
 
@@ -462,11 +446,12 @@ Hits at k is calculated \ref{eq:hits} by taking the mean of all the ranks up to 
 
 \section{Implementation details}
 The model was trained similar to \textcite{10.1145/3580305.3599903} with some adjustments made based on what was provided with the code used \cite{zhuang2022dsiqg}. We employed a Transformer-based encoder-decoder architecture for our DSI task, initializing the model with the pre-trained T5-base \cite{JMLR:v21:20-074}. This architecture comprises a hidden size of 768, 12 Transformer layers, and 12 self-attention heads. We use the Adam optimizer with a learning rate of $5e-4$ and a linear warm-up over 100,000 steps. The model is trained for a maximum of 100,000 steps with a global batch size of 64 (32 per device) on two GPUs. The maximum sequence length is set to 32.
+Right before training the emails are truncated to x tokens as the model does not allow more. 
 
 \section{Code}
 For training of the model the code of \textcite{zhuang2022dsiqg} was used as a basis. It did need to be adapted to work with the sqlite database used in this research. This code however was made for numerical tokens and not semantic tokens. To solve this problem the code to build the trie was used from \textcite{LI2023103475}. 
 
-\chapter{Experimental Analasys}
+\chapter{Experimental Analyses}
 
 \input{../../code/tbls/table_combined.tex}
 \input{../../code/tbls/table_ratios.tex}
@@ -485,6 +470,9 @@ The comparison of the baseline with the DSI and impact of data cleaning or data 
 \textbf{Thread settings comparison:} There is a slight better performance between both BM25 and DSI when there is no context on context. This could be explained by the context dataset containing a lot of duplicate email, because the email history is of email addresses also contained in the dataset. When inspecting the ratios context performed a bit better, which could be because the training data contained more words, thus providing more data for the DSI model to learn from.
 
 \textbf{Scale comparison:} As shown in \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, we would expect DSI to improve from the 10.000 dataset to the 100.000 dataset. This however is not the case. DSI perfoms significantly worse. 
+
+
+regex cleaning is brittle on natural data. Not all cleaning was succesfull \ref{app:compare}. Even after the research is over, artefacting is still present. A more robust way of cleaning is necessary to continue the use of the dataset for this task. 
 
 
 \chapter{Discussion}
@@ -527,6 +515,7 @@ In this paper we show that it is not conclusive if the DSI is a good fit for sea
 \input{../tables/email_noise}
 
 \chapter{Comparison between BM25 and DSI}
+\label{app:compare}
 {\raggedright
 \input{../../code/tbls.tex}
 }
