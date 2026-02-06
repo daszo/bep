@@ -204,13 +204,13 @@ Science Park 900\\
 
 Email is to this day a widely used communication medium, yet it consumes a disproportionate time of users day. While surveys often estimate email usage at over three hours per day \cite{Adobe2019}, empirical logging studies reveal that knowledge workers spend approximately 1.5 hours of actual focused time on email daily, checking their inboxes an average of 77 times per day \cite{inproceedings} This is why retrieving relevant past messages is a common and challenging task. The nature of email content is noisy and unstructured, with long threads, quoted replies, inconsistent formatting, and other artifacts that does not contribute to its meaning, making content-based search difficult. We validate our results using the Enron Corpus, which remains the de facto standard benchmark for open-source email analysis.
 
-Currently the most used method is BM25 \cite{INR-019}, which uses term frequency and inverse document frequency to score and rank documents based on query content. BM25 remains a strong baseline in many text retrieval tasks due to its simplicity, interpretability and robust performance, representing strong improvement over prior work. These earlier methods have often relied on lexical matching and indexing approaches, such as the vector space model,for ranking content \cite{strathprints2621}. However, even though words do not have to match exactly, BM25 still suffers from the same semantic gap, which necessitates the presence of the same keywords in the emails as in the search query
+Currently the most used method for email search is BM25 \cite{INR-019}, which uses term frequency and inverse document frequency to score and rank documents based on query content. BM25 remains a strong baseline in many text retrieval tasks due to its simplicity, interpretability and robust performance, representing strong improvement over prior work. These earlier methods have often relied on lexical matching and indexing approaches, such as the vector space model, for ranking content \cite{strathprints2621}. However, even though words do not have to match exactly, BM25 still suffers from the same semantic gap, which necessitates the presence of the same keywords in the emails as in the search query
 
-Recently, natural language processing (NLP) has seen developments in pretrained language models. Generative retrieval has emerged as a new paradigm that directly generates docuemnt identifiers or representations based on query semantics rather than relying purely on lexical overlap. While generative retrieval shows promise in general IR benchmarks, its performance on noisy, real-world email content has not been systematically evaluated.
+More recently, natural language processing (NLP) has seen developments in pretrained language models (LM). Generative retrieval (GR) has emerged as a new paradigm that directly generates document identifiers (docids) or representations based on query semantics rather than relying purely on lexical overlap. While generative retrieval shows promise in general information retrieval (IR) benchmarks, its performance on noisy, real-world email content has not been systematically evaluated.
 
 \noindent Research questions:
 \begin{enumerate}
-  \item To what extend can email retrieval performance be imporoved by moving away for lexical matching to a generative approach, and what role does thread history play in bridging the semantic gap?
+  \item To what extend can email retrieval performance be improved by moving away for lexical matching to a generative approach, and what role does thread history play in bridging the semantic gap?
   \begin{enumerate}
     \item How effective is BM25 for email content retrieval on the Enron corpus?
     \item How does generative retrieval compare with BM25 in this task?
@@ -219,7 +219,7 @@ Recently, natural language processing (NLP) has seen developments in pretrained 
 \end{enumerate}
 
 
-In this paper we will construct and email content retrieval benchmark using the enron corpus with both threaded and non-threaded text variants, to identify the impact of conversation history. We first establish a lexical baseline using BM25, followed by the implementation and evaluation of a generative retrieval method. This study will conclude with a comparative analysis, providing qualitative results and qualitative insights into the retrieval behaviors and performance disparities between the generative and lexical approaches. 
+In this paper we will construct and email content retrieval benchmark using the Enron corpus with both threaded and non-threaded text variants, to identify the impact of conversation history. We first establish a lexical baseline using BM25, followed by the implementation and evaluation of a generative retrieval method. This study will conclude with a comparative analysis, providing qualitative results and qualitative insights into the retrieval behaviors and performance disparities between the generative and lexical approaches. 
 %
 % A perpetual problem of searching through emails is the semantic mismatch problem. This causes a lot of searching time when users search through their emails. Currently the most used searching method is BM25 \cite{INR-019} and it searches using word matching. This is not sufficient as it still needs a query to be quite similar to the contents of the documents. It would be better if users could ask question and the meaning of such questions would be used for searching. An improvement on this is dense vector retrieval \cite{karpukhin-etal-2020-dense}. This turns text into a one dimensional vector and calculates the similarities between the query and the documents. This works better as users may now ask question in language that comes natural to them, but has the problem of not being end to end differential. To solve this \textcite{NEURIPS2022_892840a6} proposed a generative method called the differentable search index (DSI) turning indexing and task training into one optimizable step. 
 %
@@ -228,7 +228,9 @@ In this paper we will construct and email content retrieval benchmark using the 
 \chapter{Related Research}
 
 
-In this chapter just enough overview of the current state of information retrieval is given.Here there will be explained how IR moved from exact word matching to end to end optimizing a search engine. 
+In this chapter just enough overview of the current state of information retrieval is given. First the traditional IR methods that focus on spare retrial, lexical matching and bag of words such as inverse index [cite] and BM25 [cite]. After that transformer model are introduced, which due to their size are often referd to as large language models (LLMs) such as BERT [cite] and Dense Retrieval [cite]. Here after, GR is covered, due to these being the focus of this paper they get a separate section, even though these models do also contain the transformer architecture. Finally the email dataset, the Enron corpus [cite], is introduced together with an other popular email dataset, avocado dataset [cite]
+
+% TODO: this might be too long
 
 \section{Traditional Information Retrieval}
 
@@ -248,17 +250,17 @@ The formula for BM25 \ref{eq:bm25_score} takes query tokens of $Q = {q_1, q_2, .
 \text{score}(D, Q) = \sum_{i=1}^{n} \text{IDF}(q_i) \cdot \frac{f(q_i, D) \cdot (k_1 + 1)}{f(q_i, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\text{avgdl}}\right)}
 \end{equation}
 
-This method is made up of 3 parts. The first part is the term frequency, $f(q_i, D)$. This is the amount of times that that a keyword $q_i$ occurs in the given document. The second parts is the document length normalization, $\frac{|D|}{\text{avgdl}}$. This function of this is penalizing large documents, which otherwise would be dominant. The last part is the inverted document frequency (IDF) \ref{eq:IDF}. This acts as a weight that rewards rarity by calculating how much it occurs in the entire corpus. 
+This method is made up of 3 parts. The first part is the term frequency, $f(q_i, D)$. This is the amount of times that that a keyword $q_i$ occurs in the given document. The second parts is the document length normalization, $\frac{|D|}{\text{avgdl}}$. This function of this is penalizing large documents, which otherwise would be dominant. The last part is the inverted document frequency (IDF) \ref{eq:IDF}. This acts as a weight that rewards rarity by calculating how much it occurs in the entire corpus. Here the $N$ stands for the amount of documents inside of the corpus and $n(q_i)$ stands for the amount do documents that contain a query $q_i$.  
 \begin{equation}
 \label{eq:IDF}
 \text{IDF}(q_i) = \ln\left( \frac{N - n(q_i) + 0.5}{n(q_i) + 0.5} + 1 \right)
 \end{equation}
 
-The variables k an b are hyper parameters and control the weight of the term frequency and the length normalization respectively
+The variables k an b are hyper parameters and can be optimized. They control the weight of the term frequency and the length normalization respectively.
 
 
 \section{Transformer architecture}
-The methods discussed in the previous section both suffer form the semantic gap. Which is a problem where the query uses a differnt lexical form to the documents itself. The transformer architecture [cite] aims to solve this problem. This is a method that utilizes position of words and derives meaning form this. Tranfomers, are a deep neural network and cast words into ins latent space, which solves a large part of the semantic gap. The latent space is a term used in deep learning and refers to the hidden parameters that reside inside of the model and is of a different form then text. Transformer architecture excels at sequence to sequence tasks, which are tasks where the input and the output are sequences. [bert]
+The methods discussed in the previous section both suffer form the semantic gap. Which is a problem where the query uses a different lexical form to the documents itself. The transformer architecture [cite] aims to solve this problem. This is a method that utilizes position of words and derives meaning form this. Transformers, are a deep neural network and cast words into ins latent space, which solves a large part of the semantic gap. [mention the geometry?] The latent space is a term used in deep learning and refers to the hidden parameters that reside inside of the model and is of a different form then text. Transformer architecture excels at sequence to sequence tasks, which are tasks where the input and the output are sequences. [bert]
 
 These there two types of NLP tasks, holistic and tokenized ones [bert]. The holistic type operates with text on the sentence level. The tokenized answers questions and attribution of entities.
 
@@ -330,7 +332,6 @@ The GR retrieval model, $f_\theta$ follows an encoder-decoder architecture. The 
 \section{Dataset}
 The number of emails present after dropping automatically generated folders is \NoFolderLength. This include the inbox folders and sent / sent\_items / outbox. This is a similar number to the cleaned dataset found in \citeauthor{klimt2004enron}. They found a value of 200,399 documents after cleaning. Their different number of selected emails may have been due to their objective to classify the folders that each email belonged to, for which reason they sought only folders created by humans. After cleaning further the number of remaining emails left is \GeneralLength.
 
-[how was the data intially loaded?]
 To use the email bodies, it is important to clean them to reduce the real world noise. Case studies on random samples were conducted to construct regex patterns to clean the data. Headers, emails, websites, phone numbers, signature footers, legal disclaimers and email provider artifacts were removed this way. Email history threads were split and cleaned individually. For the analysis in this section the history threads are kept.  Preliminary experiments showed that email header data creates noise, thus were removed. We employed input lionization by concatenating the subject and body, utilizing field identifiers. This also created noise, though this was kept for some of the datasets because of an error and time constraints, more detail on this in section \ref{subsec:traingin-set-construction}. For a detailed case study showing the effects email header data and including field identifiers, see Appendix \ref{app:schema_impact}. Following earlier work on cleaning data \cite{JMLR:v21:20-074}, the emails smaller then 30 words are removed. Also they would be too  small to create queries and docids of.
 
 \begin{figure*}[ht!]
@@ -387,7 +388,7 @@ A problem that arose is that text rank generates docids that are not always uniq
 % TODO:[cite package sumsum]
 
 \subsection{Pseudo-query construction}
-When constructing queries it is important that the original words are contained but also cover the essence of the email. Which is why we use an extractve method and an abstractive method in constructing the pseudo-queries. Textrank was employed to extract the most important sentence as pseudo-query. For the abstractive query construction method the t5-headline transformer model \cite{pleban2020t5headline} was used for summarizing the email bodies. When textrank was empty the mail was truncated to 15 words and used instead. [How is textrank empty]
+When constructing queries it is important that the original words are contained but also cover the essence of the email. Which is why we use an extractve method and an abstractive method in constructing the pseudo-queries. Textrank was employed to extract the most important sentence as pseudo-query. For the abstractive query construction method an LLM was used for summarizing the email bodies. When textrank was empty the mail was truncated to 15 words and used instead. [How is textrank empty]
 
 % TODO:[cite package sumsum]
 
@@ -454,8 +455,12 @@ Hits at k is calculated \ref{eq:hits} by taking the mean of all the ranks up to 
 \section{Implementation details}
 The model was trained similar to \textcite{10.1145/3580305.3599903} with some adjustments made based on what was provided with the code used \cite{zhuang2022dsiqg}. We employed a Transformer-based encoder-decoder architecture for our DSI task, initializing the model with the pre-trained T5-base \cite{JMLR:v21:20-074}. This architecture comprises a hidden size of 768, 12 Transformer layers, and 12 self-attention heads. We use the Adam optimizer with a learning rate of $5e-4$ and a linear warm-up over 100,000 steps. The model is trained for a maximum of 100,000 steps with a global batch size of 64 (32 per device) on two GPUs. The maximum sequence length is set to 32. Right before training the emails are truncated to x tokens as the model does not allow more. 
 
-\section{Code}
-For training of the model the code of \textcite{zhuang2022dsiqg} was used as a basis. It did need to be adapted to work with the sqlite database used in this research. This code however was made for numerical tokens and not semantic tokens. To solve this problem the code to build the trie was used from \textcite{LI2023103475}.
+For generating the pseudo queries the t5-headline transformer model \cite{pleban2020t5headline} was used to generate abstractive summaries of the email. For the pseudo query generation and docid generation the 'summa' packages was used to perform text-rank \cite{barrios2016variationssimilarityfunctiontextrank}. 
+
+For training of the model the DSI-QG repository \cite{zhuang2022dsiqg} was used as a basis. It did need to be adapted to work with the sqlite database used in this research. This code however was made for numerical tokens and not semantic tokens. To solve this problem the code to build the trie was used from \textcite{LI2023103475}.
+
+
+We we implemented our models using PyTorch [cite] and the Hugging Face transformers [cite] library. To load the T5 we utilized Hugging face and we tracked performance using Weights \& Biases [cite]. 
 
 \chapter{Experimental Analyses}
 
@@ -512,9 +517,9 @@ The context dataset might have had to many topics, to verify a study could be co
 
 An other option for Generative retrieval on the Enron corpus is constructing a model that natively takes in the relationship between emails and users. 
 
-It would also be interesting to see how other baselines perform on the dataset and what the performance increase could be, by optimizing the parameters of BM25
+It would also be interesting to see how other baselines perform on the dataset and what the performance increase could be, by optimizing the parameters of BM25.
 
-[refer to the appendix]
+In appendix \ref{app:compare} shows a case study between BM25 and DSI, here it is visible how the queries generated by the title model spew nonsense  which creates noise for DSI and confuses the model.
 
 
 \chapter{Conclusion}
@@ -523,9 +528,11 @@ This study investigated the efficacy of Generative Retrieval (GR) on the Enron e
 
 BM25 proved to still be a strong baseline and was a competitive for the Enron corpus. It consistently outperformed DSI, across dataset size and thread context. Suggesting that BM25 is still a strong baseline despite the semantic limitations of lexical matching. 
 
-The DSI model proved highly sensitive to noise and failed to outperform the baseline. Indicating that ...
+Regarding the comparison between GR and BM25, our experiments contradict earlier findings, who were trained on cleaner data. The DSI model proved highly sensitive to noise and failed to outperform the baseline as the data still contained a lot of artifacting, despite the regex cleaning.
 
-In this paper we show that it is not conclusive if the DSI is a good fit for searching email datasets like the Enron corpus. Cleaning has an effect on the performance, but the main impact comes for the method used. BM25 is clear to be better method for this task and we propose investigating adaptions to the DSI method.
+Finalle, we explored the role of tread history. Contrary to our hypothesis the performance of the no thread dataset out performed the dataset with more context. Which was surprising as it was expected that more context would give more signals to the model to learn form. Further the model failed to scale properly from 10k to 100k, suggesting that the model over fitted on noise.
+
+We conclude that although GR is quite promising on cleaned data, it won't work out of the box on noisy real world data. This shows that what is necessary to move from lexical matching to generative approach is not just architectural improvements, but better data cleaning pipelines and moving away form binary tasks to a more granular relevance score. We suggest exploring denoising strategies with a Large Language model and training objectives that grade the relevance to better capture the nature of the data.
 
 
 
