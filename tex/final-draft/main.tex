@@ -206,7 +206,9 @@ Email is to this day a widely used communication medium, yet it consumes a dispr
 
 Currently the most used method for email search is BM25 \cite{INR-019}, which uses term frequency and inverse document frequency to score and rank documents based on query content. BM25 remains a strong baseline in many text retrieval tasks due to its simplicity, interpretability and robust performance, representing strong improvement over prior work. These earlier methods have often relied on lexical matching and indexing approaches, such as the vector space model, for ranking content \cite{strathprints2621}. However, even though words do not have to match exactly, BM25 still suffers from the same semantic gap, which necessitates the presence of the same keywords in the emails as in the search query
 
-More recently, natural language processing (NLP) has seen developments in pretrained language models (LM). Generative retrieval (GR) has emerged as a new paradigm that directly generates document identifiers (docids) or representations based on query semantics rather than relying purely on lexical overlap. While generative retrieval shows promise in general information retrieval (IR) benchmarks, its performance on noisy, real-world email content has not been systematically evaluated.
+More recently, natural language processing (NLP) has seen developments in pretrained language models (LM). Generative retrieval (GR) has emerged as a new paradigm that directly generates document identifiers (docids) or representations based on query semantics rather than relying purely on lexical overlap \cite{10.1145/3580305.3599903, NEURIPS2022_892840a6}. 
+
+While generative retrieval shows promise in general information retrieval (IR) benchmarks, its performance on noisy, real-world email content has not been systematically evaluated.
 
 \noindent Research questions:
 \begin{enumerate}
@@ -218,8 +220,7 @@ More recently, natural language processing (NLP) has seen developments in pretra
   \end{enumerate}
 \end{enumerate}
 
-
-In this paper we will construct and email content retrieval benchmark using the Enron corpus with both threaded and non-threaded text variants, to identify the impact of conversation history. We first establish a lexical baseline using BM25, followed by the implementation and evaluation of a generative retrieval method. This study will conclude with a comparative analysis, providing qualitative results and qualitative insights into the retrieval behaviors and performance disparities between the generative and lexical approaches. 
+In this paper we will construct and email content retrieval benchmark using the Enron corpus \cite{klimt2004enron} with both threaded and non-threaded text variants, to identify the impact of conversation history. We first establish a lexical baseline using BM25, followed by the implementation and evaluation of a generative retrieval method. This study will conclude with a comparative analysis, providing qualitative results and qualitative insights into the retrieval behaviors and performance disparities between the generative and lexical approaches. 
 %
 % A perpetual problem of searching through emails is the semantic mismatch problem. This causes a lot of searching time when users search through their emails. Currently the most used searching method is BM25 \cite{INR-019} and it searches using word matching. This is not sufficient as it still needs a query to be quite similar to the contents of the documents. It would be better if users could ask question and the meaning of such questions would be used for searching. An improvement on this is dense vector retrieval \cite{karpukhin-etal-2020-dense}. This turns text into a one dimensional vector and calculates the similarities between the query and the documents. This works better as users may now ask question in language that comes natural to them, but has the problem of not being end to end differential. To solve this \textcite{NEURIPS2022_892840a6} proposed a generative method called the differentable search index (DSI) turning indexing and task training into one optimizable step. 
 %
@@ -227,8 +228,7 @@ In this paper we will construct and email content retrieval benchmark using the 
 
 \chapter{Related Research}
 
-
-In this chapter just enough overview of the current state of information retrieval is given. First the traditional IR methods that focus on spare retrial, lexical matching and bag of words such as inverse index [cite] and BM25 [cite]. After that transformer model are introduced, which due to their size are often referd to as large language models (LLMs) such as BERT [cite] and Dense Retrieval [cite]. Here after, GR is covered, due to these being the focus of this paper they get a separate section, even though these models do also contain the transformer architecture. Finally the email dataset, the Enron corpus [cite], is introduced together with an other popular email dataset, avocado dataset [cite]
+In this chapter just enough overview of the current state of information retrieval is given. First the traditional IR methods that focus on spare retrial, lexical matching and bag of words such as inverse index \cite{strathprints2621}  and BM25 \cite{INR-019}. After that transformer model \cite{NIPS2017_3f5ee243} are introduced, which due to their size are often refers to as large language models (LLMs) such as BERT \cite{2021arXiv210311943K} and Dense Retrieval \cite{karpukhin-etal-2020-dense}. Here after, the GR methods DSI \cite{NEURIPS2022_892840a6} and SE-DSI \cite{10.1145/3580305.3599903} are covered. Due to these being the focus of this paper they get a separate section, even though these models do also contain the transformer architecture. Finally the email dataset, the Enron corpus \cite{klimt2004enron, klimt2004introducing}, is introduced.
 
 % TODO: this might be too long
 
@@ -241,7 +241,7 @@ Some of the traditional techniques are sometimes still used to day. These techni
 Inverted Index \cite{strathprints2621} is a method that creates a dictionary that saves for every term the documents it is apart of. This is done to circumvent the problem of sparse vectors and thus save memory. To search for a document, the tokens from the query where input into this dictionary and the intersection of all the documents that contained the tokens was retrieved. 
 
 \subsection{BM25}
-BM25 is a sparse retrieval ranking function [source] that is the industry standard baseline for retrieval tasks. It excels well on lexical matching, which is also it's weakness . The order of words is not important as it uses the bag of words theorem. 
+BM25 is a sparse retrieval ranking function \cite{2021arXiv210311943K} that is the industry standard baseline for retrieval tasks. It excels well on lexical matching, which is also it's weakness . The order of words is not important as it uses the bag of words theorem. 
 
 The formula for BM25 \ref{eq:bm25_score} takes query tokens of $Q = {q_1, q_2, ..., q_i}$ to score a given document D.
 
@@ -260,16 +260,15 @@ The variables k an b are hyper parameters and can be optimized. They control the
 
 
 \section{Transformer architecture}
-The methods discussed in the previous section both suffer form the semantic gap. Which is a problem where the query uses a different lexical form to the documents itself. The transformer architecture [cite] aims to solve this problem. This is a method that utilizes position of words and derives meaning form this. Transformers, are a deep neural network and cast words into ins latent space, which solves a large part of the semantic gap. [mention the geometry?] The latent space is a term used in deep learning and refers to the hidden parameters that reside inside of the model and is of a different form then text. Transformer architecture excels at sequence to sequence tasks, which are tasks where the input and the output are sequences. [bert]
+The methods discussed in the previous section both suffer form the semantic gap. Which is a problem where the query uses a different lexical form to the documents itself. The transformer architecture \cite{2021arXiv210311943K} aims to solve this problem. This is a method that utilizes position of words and derives meaning form this. Transformers, are a deep neural network and cast words into ins latent space, which solves a large part of the semantic gap. [mention the geometry?] The latent space is a term used in deep learning and refers to the hidden parameters that reside inside of the model and is of a different form then text. Transformer architecture excels at sequence to sequence tasks, which are tasks where the input and the output are sequences. \cite{2021arXiv210311943K}
 
-These there two types of NLP tasks, holistic and tokenized ones [bert]. The holistic type operates with text on the sentence level. The tokenized answers questions and attribution of entities.
+These there two types of NLP tasks, holistic and tokenized ones \cite{2021arXiv210311943K}. The holistic type operates with text on the sentence level. The tokenized answers questions and attribution of entities.
 
 
 \subsection{BERT}
-Bert is a deep bi-directional and holistic linguistic model. It uses masked language modeling to train the model. This is where random words are selected and masked and predicted by the model, taking only into account they surrounding context. Bert allows for fine tuning.
+BERT is a deep bi-directional and holistic linguistic model \cite{2021arXiv210311943K}. It uses masked language modeling to train the model. This is where random words are selected and masked and predicted by the model, taking only into account they surrounding context. Bert allows for fine tuning.
 
 \subsection{Dense Retrieval}
-
 
 Dense retrieval method  \cite{karpukhin-etal-2020-dense} replaces sparse retrieval methods like BM25 with a dense embedding based system for open domain question answering. This method uses a tokenizer and dual-encoder frame work which encodes queries into a dense vector representation. The similarity between two passages is calculated by taking the dot product between their  respective vectors \ref{eq:dense_retrieval}.
 
@@ -281,12 +280,12 @@ Dense retrieval method  \cite{karpukhin-etal-2020-dense} replaces sparse retriev
 
 \section{Generative Retrieval}
 
-In the previous sections the methods described are what is sometimes called retrieve-then-rank strategies [cite dsi]. On the other hand, generative retrieval integrates the indexing and retrieval into one model. This allows for end to end optimization as the whole task is one differentiable model. It's output is the document identifier (docid) and learns the connection between the documents and the docids.
+In the previous sections the methods described are what is sometimes called retrieve-then-rank strategies . On the other hand, generative retrieval integrates the indexing and retrieval into one model. This allows for end to end optimization as the whole task is one differentiable model. It's output is the document identifier (docid) and learns the connection between the documents and the docids.
 
 
 \subsection{DSI}
 
-Differentiable search index is a finetuned transformer [source] which encodes all the trained information of the corpus withing the parameters of the model itself. Beam first search may be used to produce a ranked list of potentially-relevant docids. The indexing and training of the task are done at the same time which allows for end to end optimization. The unique identifiers can be atomic intergers, strings integers or semantically structured string. The semantically structured strings are generated by hierachical clustering and giving names depeding on the cluster the documents are in. 
+Differentiable search index is a fine tuned transformer \cite{NEURIPS2022_892840a6} which encodes all the trained information of the corpus withing the parameters of the model itself. Beam first search may be used to produce a ranked list of potentially-relevant docids. The indexing and training of the task are done at the same time which allows for end to end optimization. The unique identifiers can be atomic integers, strings integers or semantically structured string. The semantically structured strings are generated by hierarchical clustering and giving names depending on the cluster the documents are in. 
 
 
 
@@ -306,7 +305,8 @@ SE-DSI stands for semantic-enhanced differentiable search index \cite{10.1145/35
 
 \section{The Enron Corpus}
 
-Enron was an oil and gas company that  was under investigation of the FBI \cite{BritannicaEnron, FBIEnronCase} after it filed for bankruptcy in 2001. Subsequently, during the investigation, the FBI made the emails of mostly Enron's high management avaiable. Later the dataset was bought by MIT and cleaned, because it contained integrity problems. It has been used to study network relations [source]. Also it has been used widely in spam detection. The original version of the dataset is not available anymore as it contained a lot of privacy sensative information. The dataset was re released by mit and in 2016 and is the dataset that will be used in this paper.
+Enron was an oil and gas company that  was under investigation of the FBI \cite{BritannicaEnron, FBIEnronCase} after it filed for bankruptcy in 2001. Subsequently, during the investigation, the FBI made the emails of mostly Enron's high management available. Later the dataset was bought by MIT and cleaned, because it contained integrity problems. It has been used to study spam detection \cite{inproceedings, klimt2004enron}. The original version of the dataset is not available anymore as it contained a lot of privacy sensitive information. The dataset was re released by MIT and in 2016 \cite{enron_dataset}, and is the dataset that will be used in this paper.
+
 
 % Email datasets have widely been used for the training of spam detection algorithms [find reference] and for studying network relations [find reference]. One of these datasets is the Enron dataset \cite{klimt2004introducing,klimt2004enron, enron_dataset}. Enron was energy company that specialized in oil and gas and filed for bankruptcy in 2001 \cite{BritannicaEnron, FBIEnronCase}. During the investigation this dataset was made public and a cleaned version is publicly available \cite{enron_dataset}. 
 
@@ -453,9 +453,9 @@ Hits at k is calculated \ref{eq:hits} by taking the mean of all the ranks up to 
 \end{equation}
 
 \section{Implementation details}
-The model was trained similar to \textcite{10.1145/3580305.3599903} with some adjustments made based on what was provided with the code used \cite{zhuang2022dsiqg}. We employed a Transformer-based encoder-decoder architecture for our DSI task, initializing the model with the pre-trained T5-base \cite{JMLR:v21:20-074}. This architecture comprises a hidden size of 768, 12 Transformer layers, and 12 self-attention heads. We use the Adam optimizer with a learning rate of $5e-4$ and a linear warm-up over 100,000 steps. The model is trained for a maximum of 100,000 steps with a global batch size of 64 (32 per device) on two GPUs. The maximum sequence length is set to 32. Right before training the emails are truncated to x tokens as the model does not allow more. 
+The model was trained similar to \textcite{10.1145/3580305.3599903} with some adjustments made based on what was provided with the code used \cite{zhuang2022dsiqg}. We employed a Transformer-based encoder-decoder architecture for our DSI task, initializing the model with the pre-trained T5-base \cite{JMLR:v21:20-074}. This architecture comprises a hidden size of 768, 12 Transformer layers, and 12 self-attention heads. We use the Adam optimizer with a learning rate of $5e-4$ and a linear warm-up over 100,000 steps. The model is trained for a maximum of 100,000 steps with a global batch size of 64 (32 per device) on two GPUs. The maximum sequence length is set to 32. Right before training the emails are truncated to 512 tokens as the model is not trained to use more. The model is trained on 2 A100 GPUs of the SURF platform.
 
-For generating the pseudo queries the t5-headline transformer model \cite{pleban2020t5headline} was used to generate abstractive summaries of the email. For the pseudo query generation and docid generation the 'summa' packages was used to perform text-rank \cite{barrios2016variationssimilarityfunctiontextrank}. 
+For generating part of the pseudo queries the t5-headline transformer model \cite{pleban2020t5headline} was used to generate abstractive summaries of the email. For the pseudo query generation and docid generation the 'summa' packages was used to perform text-rank \cite{barrios2016variationssimilarityfunctiontextrank}. 
 
 For training of the model the DSI-QG repository \cite{zhuang2022dsiqg} was used as a basis. It did need to be adapted to work with the sqlite database used in this research. This code however was made for numerical tokens and not semantic tokens. To solve this problem the code to build the trie was used from \textcite{LI2023103475}.
 
@@ -469,31 +469,31 @@ We we implemented our models using PyTorch [cite] and the Hugging Face transform
 
 The comparison of the baseline with the DSI and impact of data cleaning or data size is shown in  table \ref{tab:combined_results}. This table is split into two tables where the methods used are in the left column. In the top table the thread settings are compared and in the bottom the training size is compared. Besides the methods column, the tables are split into two main columns, corresponding to a dataset, which are under divided into the 4 evaluation metrics, MRR@3, MRR@20, Hits@1 and Hits@10. The ratio between between DSI's performance and BM25 performance is shown in table \ref{tab:ratio_results}
 
-\textbf{Performance baseline BM25:} BM25 performed best without context. The reason for this might be because the No Context dataset does not include the emails history, making the emails small, which is when BM25 performs best. Comparing 10k Context and 100k Context the performance drops a little which is similar previous findings \cite{10.1145/3580305.3599903} \cite{NEURIPS2022_892840a6}.
+\textbf{Performance baseline BM25:} BM25 performed best without the context of the history thread. This might be, because of the fact that the dataset did not contain emails history thread, making the emails small, which is when BM25 performs best. Comparing between the 10k and 100k datasets, the performance drops a little which is similar previous findings \cite{10.1145/3580305.3599903} \cite{NEURIPS2022_892840a6}.
 
-\textbf{Performance DSI:} DSI performed best when there was no Context. This could be because the email context could have more topics, which might confuse the model. The difference between Context and no context is not too large, which might be because of the automatic truncation. DSI performs worse on bigger datasets. This is not inline with the findings of \textcite{10.1145/3580305.3599903}, but is in line with \textcite{NEURIPS2022_892840a6}.
+\textbf{Performance DSI:} DSI performed best when there was no thread. This could be because the email thread could have more topics, which might confuse the model. The difference between thread and no thread is not too large, which might be because of the automatic truncation. DSI performs worse on bigger datasets. This is not inline with the findings of \textcite{10.1145/3580305.3599903}, but is in line with \textcite{NEURIPS2022_892840a6}.
 
 
-\textbf{Comparison BM25 and DSI} Compared to BM25, DSI performs worse on all metrics. This stands in Contrast to \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, who reported significant improvement over BM25. A reason for the poor performance might be because this research uses only 2 training queries compared to 10 \cite{10.1145/3580305.3599903}. Also the enron dataset is a real world dataset and might introduce a lot more noise then curated Q\&A datasets. Further, the data might be too complex for binary relevance of our MLE method.
+\textbf{Comparison BM25 and DSI} Compared to BM25, DSI performs worse on all metrics. This stands in contrast to \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, who reported significant improvement over BM25. A reason for the poor performance might be because this research uses only 2 training queries compared to 10 \cite{10.1145/3580305.3599903}. Also the Enron dataset is a real world dataset and might introduce a lot more noise then curated Q\&A datasets. Further, the data might be too complex for the binary relevance objective of our MLE method.
 
 % Also, when cleaning the 10k No Context dataset, less emails were bigger then 93.000
 
-\textbf{Thread settings comparison:} Although the thread dataset did not contain the field identifiers there is a slight better performance between both BM25 and DSI when there is no context on context. On the one hand this is surprising because by including the field identifiers, more noise would be present in generating the title generated pseudo queries. On the other hand this could be explained by the context dataset containing a lot of duplicate email, because the email history is of email addresses also contained in the dataset. When inspecting the ratios context performed a bit better, which could be because the training data contained more words, thus providing more data for the DSI model to learn from or because no field identifiers were present.
+\textbf{Thread settings comparison:} Although the thread dataset did not contain the field identifiers there is a slight better performance between both BM25 and DSI when there is no context on context. On the one hand this is surprising because by including the field identifiers, more noise would be present in generating the title generated pseudo queries. On the other hand this could be explained by the context dataset containing a lot of duplicate email, because the email history is of email addresses also contained in the dataset. When inspecting the ratios  DSI performed a bit better with thread, which could be BM25 performs worse on a larger datasets and there was a large overlap  or because no field identifiers were present.
 
 
-\textbf{Scale comparison:} As shown in \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, we would expect DSI to improve from the 10.000 dataset to the 100.000 dataset. This however is not the case. DSI perfoms significantly worse. 
+\textbf{Scale comparison:} As shown in \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, we would expect DSI to improve from the 10k dataset to the 100k dataset. This however is not the case. DSI perfoms significantly worse. 
 
 
 
 \chapter{Discussion}
 
 On the current version of the data set, BM25 remains a strong baseline for the Enron corpus, particularly on shorter documents. 
-DSI underperformed significantly compared across all metrics. Which stands in stark contrast to the trends in recent literature [cite], where DSI outperforms sparce retrieval. 
+DSI underperformed significantly compared across all metrics. Which stands in stark contrast to the trends in recent literature \cite{10.1145/3580305.3599903, NEURIPS2022_892840a6}, where DSI outperforms sparce retrieval. 
 Including thread history did not significalntly bridge the semantic gap and in the case of the 100k dataset, degraded the performance or introduced noise.
 
-In previous works DSI was used on Natural Questions or MS MARCO, which are clean encyclopedic texts. Enron is a real world dataset, whcih means that it is noisy and unstructured. This makes it harder to sematically map between the pseudo-queries and the docids. 
+In previous works DSI was used on Natural Questions or MS MARCO, which are clean encyclopedic texts. Enron is a real world dataset, which means that it is noisy and unstructured. This makes it harder to semantically map between the pseudo-queries and the docids. 
 An other cause for DSI poor performance could be that this research uses the most direct MLE objective, which models relevance as a binary signal. This dichotomy, takes relevance as binary which might not be representative of real world data contained in the Enron dataset. This might confuse the model by "near-duplicates" in the training data.
-Further, due to resource limitations the amount of queries generated for training was 2, although earlier works used 10+ [cite], which is less then other works. The datasets that included the field identifiers art enacting for generating the doctoqueries, might have learning to mach noise instead of semantics.
+Further, due to resource limitations the amount of queries generated for training was 2, although earlier works used 10+ \cite{10.1145/3580305.3599903}, which is less then other works. The datasets that included the field identifiers art enacting for generating the doctoqueries, might have learning to mach noise instead of semantics.
 
 Because there are a lot of similar docids, memorizing the mapping within the model weights becomes more difficult. This could also explain why the performance of the context dataset performed worse, because the history is shared among multiple emails, the docids might have become more similar. 
 Further explanation why the thread was outperformed, might be because of topic drift. The semantic docids, might not have been able to capture the shift form i.e. "meeting on Tuesday" to "budget approval" later in the tread. Also distinct parts of emails might be at the end of the emails or thread losing unique input. 
@@ -503,11 +503,11 @@ In the case the context the comparison is not a true comparison, because they do
 Because artifacting persisted a more robust way of cleaning is necessary to continue the use of the dataset for this task. To continue the exploration of this dataset with this task, a more robust cleaning strategy is necessary to combat the persisting artifacting . Because the artifacting is caused by real world data, it is inconsistent and it could be interesting to perform the cleaning by Large Language model.
 
 Rehearsal content could be added, especially for the context dataset, to increase performance.
-For DSI the thread and no context performance was very close, which could because by truncation. To include the important information of the context [tang et all book] an extraction of important information could be done.
+For DSI the thread and no context performance was very close, which could because by truncation. To include the important information of the context \cite{10.1145/3690624.3709435} an extraction of important information could be done.
 
 The inclusion of context has the effect that there are a many duplicates of emails, making a lot of emails similar. A score could be given for emails that are contained in the context and are retrieved. Similarly a score could be given to semantically similar docids or index text, move away form the binary task.
 
-Applying the current method on a curated Q\&A like Natural Questions or the MS MARCO dataset. This could give insight into the efficacy of the used methods. Further, to check if the data has potential, a simpler task could used that works better as a dichotomy. A task like spam detection for instance, which has been done before and was its original use. [reference to spam detection on the Enron dataset].
+Applying the current method on a curated Q\&A like Natural Questions or the MS MARCO dataset. This could give insight into the efficacy of the used methods. Further, to check if the data has potential, a simpler task could used that works better as a dichotomy. A task like spam detection for instance, which has been done before and was its original use \cite{inproceedings, klimt2004enron}.
 
 To generate the doc to queries the model was instructed by including "subject:" or "body:" followed by the subject and body respectively. This cluttered the queries as the doctoquery model was not made to accept instructions. This had the effect that the words subject and body where included often in the queries \ref{app:schema_impact}, because the model might be sensitive to structural patterns. Thus inducing noise. In further work this could be omitted. 
 
