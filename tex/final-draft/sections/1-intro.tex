@@ -1,0 +1,53 @@
+\chapter{Introduction}
+Email remains a widely used communication medium to this day, yet it consumes a disproportionate amount of users’ time. While surveys often estimate daily email usage at over three hours \cite{Adobe2019}, empirical logging studies suggest that knowledge workers spend approximately 1.5 hours of focused time on email per day, checking their inboxes an average of 77 times daily \cite{inproceedings}. As a result, retrieving relevant past messages is a frequent and practically important task in information seeking.
+
+Despite its importance, effective email retrieval is challenging. Email content is often noisy and unstructured, containing long conversational threads, quoted replies, inconsistent formatting, and various artifacts that do not directly contribute to semantic meaning. These characteristics distinguish email search from traditional document retrieval and make content-based search particularly difficult. In this work, we conduct our study on the Enron Email Corpus \cite{klimt2004enron}, a large collection of real-world emails that remains the de facto standard benchmark for open-source email analysis due to its scale, realism, and availability.
+
+Traditional email search systems predominantly rely on lexical retrieval models. Among them, BM25 \cite{INR-019} is the most widely adopted approach, ranking documents based on term frequency and inverse document frequency. BM25 remains a strong baseline across many text retrieval tasks due to its simplicity, interpretability, and robust empirical performance. Earlier approaches to email retrieval similarly relied on lexical matching and indexing techniques, such as the vector space model \cite{strathprints2621}. Although BM25 improves upon exact keyword matching by allowing partial term overlap, it fundamentally remains a lexical method and continues to suffer from the semantic gap between user queries and document content, requiring overlapping terms to appear in both.
+
+Recent advances in natural language processing have led to the development of large pretrained language models, enabling new retrieval paradigms. In this context, generative retrieval (GR) has emerged as a new paradigm that formulates retrieval as a sequence generation problem. Instead of ranking documents based on lexical overlap, generative retrieval models directly generate the identifier of a target document conditioned on the input query \cite{10.1145/3580305.3599903, NEURIPS2022_892840a6}. Representative methods treat document identifiers as discrete token sequences and perform retrieval by generating the corresponding docid for a given query with constrained beam search \cite{genre}. 
+% Unlike dense retrieval approaches, this paradigm does not rely on continuous vector representations or nearest-neighbor search, but instead depends on the model’s ability to correctly generate the appropriate document identifier.
+
+While docid-based GR has shown promising results on general information retrieval benchmarks \cite{chen2022corpusbrain,chen-2023-unified}, its effectiveness on noisy, real-world email content has not been systematically evaluated. In particular, it remains unclear how GR compares with strong lexical baselines such as BM25 in the context of email content search, and whether conversational context in email threads influences retrieval performance differently across retrieval paradigms.
+
+In this work, we focus specifically on content-based email retrieval. 
+To study the role of conversational context, we consider two variants of email text: a non-threaded version that includes only the main message content, and a threaded version that retains quoted prior messages.
+% 
+Based on this setup, we investigate the following research questions (RQ):
+\begin{itemize}[leftmargin=*,nosep]
+\item \textbf{RQ1}: How effective is BM25 for email content retrieval on the Enron corpus under standard information retrieval metrics?
+\item \textbf{RQ2}: How does a representative GR method, DSI\cite{NEURIPS2022_892840a6}, compare with BM25 in the same email content search task?
+\item \textbf{RQ3}: Does the inclusion of email thread context influence retrieval performance across lexical and GR methods?
+\end{itemize}
+
+
+To answer these questions, we construct an email content retrieval benchmark using the Enron corpus with both threaded and non-threaded text variants. We first establish a strong lexical baseline using BM25, followed by the implementation and evaluation of DSI. Finally, we conduct a comparative analysis to examine performance differences and retrieval behaviors across retrieval paradigms and preprocessing settings, providing empirical insights into the applicability of GR for realistic email search scenarios.
+
+
+
+
+
+% --------------------------
+% Email is to this day a widely used communication medium, yet it consumes a disproportionate time of users day. While surveys often estimate email usage at over three hours per day \cite{Adobe2019}, empirical logging studies reveal that knowledge workers spend approximately 1.5 hours of actual focused time on email daily, checking their inboxes an average of 77 times per day \cite{inproceedings} This is why retrieving relevant past messages is a common and challenging task. The nature of email content is noisy and unstructured, with long threads, quoted replies, inconsistent formatting, and other artifacts that does not contribute to its meaning, making content-based search difficult. We validate our results using the Enron Corpus, which remains the de facto standard benchmark for open-source email analysis.
+
+% Currently the most used method for email search is BM25 \cite{INR-019}, which uses term frequency and inverse document frequency to score and rank documents based on query content. BM25 remains a strong baseline in many text retrieval tasks due to its simplicity, interpretability and robust performance, representing strong improvement over prior work. These earlier methods have often relied on lexical matching and indexing approaches, such as the vector space model, for ranking content \cite{strathprints2621}. However, even though words do not have to match exactly, BM25 still suffers from the same semantic gap, which necessitates the presence of the same keywords in the emails as in the search query
+
+% More recently, natural language processing (NLP) has seen developments in pretrained language models (LM). Generative retrieval (GR) has emerged as a new paradigm that directly generates document identifiers (docids) or representations based on query semantics rather than relying purely on lexical overlap \cite{10.1145/3580305.3599903, NEURIPS2022_892840a6}. 
+
+% While generative retrieval shows promise in general information retrieval (IR) benchmarks, its performance on noisy, real-world email content has not been systematically evaluated.
+
+% \noindent Research questions:
+% \begin{enumerate}
+%   \item To what extend can email retrieval performance be improved by moving away for lexical matching to a generative approach, and what role does thread history play in bridging the semantic gap?
+%   \begin{enumerate}
+%     \item How effective is BM25 for email content retrieval on the Enron corpus?
+%     \item How does generative retrieval compare with BM25 in this task?
+%     \item Does email thread context influence retrieval performance across methods?
+%   \end{enumerate}
+% \end{enumerate}
+
+% In this paper we will construct and email content retrieval benchmark using the Enron corpus \cite{klimt2004enron} with both threaded and non-threaded text variants, to identify the impact of conversation history. We first establish a lexical baseline using BM25, followed by the implementation and evaluation of a generative retrieval method. This study will conclude with a comparative analysis, providing qualitative results and qualitative insights into the retrieval behaviors and performance disparities between the generative and lexical approaches. 
+%
+% A perpetual problem of searching through emails is the semantic mismatch problem. This causes a lot of searching time when users search through their emails. Currently the most used searching method is BM25 \cite{INR-019} and it searches using word matching. This is not sufficient as it still needs a query to be quite similar to the contents of the documents. It would be better if users could ask question and the meaning of such questions would be used for searching. An improvement on this is dense vector retrieval \cite{karpukhin-etal-2020-dense}. This turns text into a one dimensional vector and calculates the similarities between the query and the documents. This works better as users may now ask question in language that comes natural to them, but has the problem of not being end to end differential. To solve this \textcite{NEURIPS2022_892840a6} proposed a generative method called the differentable search index (DSI) turning indexing and task training into one optimizable step. 
+%
+% Generative retrieval (GR) is still a novel field and DSI has been mainly used for curated datasets or books, thus it is interesting to explore what else DSI could be used for. To see how well DSI performs on an email dataset, the Enron corpus could be used \cite{klimt2004introducing}. In this research, we explore to what extent DSI can be used to search on the Enron corpus and how well does it compare to BM25. 

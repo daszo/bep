@@ -1,0 +1,36 @@
+\chapter{Experimental Setup}
+
+In this chapter the setup of the experiment is covered. Upon the methods in the previous chapter is expanded.
+
+\section{Baseline Methods}
+
+As a baseline method only BM25 is used with the pyserini package \cite{DBLP:conf/sigir/LinMLYPN21}. Because our dataset is simlar to the MS MARCO dataset used in the pyserini paper, those optimized hyperparameters are use. Those are k1 = 0.9 and b = 0.4.
+
+\section{Evaluation metrics}
+For the evaluation metric, the same metrics were used as in \textcite{NEURIPS2022_892840a6} and \textcite{10.1145/3580305.3599903}. These are mean reciprocal rank (MRR) for 3 and 20 and hits at 1 and 10.
+
+MRR is calculated as the mean of the reciprocal rank \ref{eq:mrr}, the latter is the first position of a relavant document.
+
+Hits at k is calculated \ref{eq:hits} by taking the mean of all the ranks up to k of relevant documents.
+
+
+\begin{equation}
+  \text{MRR}  = \frac{1}{N} \sum_{i=1}^{N} \text{RR}_i
+  \label{eq:mrr}
+\end{equation}
+
+
+\begin{equation}
+\text{Hits}@k = \frac{1}{N} \sum_{i=1}^{N} \mathbb{I}(\text{rank}_i \le k)
+  \label{eq:hits}
+\end{equation}
+
+\section{Implementation details}
+The model was trained similar to \textcite{10.1145/3580305.3599903} with some adjustments made based on what was provided with the code used \cite{zhuang2022dsiqg}. We employed a Transformer-based encoder-decoder architecture for our DSI task, initializing the model with the pre-trained T5-base \cite{JMLR:v21:20-074}. This architecture comprises a hidden size of 768, 12 Transformer layers, and 12 self-attention heads. We use the Adam optimizer with a learning rate of $5e-4$ and a linear warm-up over 100,000 steps. The model is trained for a maximum of 100,000 steps with a global batch size of 64 (32 per device) on two GPUs. The maximum sequence length is set to 32. Right before training the emails are truncated to 512 tokens as the model is not trained to use more. The model is trained on 2 A100 GPUs of the SURF platform.
+
+For generating part of the pseudo queries the t5-headline transformer model \cite{pleban2020t5headline} was used to generate abstractive summaries of the email. For the pseudo query generation and docid generation the 'summa' packages was used to perform text-rank \cite{barrios2016variationssimilarityfunctiontextrank}. 
+
+For training of the model the DSI-QG repository \cite{zhuang2022dsiqg} was used as a basis. It did need to be adapted to work with the sqlite database used in this research. This code however was made for numerical tokens and not semantic tokens. To solve this problem the code to build the trie was used from \textcite{LI2023103475}.
+
+
+We we implemented our models using PyTorch [cite] and the Hugging Face transformers [cite] library. To load the T5 we utilized Hugging face and we tracked performance using Weights \& Biases [cite]. 

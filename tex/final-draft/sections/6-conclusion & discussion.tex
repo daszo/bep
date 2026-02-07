@@ -1,0 +1,52 @@
+
+\chapter{Conclusion}
+
+This study investigated the efficacy of Generative Retrieval (GR) on the Enron email corpus. It aimed to bridge the semantic gap inherent to lexical models (BM25), by using differential search index (DSI). It did so by creating a solid baseline and varying between history thread and dataset size.
+
+BM25 proved to still be a strong baseline and was a competitive for the Enron corpus. It consistently outperformed DSI, across dataset size and thread context. Suggesting that BM25 is still a strong baseline despite the semantic limitations of lexical matching. 
+
+Regarding the comparison between GR and BM25, our experiments contradict earlier findings, who were trained on cleaner data. The DSI model proved highly sensitive to noise and failed to outperform the baseline as the data still contained a lot of artifacting, despite the regex cleaning.
+
+Finalle, we explored the role of tread history. Contrary to our hypothesis the performance of the no thread dataset out performed the dataset with more context. Which was surprising as it was expected that more context would give more signals to the model to learn form. Further the model failed to scale properly from 10k to 100k, suggesting that the model over fitted on noise.
+
+We conclude that although GR is quite promising on cleaned data, it won't work out of the box on noisy real world data. This shows that what is necessary to move from lexical matching to generative approach is not just architectural improvements, but better data cleaning pipelines and moving away form binary tasks to a more granular relevance score. We suggest exploring denoising strategies with a Large Language model and training objectives that grade the relevance to better capture the nature of the data.
+
+
+\chapter{Discussion}
+
+On the current version of the data set, BM25 remains a strong baseline for the Enron corpus, particularly on shorter documents. 
+DSI underperformed significantly compared across all metrics. Which stands in stark contrast to the trends in recent literature \cite{10.1145/3580305.3599903, NEURIPS2022_892840a6}, where DSI outperforms sparce retrieval. 
+Including thread history did not significalntly bridge the semantic gap and in the case of the 100k dataset, degraded the performance or introduced noise.
+
+In previous works DSI was used on Natural Questions or MS MARCO, which are clean encyclopedic texts. Enron is a real world dataset, which means that it is noisy and unstructured. This makes it harder to semantically map between the pseudo-queries and the docids. 
+An other cause for DSI poor performance could be that this research uses the most direct MLE objective, which models relevance as a binary signal. This dichotomy, takes relevance as binary which might not be representative of real world data contained in the Enron dataset. This might confuse the model by "near-duplicates" in the training data.
+Further, due to resource limitations the amount of queries generated for training was 2, although earlier works used 10+ \cite{10.1145/3580305.3599903}, which is less then other works. The datasets that included the field identifiers art enacting for generating the doctoqueries, might have learning to mach noise instead of semantics.
+
+Because there are a lot of similar docids, memorizing the mapping within the model weights becomes more difficult. This could also explain why the performance of the context dataset performed worse, because the history is shared among multiple emails, the docids might have become more similar. 
+Further explanation why the thread was outperformed, might be because of topic drift. The semantic docids, might not have been able to capture the shift form i.e. "meeting on Tuesday" to "budget approval" later in the tread. Also distinct parts of emails might be at the end of the emails or thread losing unique input. 
+Regex cleaning is brittle on natural data. Not all cleaning was successful \ref{app:compare} and artifacting remains. Noise effects neural models disproportionately because they try to learn patterns, whereas BM25 ignorance /noise more easily. 
+In the case the context the comparison is not a true comparison, because they don't have consistent field identifiers. 
+
+Because artifacting persisted a more robust way of cleaning is necessary to continue the use of the dataset for this task. To continue the exploration of this dataset with this task, a more robust cleaning strategy is necessary to combat the persisting artifacting . Because the artifacting is caused by real world data, it is inconsistent and it could be interesting to perform the cleaning by Large Language model.
+
+Rehearsal content could be added, especially for the context dataset, to increase performance.
+For DSI the thread and no context performance was very close, which could because by truncation. To include the important information of the context \cite{10.1145/3690624.3709435} an extraction of important information could be done.
+
+The inclusion of context has the effect that there are a many duplicates of emails, making a lot of emails similar. A score could be given for emails that are contained in the context and are retrieved. Similarly a score could be given to semantically similar docids or index text, move away form the binary task.
+
+Applying the current method on a curated Q\&A like Natural Questions or the MS MARCO dataset. This could give insight into the efficacy of the used methods. Further, to check if the data has potential, a simpler task could used that works better as a dichotomy. A task like spam detection for instance, which has been done before and was its original use \cite{inproceedings, klimt2004enron}.
+
+To generate the doc to queries the model was instructed by including "subject:" or "body:" followed by the subject and body respectively. This cluttered the queries as the doctoquery model was not made to accept instructions. This had the effect that the words subject and body where included often in the queries \ref{app:schema_impact}, because the model might be sensitive to structural patterns. Thus inducing noise. In further work this could be omitted. 
+
+Currently the Context data set uses the whole context for generating the docids and queries. This might induce clutter and might result in very similar docids and queries.
+
+The context dataset might have had to many topics, to verify a study could be conducted modeling the topics using LDA or calculating the similarity using dense vector embeddings.
+
+An other option for Generative retrieval on the Enron corpus is constructing a model that natively takes in the relationship between emails and users. 
+
+It would also be interesting to see how other baselines perform on the dataset and what the performance increase could be, by optimizing the parameters of BM25.
+
+In appendix \ref{app:compare} shows a case study between BM25 and DSI, here it is visible how the queries generated by the title model spew nonsense  which creates noise for DSI and confuses the model.
+
+
+
