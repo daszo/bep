@@ -1,0 +1,1050 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{Adobe2019}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=71f698950c9cdadc3d19bb7411177a78}{%
+           family={{Adobe}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{71f698950c9cdadc3d19bb7411177a78}
+      \strng{fullhash}{71f698950c9cdadc3d19bb7411177a78}
+      \strng{fullhashraw}{71f698950c9cdadc3d19bb7411177a78}
+      \strng{bibnamehash}{71f698950c9cdadc3d19bb7411177a78}
+      \strng{authorbibnamehash}{71f698950c9cdadc3d19bb7411177a78}
+      \strng{authornamehash}{71f698950c9cdadc3d19bb7411177a78}
+      \strng{authorfullhash}{71f698950c9cdadc3d19bb7411177a78}
+      \strng{authorfullhashraw}{71f698950c9cdadc3d19bb7411177a78}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://blog.adobe.com/en/publish/2019/09/08/if-you-think-email-is-dead-think-again}}
+      \field{month}{9}
+      \field{note}{Accessed: 2025-05-23}
+      \field{title}{If {You} {Think} {Email} {Is} {Dead}, {Think} {Again}: {The} 2019 {Adobe} {Email} {Usage} {Study}}
+      \field{year}{2019}
+    \endentry
+    \entry{barrios2016variationssimilarityfunctiontextrank}{misc}{}{}
+      \name{author}{4}{}{%
+        {{hash=d770b767301837ca420c6a64d3045c58}{%
+           family={Barrios},
+           familyi={B\bibinitperiod},
+           given={Federico},
+           giveni={F\bibinitperiod}}}%
+        {{hash=6def66359761fefdfe19cd6941c25cf4}{%
+           family={López},
+           familyi={L\bibinitperiod},
+           given={Federico},
+           giveni={F\bibinitperiod}}}%
+        {{hash=502755e29a9dc550892d8968736a30f0}{%
+           family={Argerich},
+           familyi={A\bibinitperiod},
+           given={Luis},
+           giveni={L\bibinitperiod}}}%
+        {{hash=12cc6a5e8a09dedab153b961e1a50a22}{%
+           family={Wachenchauzer},
+           familyi={W\bibinitperiod},
+           given={Rosa},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{b38467260e4c9ac6f6a1d12b0c6f14a6}
+      \strng{fullhash}{6bc8113bc43e7bc19439cc5777072392}
+      \strng{fullhashraw}{6bc8113bc43e7bc19439cc5777072392}
+      \strng{bibnamehash}{b38467260e4c9ac6f6a1d12b0c6f14a6}
+      \strng{authorbibnamehash}{b38467260e4c9ac6f6a1d12b0c6f14a6}
+      \strng{authornamehash}{b38467260e4c9ac6f6a1d12b0c6f14a6}
+      \strng{authorfullhash}{6bc8113bc43e7bc19439cc5777072392}
+      \strng{authorfullhashraw}{6bc8113bc43e7bc19439cc5777072392}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.CL}
+      \field{eprinttype}{arXiv}
+      \field{title}{Variations of the Similarity Function of TextRank for Automated Summarization}
+      \field{year}{2016}
+      \verb{eprint}
+      \verb 1602.03606
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1602.03606
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1602.03606
+      \endverb
+    \endentry
+    \entry{BritannicaEnron}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=093c3817ace12bfc6d43450a544c78e9}{%
+           family={Bondarenko},
+           familyi={B\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=8d9206e77ebaf386902e019a93978573}{%
+           family={Encyclopaedia\bibnamedelima Britannica},
+           familyi={E\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={The\bibnamedelima Editors},
+           giveni={T\bibinitperiod\bibinitdelim E\bibinitperiod},
+           prefix={of},
+           prefixi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{0d92485ebbae5e911f34cb6ccc7f4d55}
+      \strng{fullhash}{0d92485ebbae5e911f34cb6ccc7f4d55}
+      \strng{fullhashraw}{0d92485ebbae5e911f34cb6ccc7f4d55}
+      \strng{bibnamehash}{0d92485ebbae5e911f34cb6ccc7f4d55}
+      \strng{authorbibnamehash}{0d92485ebbae5e911f34cb6ccc7f4d55}
+      \strng{authornamehash}{0d92485ebbae5e911f34cb6ccc7f4d55}
+      \strng{authorfullhash}{0d92485ebbae5e911f34cb6ccc7f4d55}
+      \strng{authorfullhashraw}{0d92485ebbae5e911f34cb6ccc7f4d55}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{https://www.britannica.com/event/enron-scandal}
+      \field{month}{9}
+      \field{note}{Accessed: 2025-11-05}
+      \field{title}{Enron scandal | Summary, Explained, History, \& Facts}
+      \field{year}{2025}
+    \endentry
+    \entry{strathprints2621}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=58ccb09cba60cdf4638232666fe948be}{%
+           family={Chowdhury},
+           familyi={C\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Facet Publishing}%
+      }
+      \strng{namehash}{58ccb09cba60cdf4638232666fe948be}
+      \strng{fullhash}{58ccb09cba60cdf4638232666fe948be}
+      \strng{fullhashraw}{58ccb09cba60cdf4638232666fe948be}
+      \strng{bibnamehash}{58ccb09cba60cdf4638232666fe948be}
+      \strng{authorbibnamehash}{58ccb09cba60cdf4638232666fe948be}
+      \strng{authornamehash}{58ccb09cba60cdf4638232666fe948be}
+      \strng{authorfullhash}{58ccb09cba60cdf4638232666fe948be}
+      \strng{authorfullhashraw}{58ccb09cba60cdf4638232666fe948be}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{An information retrieval system is designed to analyse, process and store sources of information and retrieve those that match a particular user's requirements. A bewildering range of techniques is now available to the information professional attempting to achieve this goal. It is recognized that today's information professionals need to concentrate their efforts on learning the techniques of computerized information retrieval. However, it is this book's contention that it also benefits them to learn the theory, techniques and tools that constitute the traditional approaches to the organization and processing of information. In fact much of this knowledge may still be applicable in the storage and retrieval of electronic information in digital library environments.}
+      \field{isbn}{1-85604-480-7}
+      \field{title}{Introduction to modern information retrieval}
+      \field{year}{2004}
+      \verb{urlraw}
+      \verb https://strathprints.strath.ac.uk/2621/
+      \endverb
+      \verb{url}
+      \verb https://strathprints.strath.ac.uk/2621/
+      \endverb
+    \endentry
+    \entry{FBIEnronCase}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=037c6c200782f77e413154becc7c0e26}{%
+           family={{Federal Bureau of Investigation}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{037c6c200782f77e413154becc7c0e26}
+      \strng{fullhash}{037c6c200782f77e413154becc7c0e26}
+      \strng{fullhashraw}{037c6c200782f77e413154becc7c0e26}
+      \strng{bibnamehash}{037c6c200782f77e413154becc7c0e26}
+      \strng{authorbibnamehash}{037c6c200782f77e413154becc7c0e26}
+      \strng{authornamehash}{037c6c200782f77e413154becc7c0e26}
+      \strng{authorfullhash}{037c6c200782f77e413154becc7c0e26}
+      \strng{authorfullhashraw}{037c6c200782f77e413154becc7c0e26}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{https://www.fbi.gov/history/famous-cases/enron}
+      \field{note}{Accessed: 2025-11-05}
+      \field{title}{Enron}
+    \endentry
+    \entry{karpukhin-etal-2020-dense}{inproceedings}{}{}
+      \name{author}{8}{}{%
+        {{hash=b24392ebfb2c0a35979fc689c389c649}{%
+           family={Karpukhin},
+           familyi={K\bibinitperiod},
+           given={Vladimir},
+           giveni={V\bibinitperiod}}}%
+        {{hash=36b7f762a5e5dbccbb0c83b8ec383cc6}{%
+           family={Oguz},
+           familyi={O\bibinitperiod},
+           given={Barlas},
+           giveni={B\bibinitperiod}}}%
+        {{hash=28789ec78f6ba72f59baf40dfb377588}{%
+           family={Min},
+           familyi={M\bibinitperiod},
+           given={Sewon},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ecbe786a5668bf643d74bb24fe1c3cfe}{%
+           family={Lewis},
+           familyi={L\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod}}}%
+        {{hash=9825446add26b320aea811f184ef643c}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Ledell},
+           giveni={L\bibinitperiod}}}%
+        {{hash=79caf76234e835df3dc38a785e0913e0}{%
+           family={Edunov},
+           familyi={E\bibinitperiod},
+           given={Sergey},
+           giveni={S\bibinitperiod}}}%
+        {{hash=aed188db3fc6855ac5666aa14e04a3bb}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Danqi},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d4d56d3d370b3afd4ad2ebf985fbd3f8}{%
+           family={Yih},
+           familyi={Y\bibinitperiod},
+           given={Wen-tau},
+           giveni={W\bibinithyphendelim t\bibinitperiod}}}%
+      }
+      \name{editor}{4}{}{%
+        {{hash=073903bf4f8271f1a80b3fdcc63d92c2}{%
+           family={Webber},
+           familyi={W\bibinitperiod},
+           given={Bonnie},
+           giveni={B\bibinitperiod}}}%
+        {{hash=fcbee11f57094a6fbbfcbf494f023974}{%
+           family={Cohn},
+           familyi={C\bibinitperiod},
+           given={Trevor},
+           giveni={T\bibinitperiod}}}%
+        {{hash=f3b78337b03e473fdd1fe07b5b127389}{%
+           family={He},
+           familyi={H\bibinitperiod},
+           given={Yulan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=621013bf54d3546375ad71f17f020b5b}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Online}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computational Linguistics}%
+      }
+      \strng{namehash}{95ef335ab136ed8801520b97e3354110}
+      \strng{fullhash}{e8e0e3674e964c98036eecbd11a7a03a}
+      \strng{fullhashraw}{e8e0e3674e964c98036eecbd11a7a03a}
+      \strng{bibnamehash}{95ef335ab136ed8801520b97e3354110}
+      \strng{authorbibnamehash}{95ef335ab136ed8801520b97e3354110}
+      \strng{authornamehash}{95ef335ab136ed8801520b97e3354110}
+      \strng{authorfullhash}{e8e0e3674e964c98036eecbd11a7a03a}
+      \strng{authorfullhashraw}{e8e0e3674e964c98036eecbd11a7a03a}
+      \strng{editorbibnamehash}{7126226c96b902f79c86c0a19c719ffe}
+      \strng{editornamehash}{7126226c96b902f79c86c0a19c719ffe}
+      \strng{editorfullhash}{b493927e65eacfc394fe1e594cf72a89}
+      \strng{editorfullhashraw}{b493927e65eacfc394fe1e594cf72a89}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Open-domain question answering relies on efficient passage retrieval to select candidate contexts, where traditional sparse vector space models, such as TF-IDF or BM25, are the de facto method. In this work, we show that retrieval can be practically implemented using dense representations alone, where embeddings are learned from a small number of questions and passages by a simple dual-encoder framework. When evaluated on a wide range of open-domain QA datasets, our dense retriever outperforms a strong Lucene-BM25 system greatly by 9{\%}-19{\%} absolute in terms of top-20 passage retrieval accuracy, and helps our end-to-end QA system establish new state-of-the-art on multiple open-domain QA benchmarks.}
+      \field{booktitle}{Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)}
+      \field{month}{11}
+      \field{title}{Dense Passage Retrieval for Open-Domain Question Answering}
+      \field{year}{2020}
+      \field{pages}{6769\bibrangedash 6781}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.18653/v1/2020.emnlp-main.550
+      \endverb
+      \verb{urlraw}
+      \verb https://aclanthology.org/2020.emnlp-main.550/
+      \endverb
+      \verb{url}
+      \verb https://aclanthology.org/2020.emnlp-main.550/
+      \endverb
+    \endentry
+    \entry{klimt2004enron}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=c51386d6d3209bb58e3031bf7754b5b8}{%
+           family={Klimt},
+           familyi={K\bibinitperiod},
+           given={Bryan},
+           giveni={B\bibinitperiod}}}%
+        {{hash=be6dc43fe1771d8870237ce7a47c6f7f}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Yiming},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \name{editor}{4}{}{%
+        {{hash=5e1c29e4163df3970ddd3f9e20fef0e4}{%
+           family={Boulicaut},
+           familyi={B\bibinitperiod},
+           given={Jean-François},
+           giveni={J\bibinithyphendelim F\bibinitperiod}}}%
+        {{hash=2f19810cf26d0c7b8b6c5c57eba12eeb}{%
+           family={Esposito},
+           familyi={E\bibinitperiod},
+           given={Floriana},
+           giveni={F\bibinitperiod}}}%
+        {{hash=7b5335e9010800b63f5c2959f076d90f}{%
+           family={Giannotti},
+           familyi={G\bibinitperiod},
+           given={Fosca},
+           giveni={F\bibinitperiod}}}%
+        {{hash=a2cc2c3b41c34d28b00e8b61bf830b42}{%
+           family={Pedreschi},
+           familyi={P\bibinitperiod},
+           given={Dino},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{0a500c782a4b1415c53880619e8b8706}
+      \strng{fullhash}{0a500c782a4b1415c53880619e8b8706}
+      \strng{fullhashraw}{0a500c782a4b1415c53880619e8b8706}
+      \strng{bibnamehash}{0a500c782a4b1415c53880619e8b8706}
+      \strng{authorbibnamehash}{0a500c782a4b1415c53880619e8b8706}
+      \strng{authornamehash}{0a500c782a4b1415c53880619e8b8706}
+      \strng{authorfullhash}{0a500c782a4b1415c53880619e8b8706}
+      \strng{authorfullhashraw}{0a500c782a4b1415c53880619e8b8706}
+      \strng{editorbibnamehash}{d839e799285678b1c6ad2e98f177ad06}
+      \strng{editornamehash}{d839e799285678b1c6ad2e98f177ad06}
+      \strng{editorfullhash}{8cdcdce4916a177045da47d92fcdfc16}
+      \strng{editorfullhashraw}{8cdcdce4916a177045da47d92fcdfc16}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Automated classification of email messages into user-specific folders and information extraction from chronologically ordered email streams have become interesting areas in text learning research. However, the lack of large benchmark collections has been an obstacle for studying the problems and evaluating the solutions. In this paper, we introduce the Enron corpus as a new test bed. We analyze its suitability with respect to email folder prediction, and provide the baseline results of a state-of-the-art classifier (Support Vector Machines) under various conditions, including the cases of using individual sections (From, To, Subject and body) alone as the input to the classifier, and using all the sections in combination with regression weights.}
+      \field{booktitle}{Machine Learning: ECML 2004}
+      \field{isbn}{978-3-540-30115-8}
+      \field{title}{The Enron Corpus: A New Dataset for Email Classification Research}
+      \field{year}{2004}
+      \field{pages}{217\bibrangedash 226}
+      \range{pages}{10}
+    \endentry
+    \entry{LI2023103475}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=4c1dbf67b53210ff707448664f3a2184}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Yongqi},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=a44174a97a52d8b64289ef831cb1ac37}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Nan},
+           giveni={N\bibinitperiod}}}%
+        {{hash=cce05cab2c437e9c128f853684ee3137}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Liang},
+           giveni={L\bibinitperiod}}}%
+        {{hash=e5bfd490d91c5d1b935092ce3132a083}{%
+           family={Wei},
+           familyi={W\bibinitperiod},
+           given={Furu},
+           giveni={F\bibinitperiod}}}%
+        {{hash=318a797cfb1e6f8da35b79287d226780}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Wenjie},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{a6fd6cb0bc64e7c20538473f411c6c4b}
+      \strng{fullhash}{7573bcc788ddb3f90ec6980f34080f8f}
+      \strng{fullhashraw}{7573bcc788ddb3f90ec6980f34080f8f}
+      \strng{bibnamehash}{a6fd6cb0bc64e7c20538473f411c6c4b}
+      \strng{authorbibnamehash}{a6fd6cb0bc64e7c20538473f411c6c4b}
+      \strng{authornamehash}{a6fd6cb0bc64e7c20538473f411c6c4b}
+      \strng{authorfullhash}{7573bcc788ddb3f90ec6980f34080f8f}
+      \strng{authorfullhashraw}{7573bcc788ddb3f90ec6980f34080f8f}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0306-4573}
+      \field{journaltitle}{Information Processing \& Management}
+      \field{number}{5}
+      \field{title}{Generative retrieval for conversational question answering}
+      \field{volume}{60}
+      \field{year}{2023}
+      \field{pages}{103475}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.ipm.2023.103475
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0306457323002121
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0306457323002121
+      \endverb
+      \keyw{Conversational question answering,Generative retrieval}
+    \endentry
+    \entry{DBLP:conf/sigir/LinMLYPN21}{inproceedings}{}{}
+      \name{author}{6}{}{%
+        {{hash=d68fb461fc3e26ff36f49c7b52ef0c3f}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Jimmy},
+           giveni={J\bibinitperiod}}}%
+        {{hash=61ddc97b5427ab1c3b0e6d1e56a0ea79}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Xueguang},
+           giveni={X\bibinitperiod}}}%
+        {{hash=1ae8c30a4d92af32ea933872c6850fac}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Sheng-Chieh},
+           giveni={S\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=6ca976d18c8f84eaf1b2b123e2697d37}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Jheng-Hong},
+           giveni={J\bibinithyphendelim H\bibinitperiod}}}%
+        {{hash=ab0e2367cd16f5d223ff8006ca5f3e32}{%
+           family={Pradeep},
+           familyi={P\bibinitperiod},
+           given={Ronak},
+           giveni={R\bibinitperiod}}}%
+        {{hash=b3f8856ec139474fedb82c31af94712b}{%
+           family={Nogueira},
+           familyi={N\bibinitperiod},
+           given={Rodrigo\bibnamedelima Frassetto},
+           giveni={R\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{5bdc0178d9fc36a209840e3feb129ba0}
+      \strng{fullhash}{ac0f6094dca93d0cf0977e3356bf4fee}
+      \strng{fullhashraw}{ac0f6094dca93d0cf0977e3356bf4fee}
+      \strng{bibnamehash}{5bdc0178d9fc36a209840e3feb129ba0}
+      \strng{authorbibnamehash}{5bdc0178d9fc36a209840e3feb129ba0}
+      \strng{authornamehash}{5bdc0178d9fc36a209840e3feb129ba0}
+      \strng{authorfullhash}{ac0f6094dca93d0cf0977e3356bf4fee}
+      \strng{authorfullhashraw}{ac0f6094dca93d0cf0977e3356bf4fee}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{SIGIR}
+      \field{title}{Pyserini: A Python Toolkit for Reproducible Information Retrieval Research with Sparse and Dense Representations}
+      \field{year}{2021}
+      \field{pages}{2356\bibrangedash 2362}
+      \range{pages}{7}
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3404835.3463238
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3404835.3463238
+      \endverb
+    \endentry
+    \entry{inproceedings}{inproceedings}{}{}
+      \name{author}{6}{}{%
+        {{hash=a1556945d7338fb5f2683690708e3e11}{%
+           family={Mark},
+           familyi={M\bibinitperiod},
+           given={Gloria},
+           giveni={G\bibinitperiod}}}%
+        {{hash=82520bbf113f3d3fb8b17746a891669f}{%
+           family={Iqbal},
+           familyi={I\bibinitperiod},
+           given={Shamsi},
+           giveni={S\bibinitperiod}}}%
+        {{hash=0a48485736e4d160570aaff34e4c3511}{%
+           family={Czerwinski},
+           familyi={C\bibinitperiod},
+           given={Mary},
+           giveni={M\bibinitperiod}}}%
+        {{hash=56b3c34514c51725334a185edb135029}{%
+           family={Johns},
+           familyi={J\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+        {{hash=d5aac144f99b358b66f35792450f3080}{%
+           family={Sano},
+           familyi={S\bibinitperiod},
+           given={Akane},
+           giveni={A\bibinitperiod}}}%
+        {{hash=2ab3640ae3c9fea94c080882af34ae6c}{%
+           family={Lutchyn},
+           familyi={L\bibinitperiod},
+           given={Yuliya},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{68b11c5321f34869c54c414cac725638}
+      \strng{fullhash}{641caf6a2c3c7c1f679be09275700793}
+      \strng{fullhashraw}{641caf6a2c3c7c1f679be09275700793}
+      \strng{bibnamehash}{68b11c5321f34869c54c414cac725638}
+      \strng{authorbibnamehash}{68b11c5321f34869c54c414cac725638}
+      \strng{authornamehash}{68b11c5321f34869c54c414cac725638}
+      \strng{authorfullhash}{641caf6a2c3c7c1f679be09275700793}
+      \strng{authorfullhashraw}{641caf6a2c3c7c1f679be09275700793}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{05}
+      \field{title}{Email Duration, Batching and Self-interruption: Patterns of Email Use on Productivity and Stress}
+      \field{year}{2016}
+      \field{pages}{1717\bibrangedash 1728}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1145/2858036.2858262
+      \endverb
+    \endentry
+    \entry{ilprints422}{report}{}{}
+      \name{author}{4}{}{%
+        {{hash=5ca20489809aaab392f875d6bc785086}{%
+           family={Page},
+           familyi={P\bibinitperiod},
+           given={Lawrence},
+           giveni={L\bibinitperiod}}}%
+        {{hash=ade8269d287e9c1531e4a1cbad0b4b82}{%
+           family={Brin},
+           familyi={B\bibinitperiod},
+           given={Sergey},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2f555526320a1c4028ad0f6328953999}{%
+           family={Motwani},
+           familyi={M\bibinitperiod},
+           given={Rajeev},
+           giveni={R\bibinitperiod}}}%
+        {{hash=9270c737346819f33742a35de2661f82}{%
+           family={Winograd},
+           familyi={W\bibinitperiod},
+           given={Terry},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Stanford InfoLab}%
+      }
+      \list{publisher}{1}{%
+        {Stanford InfoLab}%
+      }
+      \strng{namehash}{07b677797f2f761de27121ff4ec8b078}
+      \strng{fullhash}{d9b2cbd8494ef6058fe2436ee7edd977}
+      \strng{fullhashraw}{d9b2cbd8494ef6058fe2436ee7edd977}
+      \strng{bibnamehash}{07b677797f2f761de27121ff4ec8b078}
+      \strng{authorbibnamehash}{07b677797f2f761de27121ff4ec8b078}
+      \strng{authornamehash}{07b677797f2f761de27121ff4ec8b078}
+      \strng{authorfullhash}{d9b2cbd8494ef6058fe2436ee7edd977}
+      \strng{authorfullhashraw}{d9b2cbd8494ef6058fe2436ee7edd977}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The importance of a Web page is an inherently subjective matter, which depends on the readers interests, knowledge and attitudes. But there is still much that can be said objectively about the relative importance of Web pages. This paper describes PageRank, a mathod for rating Web pages objectively and mechanically, effectively measuring the human interest and attention devoted to them. We compare PageRank to an idealized random Web surfer. We show how to efficiently compute PageRank for large numbers of pages. And, we show how to apply PageRank to search and to user navigation.}
+      \field{month}{11}
+      \field{note}{Previous number = SIDL-WP-1999-0120}
+      \field{number}{1999-66}
+      \field{title}{The PageRank Citation Ranking: Bringing Order to the Web.}
+      \field{type}{Technical Report}
+      \field{year}{1999}
+      \verb{urlraw}
+      \verb http://ilpubs.stanford.edu:8090/422/
+      \endverb
+      \verb{url}
+      \verb http://ilpubs.stanford.edu:8090/422/
+      \endverb
+    \endentry
+    \entry{pleban2020t5headline}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=ae4265c973d149df069ecc9a4ef895f9}{%
+           family={Pleban},
+           familyi={P\bibinitperiod},
+           given={Michal},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Hugging Face}%
+      }
+      \strng{namehash}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{fullhash}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{fullhashraw}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{bibnamehash}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{authorbibnamehash}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{authornamehash}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{authorfullhash}{ae4265c973d149df069ecc9a4ef895f9}
+      \strng{authorfullhashraw}{ae4265c973d149df069ecc9a4ef895f9}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{https://huggingface.co/Michau/t5-base-en-generate-headline}
+      \field{note}{Hugging Face Model Hub}
+      \field{title}{T5-base-en-generate-headline}
+      \field{year}{2020}
+    \endentry
+    \entry{JMLR:v21:20-074}{article}{}{}
+      \name{author}{9}{}{%
+        {{hash=81a5a94e2388c149a73a86381db45e07}{%
+           family={Raffel},
+           familyi={R\bibinitperiod},
+           given={Colin},
+           giveni={C\bibinitperiod}}}%
+        {{hash=62efade83d70f0323fe248755e6c90c5}{%
+           family={Shazeer},
+           familyi={S\bibinitperiod},
+           given={Noam},
+           giveni={N\bibinitperiod}}}%
+        {{hash=243c03e5ae8031582d6af9fcbc70f629}{%
+           family={Roberts},
+           familyi={R\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod}}}%
+        {{hash=bfca12eba160cc79988e61b7fb6ded42}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Katherine},
+           giveni={K\bibinitperiod}}}%
+        {{hash=a2da348cbbad750c6fe76dda9c35ffcd}{%
+           family={Narang},
+           familyi={N\bibinitperiod},
+           given={Sharan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2ce97dc1ae3d554bd748423ad06453df}{%
+           family={Matena},
+           familyi={M\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=83a9e81d976cada23775106b303c4247}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Yanqi},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=be6f1b6df7f1ddfafad18806238fa391}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod}}}%
+        {{hash=570360613a16cb233115feb5f8b4e526}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Peter\bibnamedelima J.},
+           giveni={P\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{93aba8e9bb746e2d8ac216494b952014}
+      \strng{fullhash}{21f7721b75bba06d59f9d5ce222a34a5}
+      \strng{fullhashraw}{21f7721b75bba06d59f9d5ce222a34a5}
+      \strng{bibnamehash}{93aba8e9bb746e2d8ac216494b952014}
+      \strng{authorbibnamehash}{93aba8e9bb746e2d8ac216494b952014}
+      \strng{authornamehash}{93aba8e9bb746e2d8ac216494b952014}
+      \strng{authorfullhash}{21f7721b75bba06d59f9d5ce222a34a5}
+      \strng{authorfullhashraw}{21f7721b75bba06d59f9d5ce222a34a5}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Machine Learning Research}
+      \field{number}{140}
+      \field{title}{Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer}
+      \field{volume}{21}
+      \field{year}{2020}
+      \field{pages}{1\bibrangedash 67}
+      \range{pages}{67}
+      \verb{urlraw}
+      \verb http://jmlr.org/papers/v21/20-074.html
+      \endverb
+      \verb{url}
+      \verb http://jmlr.org/papers/v21/20-074.html
+      \endverb
+    \endentry
+    \entry{INR-019}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=c7dab237c14cbb4e5def052a91d7ec99}{%
+           family={Robertson},
+           familyi={R\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=cc9cdb3b111faeedc87e7f6c561d2ff8}{%
+           family={Zaragoza},
+           familyi={Z\bibinitperiod},
+           given={Hugo},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{f0a2bfb8afb93f12dec6aaefe2c3199a}
+      \strng{fullhash}{f0a2bfb8afb93f12dec6aaefe2c3199a}
+      \strng{fullhashraw}{f0a2bfb8afb93f12dec6aaefe2c3199a}
+      \strng{bibnamehash}{f0a2bfb8afb93f12dec6aaefe2c3199a}
+      \strng{authorbibnamehash}{f0a2bfb8afb93f12dec6aaefe2c3199a}
+      \strng{authornamehash}{f0a2bfb8afb93f12dec6aaefe2c3199a}
+      \strng{authorfullhash}{f0a2bfb8afb93f12dec6aaefe2c3199a}
+      \strng{authorfullhashraw}{f0a2bfb8afb93f12dec6aaefe2c3199a}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1554-0669}
+      \field{journaltitle}{Foundations and Trends® in Information Retrieval}
+      \field{number}{4}
+      \field{title}{The Probabilistic Relevance Framework: BM25 and Beyond}
+      \field{volume}{3}
+      \field{year}{2009}
+      \field{pages}{333\bibrangedash 389}
+      \range{pages}{57}
+      \verb{doi}
+      \verb 10.1561/1500000019
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1561/1500000019
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1561/1500000019
+      \endverb
+    \endentry
+    \entry{10.1145/3690624.3709435}{inproceedings}{}{}
+      \name{author}{8}{}{%
+        {{hash=b7daf707c77e15063af4049d13e4e2a5}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Yubao},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=b81bf0de98d741047b84d65d15117f32}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Ruqing},
+           giveni={R\bibinitperiod}}}%
+        {{hash=3a4015314b36f50d72a43c8fb03ca87e}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={Jiafeng},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ce8500c4435316ca20758d1f88f330bb}{%
+           family={Rijke},
+           familyi={R\bibinitperiod},
+           given={Maarten},
+           giveni={M\bibinitperiod},
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{hash=30fa12cc39400c77936416f97b11774d}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Shihao},
+           giveni={S\bibinitperiod}}}%
+        {{hash=643e7d4623069c06fde728f3a80e9613}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Shuaiqiang},
+           giveni={S\bibinitperiod}}}%
+        {{hash=866fc31d9db55acbc0a55c2b3c929414}{%
+           family={Yin},
+           familyi={Y\bibinitperiod},
+           given={Dawei},
+           giveni={D\bibinitperiod}}}%
+        {{hash=48dc8864d7a369badfb5b1b7dab6f4fa}{%
+           family={Cheng},
+           familyi={C\bibinitperiod},
+           given={Xueqi},
+           giveni={X\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Toronto ON, Canada}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{2c4faa4248387646f1a2a6e833db6c05}
+      \strng{fullhash}{095be92044fc98f542cc30f4aa9de46b}
+      \strng{fullhashraw}{095be92044fc98f542cc30f4aa9de46b}
+      \strng{bibnamehash}{2c4faa4248387646f1a2a6e833db6c05}
+      \strng{authorbibnamehash}{2c4faa4248387646f1a2a6e833db6c05}
+      \strng{authornamehash}{2c4faa4248387646f1a2a6e833db6c05}
+      \strng{authorfullhash}{095be92044fc98f542cc30f4aa9de46b}
+      \strng{authorfullhashraw}{095be92044fc98f542cc30f4aa9de46b}
+      \field{extraname}{1}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In book search, relevant book information should be returned in response to a query. Books contain complex, multi-faceted information such as metadata, outlines, and main text, where the outline provides hierarchical information between chapters and sections. Generative retrieval (GR) is a new retrieval paradigm that consolidates corpus information into a single model to generate identifiers of documents that are relevant to a given query. How can GR be applied to book search? Directly applying GR to book search is a challenge due to the unique characteristics of book search: The model needs to retain the complex, multi-faceted information of the book, which increases the demand for labeled data. Splitting book information and treating it as a collection of separate segments for learning might result in a loss of hierarchical information.We propose an effective Generative retrieval framework for Book Search (GBS) that features two main components: data augmentation and outline-oriented book encoding. For data augmentation, GBS constructs multiple query-book pairs for training; it constructs multiple book identifiers based on the outline, various forms of book contents, and simulates real book retrieval scenarios with varied pseudo-queries. This includes coverage-promoting book identifier augmentation, allowing the model to learn to index effectively, and diversity-enhanced query augmentation, allowing the model to learn to retrieve effectively. Outline-oriented book encoding improves length extrapolation through bi-level positional encoding and retentive attention mechanisms to maintain context over long sequences. Experiments on a proprietary Baidu dataset demonstrate that GBS outperforms strong baselines, achieving a 9.8\% improvement in terms of MRR@20, over the state-of-the-art RIPOR method. Experiments on public datasets confirm the robustness and generalizability of GBS, highlighting its potential to enhance book retrieval.}
+      \field{booktitle}{Proceedings of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.1}
+      \field{isbn}{9798400712456}
+      \field{series}{KDD '25}
+      \field{title}{Generative Retrieval for Book Search}
+      \field{year}{2025}
+      \field{pages}{2606\bibrangedash 2617}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1145/3690624.3709435
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3690624.3709435
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3690624.3709435
+      \endverb
+      \keyw{book retrieval,generative models,generative retrieval}
+    \endentry
+    \entry{10.1145/3580305.3599903}{inproceedings}{}{}
+      \name{author}{8}{}{%
+        {{hash=b7daf707c77e15063af4049d13e4e2a5}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Yubao},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=b81bf0de98d741047b84d65d15117f32}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Ruqing},
+           giveni={R\bibinitperiod}}}%
+        {{hash=3a4015314b36f50d72a43c8fb03ca87e}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={Jiafeng},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d20b6daa86e4b5e5c40a27d153e88ae8}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Jiangui},
+           giveni={J\bibinitperiod}}}%
+        {{hash=0af4c02df217e9e07f4d1978ef4f4a49}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Zuowei},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=643e7d4623069c06fde728f3a80e9613}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Shuaiqiang},
+           giveni={S\bibinitperiod}}}%
+        {{hash=866fc31d9db55acbc0a55c2b3c929414}{%
+           family={Yin},
+           familyi={Y\bibinitperiod},
+           given={Dawei},
+           giveni={D\bibinitperiod}}}%
+        {{hash=48dc8864d7a369badfb5b1b7dab6f4fa}{%
+           family={Cheng},
+           familyi={C\bibinitperiod},
+           given={Xueqi},
+           giveni={X\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Long Beach, CA, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{2c4faa4248387646f1a2a6e833db6c05}
+      \strng{fullhash}{80ccd1a3fdda8e121f959159ce2a3108}
+      \strng{fullhashraw}{80ccd1a3fdda8e121f959159ce2a3108}
+      \strng{bibnamehash}{2c4faa4248387646f1a2a6e833db6c05}
+      \strng{authorbibnamehash}{2c4faa4248387646f1a2a6e833db6c05}
+      \strng{authornamehash}{2c4faa4248387646f1a2a6e833db6c05}
+      \strng{authorfullhash}{80ccd1a3fdda8e121f959159ce2a3108}
+      \strng{authorfullhashraw}{80ccd1a3fdda8e121f959159ce2a3108}
+      \field{extraname}{2}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Recently, a new paradigm called Differentiable Search Index (DSI) has been proposed for document retrieval, wherein a sequence-to-sequence model is learned to directly map queries to relevant document identifiers. The key idea behind DSI is to fully parameterize traditional ''index-retrieve'' pipelines within a single neural model, by encoding all documents in the corpus into the model parameters. In essence, DSI needs to resolve two major questions: (1) how to assign an identifier to each document, and (2) how to learn the associations between a document and its identifier. In this work, we propose a Semantic-Enhanced DSI model (SE-DSI) motivated by Learning Strategies in the area of Cognitive Psychology. Our approach advances original DSI in two ways: (1) For the document identifier, we take inspiration from Elaboration Strategies in human learning. Specifically, we assign each document an Elaborative Description based on the query generation technique, which is more meaningful than a string of integers in the original DSI; and (2) For the associations between a document and its identifier, we take inspiration from Rehearsal Strategies in human learning. Specifically, we select fine-grained semantic features from a document as Rehearsal Contents to improve document memorization. Both the offline and online experiments show improved retrieval performance over prevailing baselines.}
+      \field{booktitle}{Proceedings of the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining}
+      \field{isbn}{9798400701030}
+      \field{series}{KDD '23}
+      \field{title}{Semantic-Enhanced Differentiable Search Index Inspired by Learning Strategies}
+      \field{year}{2023}
+      \field{pages}{4904\bibrangedash 4913}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1145/3580305.3599903
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3580305.3599903
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3580305.3599903
+      \endverb
+      \keyw{rehearsal strategies,elaboration strategies,dsi}
+    \endentry
+    \entry{NEURIPS2022_892840a6}{inproceedings}{}{}
+      \name{author}{13}{}{%
+        {{hash=7579658a0aca8cb0e17a89deb28b8ccc}{%
+           family={Tay},
+           familyi={T\bibinitperiod},
+           given={Yi},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=8c6e852269af500a358c3be07e8a333e}{%
+           family={Tran},
+           familyi={T\bibinitperiod},
+           given={Vinh},
+           giveni={V\bibinitperiod}}}%
+        {{hash=965baf6fa5686a42b1564330c5e11f2f}{%
+           family={Dehghani},
+           familyi={D\bibinitperiod},
+           given={Mostafa},
+           giveni={M\bibinitperiod}}}%
+        {{hash=03c157e0c0813ae391fc255395467a5e}{%
+           family={Ni},
+           familyi={N\bibinitperiod},
+           given={Jianmo},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7f0823725cb5d9190d4dbda44640adfc}{%
+           family={Bahri},
+           familyi={B\bibinitperiod},
+           given={Dara},
+           giveni={D\bibinitperiod}}}%
+        {{hash=57e6032aa3341211a8e9b9130c8f4d09}{%
+           family={Mehta},
+           familyi={M\bibinitperiod},
+           given={Harsh},
+           giveni={H\bibinitperiod}}}%
+        {{hash=5f5b3cfde3012c0d1635e3be3cd6e649}{%
+           family={Qin},
+           familyi={Q\bibinitperiod},
+           given={Zhen},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=1cdc14c486d45423b56d27ea77cb0b42}{%
+           family={Hui},
+           familyi={H\bibinitperiod},
+           given={Kai},
+           giveni={K\bibinitperiod}}}%
+        {{hash=eed156c687a79d721734200afc38d239}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Zhe},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=f9a0b360f4417c61d7430e31108fd4ef}{%
+           family={Gupta},
+           familyi={G\bibinitperiod},
+           given={Jai},
+           giveni={J\bibinitperiod}}}%
+        {{hash=750bcf434e404221c5aa7075283b0f66}{%
+           family={Schuster},
+           familyi={S\bibinitperiod},
+           given={Tal},
+           giveni={T\bibinitperiod}}}%
+        {{hash=e73233352c261fd69883c5f0f01f4218}{%
+           family={Cohen},
+           familyi={C\bibinitperiod},
+           given={William\bibnamedelima W},
+           giveni={W\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=b8598f6ee8ef27100af553bb38e1ff24}{%
+           family={Metzler},
+           familyi={M\bibinitperiod},
+           given={Donald},
+           giveni={D\bibinitperiod}}}%
+      }
+      \name{editor}{6}{}{%
+        {{hash=bf08b65cce4ebf8ed71a0b3f7c1dfa1d}{%
+           family={Koyejo},
+           familyi={K\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=f9e146884d45b458408eba9ec6ba0cc9}{%
+           family={Mohamed},
+           familyi={M\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=1cc9a6fef261c6c620d53b6fe154022a}{%
+           family={Agarwal},
+           familyi={A\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=cbb0ac3a625af607c7b2347f3a1f6eec}{%
+           family={Belgrave},
+           familyi={B\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=0f841893a4e03c6a159374cc7136b961}{%
+           family={Cho},
+           familyi={C\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=6d9c5f3daf57997af27b3617ec7d1fe9}{%
+           family={Oh},
+           familyi={O\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Curran Associates, Inc.}%
+      }
+      \strng{namehash}{3f8f8c1d6cc8b6e818219cc49ec8c7df}
+      \strng{fullhash}{170df478a048ecc9e27553866c161050}
+      \strng{fullhashraw}{170df478a048ecc9e27553866c161050}
+      \strng{bibnamehash}{3f8f8c1d6cc8b6e818219cc49ec8c7df}
+      \strng{authorbibnamehash}{3f8f8c1d6cc8b6e818219cc49ec8c7df}
+      \strng{authornamehash}{3f8f8c1d6cc8b6e818219cc49ec8c7df}
+      \strng{authorfullhash}{170df478a048ecc9e27553866c161050}
+      \strng{authorfullhashraw}{170df478a048ecc9e27553866c161050}
+      \strng{editorbibnamehash}{ef48c9a3cb05b7d5bc7df5bc7eec0b92}
+      \strng{editornamehash}{ef48c9a3cb05b7d5bc7df5bc7eec0b92}
+      \strng{editorfullhash}{149e334d093f657bc216da323592d003}
+      \strng{editorfullhashraw}{149e334d093f657bc216da323592d003}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Advances in Neural Information Processing Systems}
+      \field{title}{Transformer Memory as a Differentiable Search Index}
+      \field{volume}{35}
+      \field{year}{2022}
+      \field{pages}{21831\bibrangedash 21843}
+      \range{pages}{13}
+      \verb{urlraw}
+      \verb https://proceedings.neurips.cc/paper_files/paper/2022/file/892840a6123b5ec99ebaab8be1530fba-Paper-Conference.pdf
+      \endverb
+      \verb{url}
+      \verb https://proceedings.neurips.cc/paper_files/paper/2022/file/892840a6123b5ec99ebaab8be1530fba-Paper-Conference.pdf
+      \endverb
+    \endentry
+    \entry{zhuang2022dsiqg}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=e3ead0fec18117a867cf91d22d9afb67}{%
+           family={Zhuang},
+           familyi={Z\bibinitperiod},
+           given={Shengyao},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {GitHub}%
+      }
+      \strng{namehash}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{fullhash}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{fullhashraw}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{bibnamehash}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{authorbibnamehash}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{authornamehash}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{authorfullhash}{e3ead0fec18117a867cf91d22d9afb67}
+      \strng{authorfullhashraw}{e3ead0fec18117a867cf91d22d9afb67}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{https://github.com/ArvinZhuang/DSI-QG}
+      \field{journaltitle}{GitHub repository}
+      \field{title}{DSI-QG: Bridging the Gap Between Indexing and Retrieval for Differentiable Search Index with Query Generation}
+      \field{year}{2022}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
