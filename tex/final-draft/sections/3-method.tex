@@ -15,9 +15,9 @@ Where $y_d$ is the unique identifier assigned to document $d \in \mathcal{D}$ an
 
 The GR retrieval model, $f_\theta$ follows an encoder-decoder architecture. The encoder encodes the query $q$ or the email document $d$ and generates the unique document identifier $y$.
 
-\section{Dataset Construction}
+\section{Corpus Analysis}
 
-\paragraph{Datase}
+\paragraph{Corpus attributes}
 The number of emails present after dropping automatically generated folders is \NoFolderLength. This include the inbox folders and sent / sent\_items / outbox. This is a similar number to the cleaned dataset found in \citeauthor{klimt2004enron}. They found a value of 200,399 documents after cleaning. Their different number of selected emails may have been due to their objective to classify the folders that each email belonged to, for which reason they sought only folders created by humans. After cleaning further the number of remaining emails left is \GeneralLength.
 
 To use the email bodies, it is important to clean them to reduce the real world noise. Case studies on random samples were conducted to construct regex patterns to clean the data. Headers, emails, websites, phone numbers, signature footers, legal disclaimers and email provider artifacts were removed this way. Email history threads were split and cleaned individually. For the analysis in this section the history threads are kept.  Preliminary experiments showed that email header data creates noise, thus were removed. We employed input lionization by concatenating the subject and body, utilizing field identifiers. This also created noise, though this was kept for some of the datasets because of an error and time constraints, more detail on this in section \ref{subsec:traingin-set-construction}. For a detailed case study showing the effects email header data and including field identifiers, see Appendix \ref{app:schema_impact}. Following earlier work on cleaning data \cite{JMLR:v21:20-074}, the emails smaller then 30 words are removed. Also they would be too  small to create queries and docids of.
@@ -63,24 +63,30 @@ For the word count the Mean \wordMean{} as shown in \ref{fig:wrd_count_kde} and 
 
 To determine if the subjects of the emails have any similarity to their respective bodies a sentence transformer [source sentence transformer] has been used to calculate the embedding and the cosine similarity has be computed. In the process of calculating the cosine similarity [source cosine sim] the dot product of the subject and body embeddings is taken and the distribution is plotted in figure \ref{fig:similarities}. Although the distribution is unimodal, it is not a perfect bell curve. This is also apparent when looking at the Skewness which is a negative skew of \similaritiesSkewness making it clear that the subjects and the bodies are very similar.
 
-\section{Generating labels}
+\paragraph{Training data construction}
 To train the model without manual labels, we constructed training data solely on the email content and email subject itself. With this process we create the docids and pseudo queries.
 
 
+\begin{itemize}[leftmargin=*,nosep]
+\item \textbf{Email ID construction}
+Identifiers should capture the essence of the mail while remaining compact. Following \textcite{10.1145/3690624.3709435}, we use text rank to extract key words of interest from the emails bodies. These keywords will server as docids. Text rank is a graph based ranking system that scores text units, like words or sentences, based on their co-occurence or similarity respectively and selects the best text units using Page Rank \cite{ilprints422}. A problem that arose is that text rank generates docids that are not always unique. It is standard to ignore this issue \cite{10.1145/3580305.3599903}, because duplicate docids are for emails that are similar in contents anyway.
 
-\subsection{Email ID construction}
-Identifiers should capture the essence of the mail while remaining compact. Following \textcite{10.1145/3690624.3709435}, we use text rank to extract key words of interest from the emails bodies. These keywords will server as docids. Text rank is a graph based ranking system that scores text units, like words or sentences, based on their co-occurence or similarity respectively and selects the best text units using Page Rank \cite{ilprints422}.
 
-A problem that arose is that text rank generates docids that are not always unique. It is standard to ignore this issue \cite{10.1145/3580305.3599903}, because duplicate docids are for emails that are similar in contents anyway.
-
-% TODO:[cite package sumsum]
-
-\subsection{Pseudo-query construction}
+\item \textbf{Pseudo-query construction}
 When constructing queries it is important that the original words are contained but also cover the essence of the email. Which is why we use an extractve method and an abstractive method in constructing the pseudo-queries. Textrank was employed to extract the most important sentence as pseudo-query. For the abstractive query construction method an LLM was used for summarizing the email bodies. When textrank was empty the mail was truncated to 15 words and used instead. [How is textrank empty]
+\end{itemize}
+
+
+
+
 
 % TODO:[cite package sumsum]
 
-\subsection{Training set construction}
+
+
+% TODO:[cite package sumsum]
+
+\paragraph{Training set variants}
 \label{subsec:traingin-set-construction}
 
 For the history thread dataset \cite{10.1145/3580305.3599903}, a 10k and a 100k subset is used, because and that this size is a reasonable scale for T5 to learn from. For the dataset without history thread only a 10k dataset was used as after dropping email smaller then 30 only 93k emails were left. Per data point 3 data pairs are created. These pairs consist of the Semantic Document Identifier paired with one of the following: email body and subject, the extractive query or the abstractive query \ref{eq:training-set}.
@@ -93,6 +99,7 @@ As briefly covered in [ref dataset methods] it was planned to remove the field i
 \section{Model training}
  % \cite{NEURIPS2022_892840a6} and your improvement \cite{10.1145/3580305.3599903} or can I just quote that?
 As specified in \cref{subsec:task-definition} $f_\theta$ is a GR model with the encoder decoder architecture. For this the T5 model was chosen because that is the standard used in previous works \cite{NEURIPS2022_892840a6}\cite{10.1145/3580305.3599903}. The training of the model is a joint mode of two parts i.e., indexing and the retrieval in an end to end way.
+
 \textbf{Indexing:} This step is for memorizing information about the email documents, document are mapped to an docid \cite{NEURIPS2022_892840a6}.
 
 \begin{equation}

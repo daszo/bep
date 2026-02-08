@@ -1,0 +1,29 @@
+
+\chapter{Conclusion}
+
+
+This work evaluated the effectiveness of generative retrieval (GR) on the Enron email corpus by comparing DSI with BM25 under different dataset sizes and thread context settings. Our goal was to assess whether GR can better address semantic mismatch in realistic email content search.
+
+The experimental results show that BM25 remains a strong and robust baseline for email retrieval. Across all settings, BM25 consistently outperformed DSI, indicating that lexical matching is still highly effective on noisy real-world email data. In contrast, DSI exhibited strong sensitivity to noise and failed to generalize well, despite preprocessing efforts.
+
+We further examined the impact of email thread context and dataset scale. Contrary to our expectation, including thread history did not improve retrieval performance, and models trained on non-threaded data performed better. In addition, DSI did not scale effectively from 10K to 100K documents, suggesting limited robustness to increased noise and corpus size.
+
+Overall, our findings suggest that while GR is promising on cleaner datasets, it does not perform reliably out of the box on noisy email corpora. Improving GR for real-world email search likely requires more effective denoising strategies and training objectives that capture graded relevance rather than binary matching.
+
+
+\iffalse
+This study investigated the efficacy of Generative Retrieval (GR) on the Enron email corpus. It aimed to bridge the semantic gap inherent to lexical models (BM25), by using differential search index (DSI). It did so by creating a solid baseline and varying between history thread and dataset size.
+
+BM25 proved to still be a strong baseline and was a competitive for the Enron corpus. It consistently outperformed DSI, across dataset size and thread context. Suggesting that BM25 is still a strong baseline despite the semantic limitations of lexical matching. 
+
+Regarding the comparison between GR and BM25, our experiments contradict earlier findings, who were trained on cleaner data. The DSI model proved highly sensitive to noise and failed to outperform the baseline as the data still contained a lot of artifacting, despite the regex cleaning.
+
+Finalle, we explored the role of tread history. Contrary to our hypothesis the performance of the no thread dataset out performed the dataset with more context. Which was surprising as it was expected that more context would give more signals to the model to learn form. Further the model failed to scale properly from 10k to 100k, suggesting that the model over fitted on noise.
+
+We conclude that although GR is quite promising on cleaned data, it won't work out of the box on noisy real world data. This shows that what is necessary to move from lexical matching to generative approach is not just architectural improvements, but better data cleaning pipelines and moving away form binary tasks to a more granular relevance score. We suggest exploring denoising strategies with a Large Language model and training objectives that grade the relevance to better capture the nature of the data.
+
+\fi
+
+
+
+
