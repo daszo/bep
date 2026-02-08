@@ -1,6 +1,83 @@
 \chapter{Experimental Setup}
 
-In this chapter the setup of the experiment is covered. Upon the methods in the previous chapter is expanded.
+
+
+
+This chapter describes the experimental setup of our study, including the baseline methods, evaluation metrics, and implementation details.
+
+\section{Baseline Methods}
+
+We use BM25 as the baseline retrieval method in our experiments. BM25 is a widely adopted lexical retrieval model and serves as a strong and well-established baseline for content-based retrieval tasks. Its effectiveness and efficiency make it a common reference point in both academic research and practical search systems.
+
+BM25 is implemented using the Pyserini toolkit \cite{DBLP:conf/sigir/LinMLYPN21}, which provides a robust and reproducible framework for sparse retrieval. Since the Enron email corpus shares similar characteristics with document collections such as MS MARCO in terms of document length and query style, we adopt the optimized hyperparameters reported in the Pyserini study. Specifically, we set $k_1 = 0.9$ and $b = 0.4$ for all BM25 experiments. These settings are kept fixed across all runs to ensure a fair and consistent comparison with generative retrieval methods.
+
+\section{Evaluation Metrics}
+
+Following prior work on GR \cite{NEURIPS2022_892840a6,10.1145/3580305.3599903}, we evaluate retrieval performance using Mean Reciprocal Rank (MRR) and Hits@k. These metrics are commonly used in known-item retrieval settings, where each query is associated with a single relevant document.
+
+Mean Reciprocal Rank (MRR) measures how early the first relevant document appears in the ranked retrieval results. It is defined as the mean of the reciprocal ranks over all queries:
+
+\begin{equation}
+\text{MRR} = \frac{1}{N} \sum_{i=1}^{N} \text{RR}_i,
+\label{eq:mrr}
+\end{equation}
+% 
+where $\text{RR}_i$ denotes the reciprocal rank of the first relevant document for query $i$, and $N$ is the total number of queries. We report MRR@3 and MRR@20 in our experiments.
+
+Hits@k measures the proportion of queries for which the relevant document is ranked within the top-$k$ results. It is defined as:
+
+\begin{equation}
+\text{Hits@}k = \frac{1}{N} \sum_{i=1}^{N} \mathbb{I}(\text{rank}_i \le k),
+\label{eq:hits}
+\end{equation}
+% 
+where $\mathbb{I}(\cdot)$ is the indicator function. We report Hits@1 and Hits@10.
+
+\section{Implementation Details}
+
+\paragraph{Model Architecture}
+We employ a Transformer-based encoder--decoder architecture for generative retrieval, following the DSI framework. The model is initialized with the pre-trained T5-base checkpoint \cite{JMLR:v21:20-074}, which consists of 12 Transformer layers, a hidden size of 768, and 12 self-attention heads.
+
+\paragraph{Training Configuration}
+Model training largely follows the setup of prior work \cite{10.1145/3580305.3599903}, with minor adaptations based on the publicly available implementation \cite{zhuang2022dsiqg}. We optimize the model using the Adam optimizer with a learning rate of $5\times10^{-4}$ and a linear warm-up schedule over 100{,}000 steps. Training is conducted for a maximum of 100{,}000 steps with a global batch size of 64, distributed as 32 samples per device.
+
+\paragraph{Input Processing}
+The maximum input sequence length is set to 32 tokens for both queries and document identifiers. Prior to training, email texts are truncated to 512 tokens, as the model is not designed to process longer sequences. This truncation is applied consistently across all experimental conditions.
+
+\paragraph{Pseudo Query Construction}
+To construct pseudo queries for training, we employ two complementary strategies. First, we use a T5-headline model \cite{pleban2020t5headline} to generate abstractive summaries of email content. Second, we apply a TextRank-based method \cite{barrios2016variationssimilarityfunctiontextrank} using the \texttt{summa} package to extract key phrases. These pseudo queries are used for both indexing and retrieval training.
+
+\paragraph{Implementation and Infrastructure}
+Our implementation builds upon the DSI-QG codebase \cite{zhuang2022dsiqg}, which we adapt to support the SQLite-based storage used in this work. Since the original implementation is designed for numeric document identifiers, we incorporate trie construction code from \cite{LI2023103475} to enable decoding with semantic identifiers.
+
+All models are implemented in PyTorch and use the Hugging Face Transformers library for model loading and training. Experiments are conducted on two NVIDIA A100 GPUs provided by the SURF computing platform. We track training progress and evaluation metrics using Weights \& Biases.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% ------------------
+\iffalse
+In this chapter, we introduce the experimental settups including baseline methods, evalution metrics, and implementation details.
 
 \section{Baseline Methods}
 
@@ -34,3 +111,4 @@ For training of the model the DSI-QG repository \cite{zhuang2022dsiqg} was used 
 
 
 We we implemented our models using PyTorch [cite] and the Hugging Face transformers [cite] library. To load the T5 we utilized Hugging face and we tracked performance using Weights \& Biases [cite]. 
+\fi

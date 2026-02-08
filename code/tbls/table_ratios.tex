@@ -1,3 +1,25 @@
+\begin{table}[t]
+\centering
+\caption{Ratio of DSI scores to BM25 scores across different settings.}
+\label{tab:ratio_results}
+\begin{tabular}{lcccc}
+\toprule
+Setting & MRR@3 & MRR@20 & Hits@1 & Hits@10 \\
+\midrule
+100K Context        & 0.0737 & 0.0808 & 0.0657 & 0.1124 \\
+10K No Context      & 0.1171 & 0.1362 & 0.0867 & 0.2483 \\
+10K Context     & 0.0976 & 0.1126 & 0.0740 & 0.2066 \\
+10K Context      & 0.1052 & 0.1278 & 0.0787 & 0.2428 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+\iffalse
 \begin{table*}[t]
 \centering
 \caption{Ratio of DSI scores to BM25 scores.}
@@ -14,3 +36,4 @@ Ratio (DSI / BM25) & 0.0737 & 0.0808 & 0.0657 & 0.1124 & 0.1171 & 0.1362 & 0.086
 \end{tabular}
 }
 \end{table*}
+\fi
