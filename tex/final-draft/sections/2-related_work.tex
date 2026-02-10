@@ -1,6 +1,6 @@
 \chapter{Related Work}
 
-This chapter reviews prior work related to information retrieval methods relevant to this study. We first introduce traditional information retrieval approaches, including sparse lexical retrieval and dense retrieval methods. We then review generative retrieval (GR), which forms the methodological focus of this work. Finally, we briefly introduce the Enron email corpus used in our experiments.
+This chapter reviews prior work related to information retrieval methods relevant to this study. We first introduce traditional information retrieval approaches, including sparse lexical retrieval~\cite{strathprints2621, INR-019} and dense retrieval methods~\cite{karpukhin-etal-2020-dense, 2021arXiv210311943K}.  We then review generative retrieval (GR)~\cite{10.1145/3580305.3599903, NEURIPS2022_892840a6}, which forms the methodological focus of this work. Finally, we briefly introduce the Enron email corpus used in our experiments~\cite{klimt2004enron, klimt2004introducing}.
 
 \section{Traditional Information Retrieval}
 
@@ -8,13 +8,13 @@ Traditional information retrieval methods can be broadly categorized into sparse
 
 \paragraph{Sparse Lexical Retrieval and BM25}
 
-Sparse retrieval methods represent documents and queries using discrete terms and rely on lexical overlap for retrieval. A core component of such systems is the inverted index \cite{strathprints2621}, which maps each term to the set of documents in which it appears, enabling efficient retrieval over large corpora.
+Sparse retrieval methods represent documents and queries using discrete terms and rely on lexical overlap for retrieval. A core component of such systems is the inverted index~\cite{strathprints2621}, which maps each term to the set of documents in which it appears, enabling efficient retrieval over large corpora.
 % 
-Among sparse retrieval models, BM25 \cite{INR-019} is the most widely used ranking function and remains a strong baseline in many retrieval tasks. BM25 scores documents based on term frequency, inverse document frequency, and document length normalization, balancing the importance of rare terms while penalizing overly long documents. Due to its simplicity, interpretability, and robust empirical performance, BM25 is widely adopted in both academic research and industrial search systems. However, as a lexical method, BM25 fundamentally relies on term overlap and therefore suffers from the semantic gap when queries and documents express similar meanings using different vocabulary.
+Among sparse retrieval models,~BM25 \cite{INR-019} is the most widely used ranking function and remains a strong baseline in many retrieval tasks. BM25 scores documents based on term frequency, inverse document frequency, and document length normalization, balancing the importance of rare terms while penalizing overly long documents. Due to its simplicity, interpretability, and robust empirical performance, BM25 is widely adopted in both academic research and industrial search systems. However, as a lexical method, BM25 fundamentally relies on term overlap and therefore suffers from the semantic gap when queries and documents express similar meanings using different vocabulary.
 
 \paragraph{Dense Retrieval}
 
-Dense retrieval methods aim to address the semantic gap by encoding queries and documents into continuous vector representations using neural models \cite{karpukhin-etal-2020-dense}. Typically, a dual-encoder architecture is employed, where queries and documents are independently encoded and compared via vector similarity. Transformer-based language models \cite{NIPS2017_3f5ee243} such as BERT \cite{2021arXiv210311943K} serve as the backbone of these encoders, enabling richer semantic representations.
+Dense retrieval methods aim to address the semantic gap by encoding queries and documents into continuous vector representations using neural models~\cite{karpukhin-etal-2020-dense}. Typically, a dual-encoder architecture is employed, where queries and documents are independently encoded and compared via vector similarity. Transformer-based language models~\cite{NIPS2017_3f5ee243} such as BERT~\cite{2021arXiv210311943K} serve as the backbone of these encoders, enabling richer semantic representations.
 
 While dense retrieval has demonstrated strong performance on a variety of open-domain retrieval tasks, it introduces additional complexity through vector indexing and nearest-neighbor search. Since dense retrieval methods are not evaluated or compared in this work, we do not discuss them further.
 
@@ -24,7 +24,7 @@ Generative retrieval (GR) formulates retrieval as a sequence generation problem.
 This end-to-end formulation removes the need for maintaining an external index structure, such as an inverted index or a vector database, and allows the entire retrieval process to be optimized within a single model.
 
 At the method design level, GR mainly involves two aspects: the design of document identifiers and the learning process that connects documents and queries through these identifiers. 
-Document identifier design plays a central role in GR, and existing approaches can be broadly categorized into numeric identifiers, such as atomic or tokenizable numeric strings, and textual identifiers, which incorporate lexical or semantic information derived from document content \cite{tang2023recent}. 
+Document identifier design plays a central role in GR, and existing approaches can be broadly categorized into numeric identifiers, such as atomic or tokenizable numeric strings, and textual identifiers, which incorporate lexical or semantic information derived from document content~\cite{tang2023recent}. 
 
 The learning process in GR consists of two fundamental operations:
 \begin{enumerate}[label=(\roman*)]
@@ -37,7 +37,7 @@ These two operations are typically optimized jointly using maximum likelihood es
 
 \paragraph{DSI}
 
-DSI is the first concrete framework that operationalizes GR using a T5-style encoder–decoder model \cite{NEURIPS2022_892840a6}. 
+DSI is the first concrete framework that operationalizes GR using a T5-style encoder–decoder model~\cite{NEURIPS2022_892840a6}. 
 DSI explores multiple design choices for indexing and identifier construction. 
 (i) For indexing, documents can be mapped to identifiers using different strategies, including directly encoding document text into the decoder target, reversing the mapping, or introducing span-level perturbations. Among these strategies, input-to-target indexing is shown to be the most effective and has become the dominant approach in subsequent work. DSI also investigates different document representations during indexing, such as using the first segment of the document, representing documents as sets of keywords, or constructing inverted-style representations.
 % 
@@ -46,15 +46,16 @@ These design choices highlight the flexibility of docid generation within the GR
 
 \paragraph{SE-DSI}
 
-SE-DSI extends DSI by incorporating multi-granularity document representations and semantic enhancements to identifier construction \cite{10.1145/3580305.3599903}. In particular, it allows documents to be indexed at different granularities, such as full documents, passages, or sentences, and introduces content-derived identifiers to improve semantic alignment between queries and docids.
+SE-DSI extends DSI by incorporating multi-granularity document representations and semantic enhancements to identifier construction~\cite{10.1145/3580305.3599903}. In particular, it allows documents to be indexed at different granularities, such as full documents, passages, or sentences, and introduces content-derived identifiers to improve semantic alignment between queries and docids.
 
-While GR methods have shown promising results on knowledge-intensive tasks \cite{chen2022corpusbrain,chen-2023-unified}, they have not been evaluated in the context of email content search. In particular, their behavior on noisy, conversational, and thread-structured email data remains underexplored, motivating the empirical study conducted in this work.
+
+While GR methods have shown promising results on knowledge-intensive tasks~\cite{chen2022corpusbrain,chen-2023-unified}, they have not been evaluated in the context of email content search. In particular, their behavior on noisy, conversational, and thread-structured email data remains underexplored, motivating the empirical study conducted in this work.
 
 \section{The Enron Corpus}
 
-The Enron email corpus is a large collection of real-world emails released during the investigation of Enron Corporation following its bankruptcy in 2001 \cite{BritannicaEnron, FBIEnronCase}. The dataset was later curated and released for research purposes due to its unique scale and authenticity \cite{klimt2004enron, klimt2004introducing}. It has been widely used in studies on spam detection, classification, and email analysis.
+The Enron email corpus is a large collection of real-world emails released during the investigation of Enron Corporation following its bankruptcy in 2001~\cite{BritannicaEnron, FBIEnronCase}. The dataset was later curated and released for research purposes due to its unique scale and authenticity~\cite{klimt2004enron, klimt2004introducing}. 
 % 
-Due to privacy concerns, the original dataset underwent multiple revisions, and a cleaned version was re-released in 2016 \cite{enron_dataset}. This version is used in our study. The Enron corpus remains one of the few publicly available datasets that captures realistic email communication, making it a valuable benchmark for evaluating email retrieval methods.
+Due to privacy concerns, the original dataset underwent multiple revisions, and a cleaned version was re-released in 2016~\cite{enron_dataset}. This version is used in our study. The Enron corpus remains one of the few publicly available datasets that captures realistic email communication, making it a valuable benchmark for evaluating email retrieval methods.
 
 
 
