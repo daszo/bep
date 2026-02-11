@@ -195,6 +195,18 @@ Science Park 900\\
 \setcounter{page}{1}
 \pagestyle{plain} 
 
+
+\abstract
+DSI is a generative retrieval (GR) method has proven to outperform basseline methods on clean and structured datsets. This paper aims to explores the utility of DSI on noisy real world data such as the Enron corpus. As is industry standard, to test the performance, DSI is tested against BM25 as a bassline. The dataset is cleaned using a regex pattern. To explore how to increase the performance of DSI, two different comparisons are made. The first is that of including the email history thread. For this, 10k emails are selected and turned into two datasets, one with the history thread and one without. The second comparison is of scale, a 10k and a 100k dataset is constructed and compared against each other. Contrary to findings in cleaner data domains, BM25 outperformed DSI. The model also did not improve with neither increasing scale and adding history thread. We conclude that a better data cleaning strategy is needed and that the training objective should adhere better to the nature of the corpus.
+
+
+
+
+% The objective of this paper is to improve on email search, explore the performance of DSI on noisy real-world data, and what the performance increase is of including the email history thread and increasing scale. To achieve this, DSI is tested against, the industry standard, BM25. For the email dataset the Enron corpus is used, which is cleaned using a regex data cleaning strategy. Contrary to findings in cleaner data domains, BM25 outperformed DSI. Including the history thread or scaling, did not increase performance for both methods. We conclude that a better data cleaning strategy is needed and that the training objective should adhere better to the nature of the corpus.
+
+
+
+
 \tableofcontents{}
 
 

@@ -1,44 +1,44 @@
-\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Related Work}{4}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Traditional Information Retrieval}{4}{section.2.1}%
-\contentsline {paragraph}{Sparse Lexical Retrieval and BM25}{4}{section*.2}%
-\contentsline {paragraph}{Dense Retrieval}{5}{section*.3}%
-\contentsline {section}{\numberline {2.2}Generative Retrieval}{5}{section.2.2}%
-\contentsline {paragraph}{DSI}{6}{section*.4}%
-\contentsline {paragraph}{SE-DSI}{6}{section*.5}%
-\contentsline {section}{\numberline {2.3}The Enron Corpus}{6}{section.2.3}%
-\contentsline {chapter}{\numberline {3}Methods}{7}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Task Definition}{7}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Corpus Analysis}{7}{section.3.2}%
-\contentsline {paragraph}{Corpus attributes}{7}{section*.6}%
-\contentsline {paragraph}{Training data construction}{9}{section*.10}%
-\contentsline {paragraph}{Training set variants}{10}{section*.11}%
-\contentsline {section}{\numberline {3.3}Model training}{10}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Model inference}{11}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Experimental Setup}{12}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Baseline Methods}{12}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Evaluation Metrics}{12}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Implementation Details}{13}{section.4.3}%
-\contentsline {paragraph}{Model Architecture}{13}{section*.12}%
-\contentsline {paragraph}{Training Configuration}{13}{section*.13}%
-\contentsline {paragraph}{Input Processing}{13}{section*.14}%
-\contentsline {paragraph}{Pseudo Query Construction}{13}{section*.15}%
-\contentsline {paragraph}{Implementation and Infrastructure}{14}{section*.16}%
-\contentsline {chapter}{\numberline {5}Experimental Analyses}{15}{chapter.5}%
-\contentsline {paragraph}{BM25:}{15}{section*.19}%
-\contentsline {paragraph}{Comparison BM25 and DSI}{15}{section*.20}%
-\contentsline {paragraph}{Thread settings comparison:}{16}{section*.21}%
-\contentsline {paragraph}{Scale comparison:}{16}{section*.22}%
-\contentsline {paragraph}{Error analysis}{16}{section*.23}%
-\contentsline {subparagraph}{Popularity bias}{17}{section*.24}%
-\contentsline {subparagraph}{Topic collision}{17}{section*.25}%
-\contentsline {chapter}{\numberline {6}Conclusion}{18}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Discussion}{19}{chapter.7}%
-\contentsline {paragraph}{Impact of Noise and Data Characteristics}{19}{section*.26}%
-\contentsline {paragraph}{Thread Context and Topic Drift}{19}{section*.27}%
-\contentsline {paragraph}{Identifier Design and Learning Objective}{20}{section*.28}%
-\contentsline {paragraph}{Pseudo-Query Construction}{20}{section*.29}%
-\contentsline {paragraph}{Implications and Future Directions}{20}{section*.30}%
-\contentsline {chapter}{\numberline {8}Appendix}{25}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Impact of Schema Artifacts on Model Performance}{25}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Comparison DSI and BM25 performance}{26}{section.8.2}%
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Related Work}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Traditional Information Retrieval}{5}{section.2.1}%
+\contentsline {paragraph}{Sparse Lexical Retrieval and BM25}{5}{section*.2}%
+\contentsline {paragraph}{Dense Retrieval}{6}{section*.3}%
+\contentsline {section}{\numberline {2.2}Generative Retrieval}{6}{section.2.2}%
+\contentsline {paragraph}{DSI}{7}{section*.4}%
+\contentsline {paragraph}{SE-DSI}{7}{section*.5}%
+\contentsline {section}{\numberline {2.3}The Enron Corpus}{7}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Methods}{8}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Task Definition}{8}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Corpus Analysis}{8}{section.3.2}%
+\contentsline {paragraph}{Corpus attributes}{8}{section*.6}%
+\contentsline {paragraph}{Training data construction}{10}{section*.10}%
+\contentsline {paragraph}{Training set variants}{11}{section*.11}%
+\contentsline {section}{\numberline {3.3}Model training}{11}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Model inference}{12}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Experimental Setup}{13}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Baseline Methods}{13}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Evaluation Metrics}{13}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Implementation Details}{14}{section.4.3}%
+\contentsline {paragraph}{Model Architecture}{14}{section*.12}%
+\contentsline {paragraph}{Training Configuration}{14}{section*.13}%
+\contentsline {paragraph}{Input Processing}{14}{section*.14}%
+\contentsline {paragraph}{Pseudo Query Construction}{14}{section*.15}%
+\contentsline {paragraph}{Implementation and Infrastructure}{15}{section*.16}%
+\contentsline {chapter}{\numberline {5}Experimental Analyses}{16}{chapter.5}%
+\contentsline {paragraph}{BM25:}{16}{section*.19}%
+\contentsline {paragraph}{Comparison BM25 and DSI}{16}{section*.20}%
+\contentsline {paragraph}{Thread settings comparison:}{17}{section*.21}%
+\contentsline {paragraph}{Scale comparison:}{17}{section*.22}%
+\contentsline {paragraph}{Error analysis}{17}{section*.23}%
+\contentsline {subparagraph}{Popularity bias}{18}{section*.24}%
+\contentsline {subparagraph}{Topic collision}{18}{section*.25}%
+\contentsline {chapter}{\numberline {6}Conclusion}{19}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Discussion}{20}{chapter.7}%
+\contentsline {paragraph}{Impact of Noise and Data Characteristics}{20}{section*.26}%
+\contentsline {paragraph}{Thread Context and Topic Drift}{20}{section*.27}%
+\contentsline {paragraph}{Identifier Design and Learning Objective}{21}{section*.28}%
+\contentsline {paragraph}{Pseudo-Query Construction}{21}{section*.29}%
+\contentsline {paragraph}{Implications and Future Directions}{21}{section*.30}%
+\contentsline {chapter}{\numberline {8}Appendix}{26}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Impact of Schema Artifacts on Model Performance}{26}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Comparison DSI and BM25 performance}{27}{section.8.2}%
