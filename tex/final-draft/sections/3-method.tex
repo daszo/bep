@@ -89,7 +89,7 @@ When constructing queries it is important that the original words are contained 
 \paragraph{Training set variants}
 \label{subsec:traingin-set-construction}
 
-For the history thread dataset, a 10k and a 100k subset is used~\cite{10.1145/3580305.3599903}, because this size is a reasonable scale for T5 to learn from. For the dataset without history thread only a 10k dataset was used, because after dropping email smaller then 30 only 93k emails were left. Per data point 3 data pairs are created. These pairs consist of the Semantic Document Identifier paired with one of the following: email body and subject, the extractive query or the abstractive query \eqref{eq:training-set}.
+For the history thread dataset, a 10k and a 100k subset is used~\cite{10.1145/3580305.3599903}, because this size is a reasonable scale for T5 to learn from. For the dataset without history thread only a 10k dataset was used, because after dropping email smaller then 30 only 93k emails were left. Per data point 3 data pairs are created. These pairs consist of the Semantic Document Identifier paired with one of the following: email body and subject, the extractive query or the abstractive query \eqref{eq:training-set}. To compare the difference between thread and no thread, a 10k data set was created with the exact same emails for both datasets.
 
 As briefly covered in~\cref{section:corpus-an} it was planned to remove the field identifier when applying input linerization for the title generation. Due to an error it only applied to the 10k history thread dataset. See appendix \ref{app:schema_impact} for a more in depth table.
 
@@ -97,6 +97,7 @@ As briefly covered in~\cref{section:corpus-an} it was planned to remove the fiel
 
 
 \section{Model training}
+\label{section:model_training}
  % \cite{NEURIPS2022_892840a6} and your improvement \cite{10.1145/3580305.3599903} or can I just quote that?
 As specified in \cref{subsec:task-definition} $f_\theta$ is a GR model with the encoder decoder architecture. For this the T5 model was chosen because that is the standard used in previous works~\cite{NEURIPS2022_892840a6, 10.1145/3580305.3599903}. The training of the model is a joint mode of two parts i.e., indexing and the retrieval in an end to end way.
 
@@ -116,6 +117,16 @@ As specified in \cref{subsec:task-definition} $f_\theta$ is a GR model with the 
   \label{eq:retrieval-loss}
 \end{equation}
 
-For training the model, a top 10 greedy beam first search \cite{10.1145/3580305.3599903,NEURIPS2022_892840a6} is used to help the model find a valid document identifier. This works because a trie has been build using the docids and guides the model to the right answers. For every token it generates, it predicts for every possible token the probability that it is that token. From that list, only the tokens that are in the trie are selected and the 10 highest probability are kept. For every consecutive token the current probability is summed with the new token. At some point the trie ends and then the 10 most probable are ranked accordingly and scored.
+For training the model, a top 10 greedy beam first search \cite{10.1145/3580305.3599903,NEURIPS2022_892840a6} is used to help the model find a valid document identifier. This works because a trie has been build using the docids and guides the model to the right answers. For every token it generates, it predicts for every possible token the probability that it is that token. From that list, only the tokens that are in the trie are selected and the 10 highest probability are kept. For every consecutive token the current probability is summed with the new token. At some point the trie ends and then the 10 most probable are ranked accordingly and scored \ref{eq:beam_scoring}. This trie is build on the whole of the corpus: training, validation and test dataset. 
 
-For training, the data set queries were split up in three groups. The first 80\% was reserved for training and then 10\% for both validating and testing. It was made sure that the queries of the validation and testings set were not of the same email. This was done to ensure that the model has seen at least one example of the retrieval task. The email bodies were exclusively reserved for training, because they serve only for learning the model what each unique document identifier means. 
+\begin{equation}
+\label{eq:beam_scoring}
+\text{Score}(y) = \sum_{t=1}^{|y|} \log P(y_t \mid y_{<t}, q)
+\end{equation}
+
+For training, the data set queries were split up in three groups. The first 80\% was reserved for training and then 10\% for both validating and testing. It was made sure that the queries of the validation and testings set were not of the same email. This was done to ensure that the model has seen at least one example of the retrieval task. The email bodies were exclusively reserved for training, because they serve only for learning the model what each unique document identifier means. The evaluation set was used during training to evaluate the performance of the checkpoint model.
+
+\section{Model inference}
+
+Model inference also uses top 10 trie-based greedy beam search, as specified in \cref{section:model_training}. Further, the same equation is used to score the retrieved docids \ref{eq:beam_scoring}and the trie that is traversed is build by the whole corpus: training, testing and validation. The testing set was used as a final test and to compare to with our bassline.
+

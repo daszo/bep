@@ -36,21 +36,23 @@ where $\mathbb{I}(\cdot)$ is the indicator function. We report Hits@1 and Hits@1
 \section{Implementation Details}
 
 \paragraph{Model Architecture}
-We employ a Transformer-based encoder--decoder architecture for generative retrieval, following the DSI framework. The model is initialized with the pre-trained T5-base checkpoint \cite{JMLR:v21:20-074}, which consists of 12 Transformer layers, a hidden size of 768, and 12 self-attention heads.
+We employ a Transformer-based encoder--decoder architecture for generative retrieval, following the DSI framework. The model is initialized with the pre-trained T5-base checkpoint~\cite{JMLR:v21:20-074}, which consists of 12 Transformer layers, a hidden size of 768, and 12 self-attention heads.
 
 \paragraph{Training Configuration}
-Model training largely follows the setup of prior work \cite{10.1145/3580305.3599903}, with minor adaptations based on the publicly available implementation \cite{zhuang2022dsiqg}. We optimize the model using the Adam optimizer with a learning rate of $5\times10^{-4}$ and a linear warm-up schedule over 100{,}000 steps. Training is conducted for a maximum of 100{,}000 steps with a global batch size of 64, distributed as 32 samples per device.
+Model training largely follows the setup of prior work~\cite{10.1145/3580305.3599903}, with minor adaptations based on the publicly available implementation~\cite{zhuang2022dsiqg}. We optimize the model using the Adam optimizer with a learning rate of $5\times10^{-4}$ and a linear warm-up schedule over 100{,}000 steps. Training is conducted for a maximum of 100{,}000 steps with a global batch size of 64, distributed as 32 samples per device.
 
 \paragraph{Input Processing}
 The maximum input sequence length is set to 32 tokens for both queries and document identifiers. Prior to training, email texts are truncated to 512 tokens, as the model is not designed to process longer sequences. This truncation is applied consistently across all experimental conditions.
 
 \paragraph{Pseudo Query Construction}
-To construct pseudo queries for training, we employ two complementary strategies. First, we use a T5-headline model \cite{pleban2020t5headline} to generate abstractive summaries of email content. Second, we apply a TextRank-based method \cite{barrios2016variationssimilarityfunctiontextrank} using the \texttt{summa} package to extract key phrases. These pseudo queries are used for both indexing and retrieval training.
+To construct pseudo queries for training, we employ two complementary strategies. First, we use a T5-headline model~\cite{pleban2020t5headline} to generate abstractive summaries of email content. Second, we apply a TextRank-based method~\cite{barrios2016variationssimilarityfunctiontextrank} using the \texttt{summa} package to extract key phrases. These pseudo queries are used for both indexing and retrieval training.
 
 \paragraph{Implementation and Infrastructure}
-Our implementation builds upon the DSI-QG codebase \cite{zhuang2022dsiqg}, which we adapt to support the SQLite-based storage used in this work. Since the original implementation is designed for numeric document identifiers, we incorporate trie construction code from \cite{LI2023103475} to enable decoding with semantic identifiers.
+Our implementation builds upon the DSI-QG codebase~\cite{zhuang2022dsiqg}, which we adapt to support the SQLite-based storage used in this work. Since the original implementation is designed for numeric document identifiers, we incorporate trie construction code from~\cite{LI2023103475} to enable decoding with semantic identifiers.
 
 All models are implemented in PyTorch and use the Hugging Face Transformers library for model loading and training. Experiments are conducted on two NVIDIA A100 GPUs provided by the SURF computing platform. We track training progress and evaluation metrics using Weights \& Biases.
+
+For inference the batch size was 8 and a single NVIDEA A100 GPU was used
 
 
 
