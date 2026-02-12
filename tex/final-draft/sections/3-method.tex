@@ -104,29 +104,43 @@ As specified in \cref{subsec:task-definition} $f_\theta$ is a GR model with the 
 \textbf{Indexing:} This step is for memorizing information about the email documents, document are mapped to a docid~\cite{NEURIPS2022_892840a6}.
 
 \begin{equation}
-  \mathcal{L}_{Indexing}{(\theta)} = \displaystyle\sum_{d_i \in \mathcal{D}} log P(y | T5_{\theta}(d_i))
+  \mathcal{L}_{Indexing}{(\theta)} = \displaystyle\sum_{d_i \in \mathcal{D}} log P(y | T5_{\theta}(d_i)).
   \label{eq:indexing-los}
 \end{equation}
-
 % While \textcite{NEURIPS2022_892840a6} use only numerical ids \textcite{10.1145/3580305.3599903} use Elaborative Descriptions as the identifier. 
 
 \textbf{Retrieval:} Given a query $q \in \mathcal{Q}$, the DSI model outputs the relevant document identifier $y$. For this the T5 model, previously fine tuned for indexing, is trained on the query-id pair.
 
 \begin{equation}
-  \mathcal{L}_{Retrieval}{(\theta)} = \displaystyle\sum_{d_i \in \mathcal{D}} log P(y | T5_{\theta}(d_i))
+  \mathcal{L}_{Retrieval}{(\theta)} = \displaystyle\sum_{d_i \in \mathcal{D}} log P(y | T5_{\theta}(d_i)).
   \label{eq:retrieval-loss}
 \end{equation}
 
-For training the model, a top 10 greedy beam first search \cite{10.1145/3580305.3599903,NEURIPS2022_892840a6} is used to help the model find a valid document identifier. This works because a trie has been build using the docids and guides the model to the right answers. For every token it generates, it predicts for every possible token the probability that it is that token. From that list, only the tokens that are in the trie are selected and the 10 highest probability are kept. For every consecutive token the current probability is summed with the new token. At some point the trie ends and then the 10 most probable are ranked accordingly and scored \ref{eq:beam_scoring}. This trie is build on the whole of the corpus: training, validation and test dataset. 
 
-\begin{equation}
-\label{eq:beam_scoring}
-\text{Score}(y) = \sum_{t=1}^{|y|} \log P(y_t \mid y_{<t}, q)
-\end{equation}
+
+
 
 For training, the data set queries were split up in three groups. The first 80\% was reserved for training and then 10\% for both validating and testing. It was made sure that the queries of the validation and testings set were not of the same email. This was done to ensure that the model has seen at least one example of the retrieval task. The email bodies were exclusively reserved for training, because they serve only for learning the model what each unique document identifier means. The evaluation set was used during training to evaluate the performance of the checkpoint model.
 
 \section{Model inference}
 
-Model inference also uses top 10 trie-based greedy beam search, as specified in \cref{section:model_training}. Further, the same equation is used to score the retrieved docids \ref{eq:beam_scoring}and the trie that is traversed is build by the whole corpus: training, testing and validation. The testing set was used as a final test and to compare to with our bassline.
+To guarantee valid docid generation, 
+we use the constrained beam search with the beam size as 10 \cite{10.1145/3580305.3599903,NEURIPS2022_892840a6}.
+% a top 10 greedy beam first search is used to help the model find a valid document identifier. 
+More specifically, we construct a prefix trie to 
+constrain the token generation, where nodes are annotated with tokens from the vocabulary. For each node, its children indicate all the allowed continuations from the preﬁx deﬁned traversing the trie from the root to the current node.
+
+For every token it generates, it predicts for every possible token the probability that it is that token. From that list, only the tokens that are in the trie are selected and the 10 highest probability are kept. For every consecutive token the current probability is summed with the new token, 
+denoted as in Equation~\ref{eq:beam_scoring}. 
+% 
+At some point the trie ends and then the 10 most probable are ranked accordingly and scored. This trie is build on the whole of the corpus: training, validation and test dataset. 
+
+\begin{equation}
+\label{eq:beam_scoring}
+\text{Score}(y) = \sum_{t=1}^{|y|} \log P(y_t \mid y_{<t}, q).
+\end{equation}
+
+% Model inference also uses top 10 trie-based greedy beam search, as specified in \cref{section:model_training}. 
+% Further, the same equation is used to score the retrieved docids \ref{eq:beam_scoring}and the trie that is traversed is build by the whole corpus: training, testing and validation. 
+The testing set was used as a final test and to compare to with our bassline.
 

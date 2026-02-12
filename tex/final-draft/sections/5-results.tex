@@ -1,13 +1,14 @@
 \chapter{Experimental Analyses}
 
+\section{Main results}
 \input{../../code/tbls/table_combined.tex}
 \input{../../code/tbls/table_ratios.tex}
 
 The comparison of the baseline with the DSI and impact of data cleaning or data size is shown in  table \ref{tab:combined_results}. This table is split into two tables where the methods used are in the left column. In the top table the thread settings are compared and in the bottom the training size is compared. Besides the methods column, the tables are split into two main columns, corresponding to a dataset, which are under divided into the 4 evaluation metrics, MRR@3, MRR@20, Hits@1 and Hits@10. The ratio between between DSI's performance and BM25 performance is shown in table \ref{tab:ratio_results}
 
-\paragraph{BM25:} BM25 performed best without the context of the history thread. This might be, because of the fact that the dataset did not contain emails history thread, making the emails small, which is when BM25 performs best. Comparing between the 10k and 100k datasets, the performance drops a little which is similar previous findings \cite{10.1145/3580305.3599903} \cite{NEURIPS2022_892840a6}.
+\paragraph{BM25} BM25 performed best without the context of the history thread. This might be, because of the fact that the dataset did not contain emails history thread, making the emails small, which is when BM25 performs best. Comparing between the 10k and 100k datasets, the performance drops a little which is similar previous findings \cite{10.1145/3580305.3599903} \cite{NEURIPS2022_892840a6}.
 
-\textbf{DSI} DSI performed best when there was no thread. This could be because the email thread could have more topics, which might confuse the model. The difference between thread and no thread is not too large, which might be because of the automatic truncation. DSI performs worse on bigger datasets. This is not inline with the findings of \textcite{10.1145/3580305.3599903}, but is in line with \textcite{NEURIPS2022_892840a6}.
+\paragraph{DSI} DSI performed best when there was no thread. This could be because the email thread could have more topics, which might confuse the model. The difference between thread and no thread is not too large, which might be because of the automatic truncation. DSI performs worse on bigger datasets. This is not inline with the findings of \textcite{10.1145/3580305.3599903}, but is in line with \textcite{NEURIPS2022_892840a6}.
 
 
 \paragraph{Comparison BM25 and DSI} Compared to BM25, DSI performs worse on all metrics. This stands in contrast to \textcite{10.1145/3580305.3599903} and \textcite{NEURIPS2022_892840a6}, who reported significant improvement over BM25. A reason for the poor performance might be because this research uses only 2 training queries compared to 10 \cite{10.1145/3580305.3599903}. Also the Enron dataset is a real world dataset and might introduce a lot more noise then curated Q\&A datasets. Further, the data might be too complex for the binary relevance objective of our MLE method.
@@ -17,15 +18,18 @@ The comparison of the baseline with the DSI and impact of data cleaning or data 
 \paragraph{Thread settings comparison:} Although the thread dataset did not contain the field identifiers there is a slight better performance between both BM25 and DSI when there is no context on context. On the one hand this is surprising because by including the field identifiers, more noise would be present in generating the title generated pseudo queries. On the other hand this could be explained by the context dataset containing a lot of duplicate email, because the email history is of email addresses also contained in the dataset. When inspecting the ratios  DSI performed a bit better with thread, which could be BM25 performs worse on a larger datasets and there was a large overlap  or because no field identifiers were present.
 
 
-\paragraph{Scale comparison:} As shown in \cite{10.1145/3580305.3599903} and \cite{NEURIPS2022_892840a6}, we would expect DSI to improve from the 10k dataset to the 100k dataset. This however is not the case. DSI perfoms significantly worse. 
 
-\paragraph{Error analysis}
+\paragraph{Scale comparison:} 
+
+As shown in \cite{10.1145/3580305.3599903} and \cite{NEURIPS2022_892840a6}, we would expect DSI to improve from the 10k dataset to the 100k dataset. This however is not the case. DSI perfoms significantly worse. 
+
+\section{Error analysis}
 In table \ref{tab:email_noise_mismatch}
 \
 several examples comparing the performance between BM25 and DSI are displayed. To understand why DSI made mistakes it needs no be stated that all the predicted docids are valid by nature of trie-based constrained beam search. This means that incorrect predictions are not gibberish and hallucinations, but an indication of semantic collapse. 
 
-\subparagraph{Popularity bias} DSI fails to predict a docid that has obscure words like 'http' and 'ta' (Target ID: http ta night todd fax street) and settles for more frequent words like "enron", "sara", "texas", "america", etc.. . Besides that these words hold little connection to the essence of body of the email and query. Thus DSI defaults to more dominant entities as it lacks strong attention signals. It gravitates to higher probabilities and safe answers, rather then rare ones. 
+\paragraph{Popularity bias} DSI fails to predict a docid that has obscure words like 'http' and 'ta' (Target ID: http ta night todd fax street) and settles for more frequent words like "enron", "sara", "texas", "america", etc.. . Besides that these words hold little connection to the essence of body of the email and query. Thus DSI defaults to more dominant entities as it lacks strong attention signals. It gravitates to higher probabilities and safe answers, rather then rare ones. 
 
-\subparagraph{Topic collision} In a certain instance, the model succeeds to predict a broad topic but fails to predict specifics. In the instance of Target ID: "meeting scheduling scheduled dinner..." and Query "Dinner Meeting on..." it gets meeting correct, but fails to find the correct docid. A cause for this could be is that, by virtue of using semantic docids made up of keywords, there are a lot of docids that are similar. This is cause for topic collision as the model gets the first word correct but fails the distinguish between "dinner" or generic meeting. Beam search then finishes the docid and defaults to the higher keyword probabilities due to commonality.
+\paragraph{Topic collision} In a certain instance, the model succeeds to predict a broad topic but fails to predict specifics. In the instance of Target ID: "meeting scheduling scheduled dinner..." and Query "Dinner Meeting on..." it gets meeting correct, but fails to find the correct docid. A cause for this could be is that, by virtue of using semantic docids made up of keywords, there are a lot of docids that are similar. This is cause for topic collision as the model gets the first word correct but fails the distinguish between "dinner" or generic meeting. Beam search then finishes the docid and defaults to the higher keyword probabilities due to commonality.
 
 
